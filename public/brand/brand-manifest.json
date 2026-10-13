@@ -1,0 +1,82 @@
+{
+  "brand": "familiar",
+  "version": "1.0.0",
+  "created": "2026-10-13",
+  "license": {
+    "type": "CC0-1.0",
+    "description": "Original hand-constructed SVG artwork dedicated to the public domain; no external fonts or stock artwork.",
+    "trademarkClearance": "not assessed"
+  },
+  "construction": {
+    "wordmark": "Original filled paths with named per-letter geometry; no font dependency.",
+    "mark": "An open evidence frame containing a folded continuous loop.",
+    "palette": {
+      "ink": "#25232A",
+      "paper": "#F7F4EE",
+      "lilac": "#DCD1F0"
+    },
+    "minimumSizes": {
+      "wordmarkWidthPx": 104,
+      "markSizePx": 16
+    },
+    "clearSpace": "At least one stem-width around the wordmark; one frame stroke-width around the compact mark."
+  },
+  "assets": [
+    {
+      "filename": "logo-light.svg",
+      "path": "/brand/logo-light.svg",
+      "role": "primary wordmark for light surfaces",
+      "bytes": 2168,
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "filename": "logo-dark.svg",
+      "path": "/brand/logo-dark.svg",
+      "role": "primary wordmark for dark surfaces",
+      "bytes": 2167,
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "filename": "mark.svg",
+      "path": "/brand/mark.svg",
+      "role": "monochrome compact mark; inline CSS can set currentColor",
+      "bytes": 1118,
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "filename": "favicon.svg",
+      "path": "/brand/favicon.svg",
+      "role": "favicon with lilac surface",
+      "bytes": 1075,
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "filename": "familiar-wordmark.svg",
+      "path": "/brand/familiar-wordmark.svg",
+      "role": "primary",
+      "bytes": 2168,
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "filename": "familiar-wordmark-reverse.svg",
+      "path": "/brand/familiar-wordmark-reverse.svg",
+      "role": "reverse primary",
+      "bytes": 2167,
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "filename": "familiar-mark.svg",
+      "path": "/brand/familiar-mark.svg",
+      "role": "primary",
+      "bytes": 1118,
+      "mimeType": "image/svg+xml"
+    },
+    {
+      "filename": "familiar-mark-reverse.svg",
+      "path": "/brand/familiar-mark-reverse.svg",
+      "role": "reverse primary",
+      "bytes": 1113,
+      "mimeType": "image/svg+xml"
+    }
+  ]
+}

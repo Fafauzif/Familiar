@@ -1,0 +1,49 @@
+{
+  "unitTests": {
+    "passed": 97,
+    "files": 4,
+    "command": "npm test"
+  },
+  "cleanInstall": {
+    "status": "passed",
+    "command": "npm ci --no-audit --no-fund"
+  },
+  "typescriptAndProductionBuild": {
+    "status": "passed",
+    "command": "npm run build"
+  },
+  "productionBrowser": {
+    "passed": 23,
+    "failed": 0,
+    "pageErrors": 0,
+    "command": "FAMILIAR_TEST_PRODUCTION=1 npm run test:browser"
+  },
+  "rapidComparisonReload": {
+    "passed": 20,
+    "trials": 20,
+    "command": "node scripts/rapid-reload-test.mjs"
+  },
+  "assetValidation": {
+    "status": "passed",
+    "requiredAssets": 80,
+    "GLBModels": 4,
+    "command": "npm run verify:assets"
+  },
+  "fixtureValidation": {
+    "status": "passed",
+    "preparedMediaFiles": 65,
+    "catalogue": 12,
+    "command": "npm run verify:fixtures"
+  },
+  "accessibility": {
+    "primaryRouteScans": 9,
+    "seriousOrCriticalViolations": 0,
+    "standard": "automated WCAG A/AA Axe rules"
+  },
+  "limits": [
+    "Familiar companion archive unavailable and not audited",
+    "Browser checks use Chromium; physical devices, Safari and Firefox not tested",
+    "Visual inspection was performed by automated agents; human acceptance not performed",
+    "No live Vercel deployment or real services executed"
+  ]
+}

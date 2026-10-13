@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="familiar-favicon-title familiar-favicon-desc">
+  <title id="familiar-favicon-title">Familiar</title>
+  <desc id="familiar-favicon-desc">Familiar folded loop and evidence frame in deep ink on a lilac square.</desc>
+  <!-- Construction source: original compact mark on the Familiar lilac field. A 5-unit evidence frame and 6-unit folded loop use the same geometry as the compact mark. Editable path geometry; no third-party artwork. Trademark clearance has not been assessed. -->
+  <rect width="64" height="64" rx="14" fill="#DCD1F0"/>
+  <g transform="translate(5 5) scale(.84375)" fill="none" stroke="#25232A" stroke-linecap="round" stroke-linejoin="round">
+    <path id="evidence-frame" stroke-width="5" d="M42 8H20C13.37 8 8 13.37 8 20V44C8 50.63 13.37 56 20 56H44C50.63 56 56 50.63 56 44V32"/>
+    <path id="folded-loop" stroke-width="6" d="M41 20H32C27.58 20 24 23.58 24 28V38C24 42.42 27.58 46 32 46H33C37.42 46 41 42.42 41 38C41 33.58 37.42 30 33 30H21M41 20L34 27"/>
+  </g>
+</svg>

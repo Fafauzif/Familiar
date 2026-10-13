@@ -1,0 +1,34 @@
+{
+  "name": "familiar-final",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "test:browser": "node scripts/browser-tests.mjs",
+    "verify:assets": "node scripts/verify-assets.mjs",
+    "preview": "vite preview --host 127.0.0.1",
+    "verify:fixtures": "node --experimental-strip-types scripts/verify-fixtures.mjs"
+  },
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "three": "0.180.0",
+    "@phosphor-icons/react": "2.1.10"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "@types/three": "0.180.0",
+    "typescript": "5.9.3",
+    "vite": "7.1.12",
+    "vitest": "3.2.4",
+    "playwright": "1.56.1",
+    "@axe-core/playwright": "4.11.0"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

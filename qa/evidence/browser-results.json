@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-13T19:08:07.930Z",
+  "production": true,
+  "browser": "Chromium 141 / Playwright 1.56.1",
+  "reports": [
+    {
+      "name": "Gateway role choices and editorial desktop",
+      "status": "passed"
+    },
+    {
+      "name": "Marketplace exact counts and inert Coming soon",
+      "status": "passed"
+    },
+    {
+      "name": "Search, size filtering and persisted saved listing",
+      "status": "passed"
+    },
+    {
+      "name": "Every active listing offers comparison and real source files",
+      "status": "passed"
+    },
+    {
+      "name": "Source evidence state, marker and unknowns",
+      "status": "passed"
+    },
+    {
+      "name": "Three Match results, reference rename/delete/restore",
+      "status": "passed"
+    },
+    {
+      "name": "Four real GLBs, one canvas, controls and modes",
+      "status": "passed"
+    },
+    {
+      "name": "WebGL and failed asset fallback",
+      "status": "passed"
+    },
+    {
+      "name": "Seller six stages, review correction, unsure, publish persistence",
+      "status": "passed"
+    },
+    {
+      "name": "Seller retake clears stale relevant decisions",
+      "status": "passed"
+    },
+    {
+      "name": "Checkout decline, reservation, persistence and order cancellation",
+      "status": "passed"
+    },
+    {
+      "name": "Mobile and reduced-motion layouts",
+      "status": "passed"
+    },
+    {
+      "name": "Narrow mobile landscape no overflow",
+      "status": "passed"
+    },
+    {
+      "name": "Corrupted local state and 404 recover",
+      "status": "passed"
+    },
+    {
+      "name": "Revised discovery, source recovery and private route guards",
+      "status": "passed"
+    },
+    {
+      "name": "Buy now preserves another piece in the bag",
+      "status": "passed"
+    },
+    {
+      "name": "Persistent source conversation and report",
+      "status": "passed"
+    },
+    {
+      "name": "Private reference processing and incomplete recovery",
+      "status": "passed"
+    },
+    {
+      "name": "Distinct durable moderation gate and appeal recovery",
+      "status": "passed"
+    },
+    {
+      "name": "Local privacy export, consent and prepared signout",
+      "status": "passed"
+    },
+    {
+      "name": "Listing pause/remove/resume and immutable receipts",
+      "status": "passed"
+    },
+    {
+      "name": "Four-property arrival feedback and skip recovery",
+      "status": "passed"
+    },
+    {
+      "name": "Accessibility primary views",
+      "status": "passed"
+    }
+  ],
+  "pageErrors": []
+}
