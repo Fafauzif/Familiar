@@ -1,45 +1,47 @@
 import { describe, expect, it } from "vitest";
-import { MIN_TAKE_LENGTH, TAKE_LENGTH, newTake, recordingTransition, sanitizeTakes } from "../src/recording";
+import { TAKE_LENGTH, newTake, recordingTransition, sanitizeTakes } from "../src/recording";
 import { initialState, transition, sanitizeStoredState, getActiveReferenceCapture, getActiveDraft } from "../src/domain";
 
-describe("prepared guided recording", () => {
-  it("cannot save a take before recording and reviewing", () => {
-    const ready = newTake();
-    expect(recordingTransition(ready, { type: "SAVE" })).toBe(ready);
-    expect(recordingTransition(ready, { type: "STOP" })).toBe(ready);
+describe("prepared guided walkthrough", () => {
+  it("autoplays the example immediately when a new step opens", () => {
+    expect(newTake()).toEqual({ phase: "playing", elapsed: 0, error: "" });
   });
-  it("requires useful duration before accepting a stop", () => {
-    let state = recordingTransition(newTake(), { type: "START" });
-    state = recordingTransition(state, { type: "TICK" });
-    state = recordingTransition(state, { type: "STOP" });
-    expect(state.phase).toBe("paused");
-    expect(state.error).toContain("at least 3 seconds");
-    state = recordingTransition(state, { type: "RESUME" });
-    for (let i = 1; i < MIN_TAKE_LENGTH; i++) state = recordingTransition(state, { type: "TICK" });
-    expect(recordingTransition(state, { type: "STOP" }).phase).toBe("preview");
+  it("allows Next immediately, without recording duration or a Stop/Keep gate", () => {
+    const progressed = recordingTransition(newTake(), { type: "SAVE" });
+    expect(progressed.phase).toBe("saved");
+    expect(progressed.elapsed).toBe(0);
+    expect(progressed.error).toBe("");
+    expect(recordingTransition(progressed, { type: "SAVE" })).toBe(progressed);
   });
-  it("pauses without advancing and resumes the existing timer", () => {
-    let state = recordingTransition(newTake(), { type: "START" });
-    state = recordingTransition(state, { type: "TICK" });
-    state = recordingTransition(state, { type: "PAUSE" });
-    expect(recordingTransition(state, { type: "TICK" })).toBe(state);
-    state = recordingTransition(state, { type: "RESUME" });
-    expect(recordingTransition(state, { type: "TICK" }).elapsed).toBe(2);
-  });
-  it("finishes at six seconds, then explicitly saves", () => {
-    let state = recordingTransition(newTake(), { type: "START" });
+  it("holds the final pose at six seconds until explicit Next", () => {
+    let state = newTake();
     for (let i = 0; i < 20; i++) state = recordingTransition(state, { type: "TICK" });
-    expect(state.phase).toBe("preview");
+    expect(state.phase).toBe("held");
     expect(state.elapsed).toBe(TAKE_LENGTH);
+    expect(recordingTransition(state, { type: "TICK" })).toBe(state);
     expect(recordingTransition(state, { type: "SAVE" }).phase).toBe("saved");
   });
-  it("a retake clears the prior recording", () => {
-    expect(recordingTransition(newTake(true), { type: "RETAKE" })).toEqual(newTake());
+  it("pauses without advancing and resumes the existing fractional timer", () => {
+    let state = recordingTransition(newTake(), { type: "TICK", seconds: 1.25 });
+    state = recordingTransition(state, { type: "PAUSE" });
+    expect(recordingTransition(state, { type: "TICK", seconds: 2 })).toBe(state);
+    state = recordingTransition(state, { type: "RESUME" });
+    expect(recordingTransition(state, { type: "TICK", seconds: .5 }).elapsed).toBe(1.75);
   });
-  it("restores valid saved takes and rejects incomplete/corrupt ones", () => {
-    const stored = JSON.parse(JSON.stringify([{ step: 0, duration: 4 }, { step: 1, duration: 6 }]));
-    expect(sanitizeTakes(stored)).toEqual(stored);
-    expect(sanitizeTakes([{ step: 0, duration: 1 }, { step: 1, duration: 6 }, { step: 1, duration: 4 }, { step: 6, duration: 6 }, { step: 3, duration: Infinity }])).toEqual([{ step: 1, duration: 6 }]);
+  it("replay resets both elapsed time and play state", () => {
+    const state = recordingTransition(newTake(true), { type: "REPLAY" });
+    expect(state).toEqual(newTake());
+    expect(recordingTransition(recordingTransition(state, { type: "PAUSE" }), { type: "REPLAY" })).toEqual(newTake());
+  });
+  it("a fractional tick caps at six seconds and ignores nonfinite or negative deltas", () => {
+    expect(recordingTransition(newTake(), { type: "TICK", seconds: 100 }).elapsed).toBe(6);
+    expect(recordingTransition(newTake(), { type: "TICK", seconds: -1 }).elapsed).toBe(0);
+    expect(recordingTransition(newTake(), { type: "TICK", seconds: NaN }).elapsed).toBe(0);
+  });
+  it("restores completed walkthrough progress even when Next was pressed at zero seconds", () => {
+    const stored = [{ step: 0, duration: 0 }, { step: 1, duration: 6 }];
+    expect(sanitizeTakes(JSON.parse(JSON.stringify(stored)))).toEqual(stored);
+    expect(sanitizeTakes([{ step: 0, duration: -1 }, { step: 1, duration: 6 }, { step: 1, duration: 4 }, { step: 6, duration: 6 }, { step: 3, duration: Infinity }])).toEqual([{ step: 1, duration: 6 }]);
   });
   it("resumes a seller on the saved task and invalidates a dependent review on retake", () => {
     let state = initialState();
@@ -60,7 +62,7 @@ describe("prepared guided recording", () => {
     expect(restored.decisions.Movement).toBeUndefined();
     expect(restored.decisions.Surface.status).toBe("confirmed");
   });
-  it("a buyer finishes only after all six takes, then resumes a retake privately", () => {
+  it("a buyer finishes only after all six walkthrough steps, then resumes a retake privately", () => {
     let state = transition(initialState(), { type: "REFERENCE_CAPTURE_START" });
     state = transition(state, { type: "REFERENCE_CAPTURE_SAVE", name: "My familiar blouse" });
     expect(getActiveReferenceCapture(state)?.ready).toBe(false);

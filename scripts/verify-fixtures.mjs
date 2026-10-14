@@ -27,7 +27,7 @@ assert(!CATALOG.some(item => item.id === REFERENCE.id), 'Private reference is no
 assert.deepEqual(PROPERTIES, ['Drape', 'Movement', 'Stretch', 'Surface']);
 
 for (const listing of [...CATALOG, REFERENCE]) {
-  assert.equal(listing.model, undefined, `${listing.id}: no runtime garment model`);
+  assert.equal(listing.model, undefined, `${listing.id}: garment evidence stays photograph-linked, separate from the illustrative model`);
   assert.equal(listing.poster, media.coverFor(listing.id), `${listing.id}: photographic cover`);
   assert.deepEqual(listing.evidence.map(item => item.property), PROPERTIES, 'Fixed evidence order');
   const views = media.mediaFor(listing.id).photos;
@@ -64,15 +64,20 @@ assert.equal(matches.length, 3, 'Three eligible authored feel suggestions');
 assert.equal(new Set(matches.map(match => match.listing.id)).size, 3);
 assert(matches.every(match => feel.compatibleGarments(REFERENCE, match.listing)), 'Compatible garment families');
 assert(!matches.some(match => 'score' in match || 'percentage' in match || 'distance' in match), 'No overall numeric result exposed');
-const unknownReference = { ...REFERENCE, id: 'unknown-reference', templateId: 'unknown-reference' };
+const unknownReference = { ...REFERENCE, id: 'unknown-reference', templateId: 'unknown-reference', feelDescription: feel.UNKNOWN_FEEL };
 assert.deepEqual(feel.findFeelMatches(initialState(), unknownReference, { ...preferences, priority: 'Stretch' }, { category: 'All', size: 'All' }), [], 'Unknown fabric profile abstains');
 
 let state = transition(initialState(), { type: 'REFERENCE_CREATE', templateId: REFERENCE.id });
 let reference = getListing(state, state.selectedReference);
-assert(reference.evidence.every(item => item.support === 'unavailable'), 'Unrecorded reference has no usable take');
+const beforeSources = JSON.stringify(reference.evidence);
+assert.equal(reference.evidence.find(item => item.property === 'Drape').support, 'supported', 'Prepared front photo exists independently of walkthrough progress');
+assert.equal(reference.evidence.find(item => item.property === 'Stretch').support, 'unavailable', 'No garment-specific pull test');
+assert.deepEqual(reference.feelDescription, REFERENCE.feelDescription, 'Prepared description is copied with attribution');
+assert.equal(reference.feelDescriptionSource, 'prepared');
 state = transition(state, { type: 'REFERENCE_RECORDING_COMPLETE', step: 0 });
 reference = getListing(state, state.selectedReference);
-assert.notEqual(reference.evidence.find(item => item.property === 'Drape').support, 'unavailable', 'Recorded front can be used independently');
+assert.equal(JSON.stringify(reference.evidence), beforeSources, 'Watching an instruction cannot change source authority');
+assert.equal(state.privateReferences.find(item => item.id === state.selectedReference).progressKind, 'animated-demo');
 assert.equal(reference.evidence.find(item => item.property === 'Stretch').support, 'unavailable', 'Missing pull stays unavailable');
 for (let step = 0; step < 6; step++) {
   state = transition(state, { type: 'REFERENCE_RECORDING_COMPLETE', step });
@@ -80,7 +85,8 @@ for (let step = 0; step < 6; step++) {
 }
 state = transition(state, { type: 'REFERENCE_FINISH' });
 assert(state.privateReferences.find(item => item.id === state.selectedReference).ready);
-assert.equal(getListing(state, state.selectedReference).evidence.find(item => item.property === 'Stretch').support, 'limited', 'Prepared pull remains limited, not a mechanics measurement');
+assert.equal(JSON.stringify(getListing(state, state.selectedReference).evidence), beforeSources, 'Completing the demo does not create new evidence');
+assert.equal(getListing(state, state.selectedReference).evidence.find(item => item.property === 'Stretch').support, 'unavailable', 'Watching an animated pull does not create measured or captured evidence');
 assert.equal(sanitizeStoredState(JSON.parse(JSON.stringify(state))).selectedReference, state.selectedReference, 'Private reference selection survives reload');
 
 state = transition(state, { type: 'LOCAL_DRAFT_CREATE', templateId: 'moss-knit' });
@@ -97,4 +103,4 @@ state = transition(state, { type: 'DRAFT', draft: { name: 'Unpublished edit' } }
 assert.equal(JSON.stringify(getListing(state, state.activeDraftId)), published, 'Public version is independent of edits');
 assert.equal(JSON.stringify(getListing(sanitizeStoredState(JSON.parse(JSON.stringify(state))), state.activeDraftId)), published, 'Public snapshot survives reload');
 
-console.log(JSON.stringify({ status: 'passed', catalogue: 12, photographicSets: 13, photographs: 36, runtimeModels: 0, properties: PROPERTIES, candidateCount: matches.length, checks: ['source associations', 'local photo byte lengths and SHA-256', 'no garment-model requirement', 'fixed property order', 'eligible authored suggestions', 'missing versus limited support', 'guided completion', 'private reference persistence', 'immutable local publication'] }, null, 2));
+console.log(JSON.stringify({ status: 'passed', catalogue: 12, photographicSets: 13, photographs: 36, properties: PROPERTIES, candidateCount: matches.length, checks: ['source associations', 'local photo byte lengths and SHA-256', 'illustrative motion separate from evidence', 'fixed property order', 'eligible authored suggestions', 'missing support stays missing after walkthrough', 'guided completion', 'private reference persistence', 'immutable local publication'] }, null, 2));

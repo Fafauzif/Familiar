@@ -21,7 +21,7 @@ describe('photographic local marketplace domain', () => {
         state = act(state, { type: 'LOCAL_DRAFT_CREATE', templateId: 'airloom-linen' });
         expect(state.localDrafts.map((d: any) => d.id)).toEqual(['local-001', 'local-002']);
     });
-    it('publishes only completed reviewed recordings with an immutable public snapshot', () => {
+    it('publishes only a completed walkthrough and reviewed descriptions with an immutable public snapshot', () => {
         let state: any = act(initialState(), { type: 'LOCAL_DRAFT_CREATE', templateId: 'moss-knit' });
         expect(act(state, { type: 'PUBLISH' })).toBe(state);
         state = completeSeller(state);
@@ -45,7 +45,7 @@ describe('photographic local marketplace domain', () => {
         expect(state.captureStage).toBe(1);
         expect(state.capturedSteps).toEqual([0]);
     });
-    it('requires a saved prepared take before advancing, and retry clears affected review only', () => {
+    it('requires a saved walkthrough step before advancing, and redo clears affected review only', () => {
         let state: any = initialState();
         expect(act(state, { type: 'RECORDING_NEXT' })).toBe(state);
         expect(act(state, { type: 'RECORDING_COMPLETE', step: 3 })).toBe(state);
@@ -83,15 +83,17 @@ describe('photographic local marketplace domain', () => {
         state = act(state, { type: 'CHECKOUT', payment: 'success' });
         expect(act(state, { type: 'LISTING_REMOVE', id: 'local-001' })).toBe(state);
     });
-    it('creates buyer recordings and retains property-specific readiness while other tasks are missing', () => {
+    it('creates buyer walkthroughs while photographs and descriptions remain independent of progress', () => {
         let state: any = act(initialState(), { type: 'REFERENCE_CREATE', templateId: 'my-blue-blouse' });
         expect(state.selectedReference).toBe('private-001');
         expect(state.privateReferences).toHaveLength(2);
-        expect(getListing(state, 'private-001')?.evidence.every(e => e.support === 'unavailable')).toBe(true);
+        const before = JSON.stringify(getListing(state, 'private-001')?.evidence);
+        expect(getListing(state, 'private-001')?.evidence.find(e => e.property === 'Drape')?.support).toBe('supported');
         state = act(state, { type: 'REFERENCE_RECORDING_COMPLETE', step: 0 });
         const ref = getListing(state, 'private-001')!;
         expect(ref.evidence.find(e => e.property === 'Drape')?.support).not.toBe('unavailable');
-        expect(ref.evidence.find(e => e.property === 'Movement')?.support).toBe('unavailable');
+        expect(JSON.stringify(ref.evidence)).toBe(before);
+        expect(ref.evidence.find(e => e.property === 'Stretch')?.support).toBe('unavailable');
         expect(act(state, { type: 'REFERENCE_FINISH' })).toBe(state);
     });
     it('deleting a selected private reference safely selects another and does not alter catalogue', () => {
@@ -104,7 +106,7 @@ describe('photographic local marketplace domain', () => {
         expect(allListings(state)).toHaveLength(12);
         expect(act(state, { type: 'REFERENCE', id: 'private-001' })).toBe(state);
     });
-    it('saves a buyer reference only after all six guided takes', () => {
+    it('saves a buyer reference after all six guided walkthrough steps', () => {
         let state: any = act(initialState(), { type: 'REFERENCE_CREATE' });
         for (let step = 0; step < 6; step++) {
             state = act(state, { type: 'REFERENCE_RECORDING_COMPLETE', step });
@@ -150,7 +152,7 @@ describe('photographic local marketplace domain', () => {
     it('sanitizes and persists feel intentions without fabricated numeric scores', () => {
         let state: any = act(initialState(), { type: 'FEEL_INTENT', intent: { query: 'Soft cotton in size M', likes: ['smooth', 'smooth'], dislikes: ['scratchy'], priority: 'Surface' } });
         state = sanitizeStoredState(JSON.parse(JSON.stringify(state)));
-        expect(state.feelIntent).toEqual({ query: 'Soft cotton in size M', likes: ['smooth'], dislikes: ['scratchy'], priority: 'Surface', qualities: [], goal: 'similar' });
+        expect(state.feelIntent).toEqual({ query: 'Soft cotton in size M', likes: ['smooth'], dislikes: ['scratchy'], priority: 'Surface', qualities: [], goal: 'shape' });
     });
 });
 it('keeps published measurement and material facts independent of a revised seller draft', () => {
@@ -176,7 +178,7 @@ it('saving a delivered purchase as private reference retains purchase-time name 
     expect(getListing(state, state.selectedReference)?.name).toBe(purchased.name);
     expect(state.privateReferences.find((x: any) => x.id === state.selectedReference).ready).toBe(false);
 });
-it('unfinished reference recording survives reload without becoming ready', () => {
+it('unfinished reference walkthrough survives reload without becoming ready', () => {
     let state: any = act(initialState(), { type: 'REFERENCE_CREATE' });
     state = act(state, { type: 'REFERENCE_RECORDING_COMPLETE', step: 0 });
     state = act(state, { type: 'REFERENCE_RECORDING_NEXT' });
@@ -186,18 +188,18 @@ it('unfinished reference recording survives reload without becoming ready', () =
     expect(restored.privateReferences[1].capturedSteps).toEqual([0]);
     expect(restored.privateReferences[1].ready).toBe(false);
 });
-it('completed prepared pull gestures provide limited comparison context without measured elasticity', () => {
+it('completed animated pull examples do not become garment-specific stretch evidence', () => {
     let state: any = act(initialState(), { type: 'REFERENCE_CREATE' });
     for (let step = 0; step < 5; step++) {
         state = act(state, { type: 'REFERENCE_RECORDING_COMPLETE', step });
         state = act(state, { type: 'REFERENCE_RECORDING_NEXT' });
     }
     const stretch = getListing(state, state.selectedReference)?.evidence.find(e => e.property === 'Stretch');
-    expect(stretch?.support).toBe('limited');
-    expect(stretch?.observation).toMatch(/prepared|demonstration/i);
+    expect(stretch?.support).toBe('unavailable');
+    expect(stretch?.observation).toMatch(/no garment-specific/i);
     expect(stretch?.observation).toMatch(/not|unknown|unmeasured/i);
 });
-it('forged active draft aliases cannot bypass saved recording completion on reload', () => {
+it('forged active draft aliases cannot bypass completed walkthrough steps on reload', () => {
     let state: any = act(initialState(), { type: 'LOCAL_DRAFT_CREATE' });
     state = { ...state, captureStage: 6, captureComplete: true, decisions: Object.fromEntries(PROPERTIES.map(p => [p, { status: 'confirmed', note: '' }])) };
     const restored: any = sanitizeStoredState(JSON.parse(JSON.stringify(state)));
@@ -211,12 +213,12 @@ it('retains the entire dynamic published observation snapshot across reload', ()
     state = sanitizeStoredState(JSON.parse(JSON.stringify(state)));
     expect(getListing(state, 'local-001')).toEqual(original);
 });
-it('replacement pull take on the original private reference survives reload', () => {
+it('replaying the pull example never upgrades private stretch evidence across reload', () => {
     let state: any = act(initialState(), { type: 'REFERENCE_RECORDING_RETAKE', step: 4 });
     state = act(state, { type: 'REFERENCE_RECORDING_COMPLETE', step: 4 });
-    expect(getListing(state, REFERENCE.id)?.evidence.find(e => e.property === 'Stretch')?.support).toBe('limited');
+    expect(getListing(state, REFERENCE.id)?.evidence.find(e => e.property === 'Stretch')?.support).toBe('unavailable');
     state = sanitizeStoredState(JSON.parse(JSON.stringify(state)));
-    expect(getListing(state, REFERENCE.id)?.evidence.find(e => e.property === 'Stretch')?.support).toBe('limited');
+    expect(getListing(state, REFERENCE.id)?.evidence.find(e => e.property === 'Stretch')?.support).toBe('unavailable');
 });
 it('keeps the validated checkout destination and selected method on the immutable order', () => {
     let state: any = act(initialState(), { type: 'BUY_NOW', id: 'cloud-poplin' });

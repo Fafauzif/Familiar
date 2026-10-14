@@ -1,6 +1,6 @@
-# Familiar, photographic marketplace V2
+# Familiar, animated marketplace V3
 
-A mobile-first, browser-local secondhand clothing demonstrator inspired closely by the supplied Stitch marketplace layouts. It combines photographic discovery, useful garment comparison, optional Search by feel, guided prepared recordings for buyers and sellers, and coherent simulated commerce.
+A mobile-first, browser-local secondhand clothing prototype. It preserves the photographic Stitch-inspired marketplace and lavender design system, adds one interactive shirt with simulated cloth motion, and compares finds with a garment the buyer already knows.
 
 ## Run locally
 
@@ -11,25 +11,29 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Vite. The root route opens the marketplace. Browse `/shop`, use Search by feel, or open `/sell` for the seller studio.
+The root opens shopping. Cloud Poplin is the first prepared listing, with a **See it move** entry. **Sell a piece** is visible in the header; **Sell** also appears in mobile navigation. Search by feel is available beside the shopping search box.
 
-## Build and deploy to Vercel
+## Deploy to Vercel
 
-Unzip the deployable archive and use the directory containing `package.json` as the project root. Import that directory through your repository or Vercel workflow.
+Unzip and use the directory containing `package.json` as the project root. Import it through your repository or Vercel workflow.
 
-- Framework: Vite.
-- Install: `npm ci`.
-- Build: `npm run build`.
-- Output: `dist`.
-- Environment variables: none.
-- Backend, database and external service configuration: none.
+- Framework: Vite
+- Install: `npm ci`
+- Build: `npm run build`
+- Output: `dist`
+- Environment variables or backend setup: none
 
-`vercel.json` includes the SPA rewrite to `/index.html`. Static photographs, fonts and bundles are local assets. The ZIP is a deployable source project, not a change to your current Vercel account. Source is authoritative; rebuild `dist` after edits.
+`vercel.json` supplies the SPA rewrite to `/index.html`. All photographs, fonts and the garment model are local. The archive contains source, a lockfile, a production build and supporting checks. Rebuild `dist` after source edits. Providing this ZIP does not change the existing live deployment.
 
-```sh
-npm run build
-npm run preview
-```
+## Main journeys
+
+- Browse twelve prepared listings, search, filter, save, inspect original photographs, compare flat measurements and use simulated checkout.
+- Explore Cloud Poplin by rotating, zooming, hanging and swaying, or gently pulling and releasing its fabric. Switch to original photographs for the photographed garment and condition.
+- Compare Cloud with an illustrative blue version of the same base model. Both follow the same chosen action; each is independently explorable. Other garment types retain their own photographs.
+- Read four differences in ordinary terms: **Shape**, **Give**, **Texture**, and **Softness**. The summary starts from your familiar piece. Descriptions retain seller, owner or prepared attribution; unknown qualities remain unknown. Measurements, condition, composition source, price and delivery stay available.
+- Edit a private familiar piece's four descriptions. Sellers can edit the same descriptions in draft details before publishing.
+- Follow six buyer or seller demonstration steps: full garment, reverse, label closer, hang and move, gentle pull, fabric and wear closer. **Next is available immediately**. Each example lasts six seconds, then holds while waiting for Next. Pause, replay, Back, inspection and resume are available. Viewing a saved step does not invalidate completion.
+- Review, correct or mark seller findings unsure, then publish a browser-local listing. Public snapshots and existing purchase receipts remain independent of later draft edits.
 
 ## Verify
 
@@ -37,31 +41,23 @@ npm run preview
 npm test
 npm run verify:assets
 npm run verify:fixtures
+npm run verify:models
 npm run build
 npx playwright install chromium
 FAMILIAR_TEST_PRODUCTION=1 npm run test:browser
+FAMILIAR_TEST_PRODUCTION=1 node scripts/studio-browser-tests.mjs
 ```
 
-The unit suite checks state transitions, authored feel discovery, measurement differences, recording progress, legacy persistence, publication snapshots and immutable order facts. Asset checks verify the local WebP registry, decoded dimensions, checksums and file completeness. Browser checks exercise Chromium desktop and simulated phone viewports. The browser script writes its results to `../familiar-v2-check` by default; set `FAMILIAR_QA_DIR` to choose another directory. Packaged verification evidence records the checks actually run.
+The numerical cloth suite checks supports, localized deformation, recovery, transient strain, long-run stability and display-rate agreement. State tests cover descriptions, walkthrough progress, review invalidation, migration, shopping and receipts. Asset checks verify local geometry, photographs, dimensions and hashes. Chromium checks exercise real rendered WebGL, interaction, short-phone controls, fallback, source context and bounded automated accessibility checks.
 
-## What is included
-
-- Twelve prepared listings, one prepared private blue reference, and 36 local photographs across 13 garment sets.
-- Search, filters, sorting, saved pieces, listing galleries, measurements and original-photo inspection.
-- A Search by feel action beside the shopping search bar, private reference selection, preferences, three eligible suggestions when available, paired photographs and four measurement differences.
-- Shared six-task prepared recording: front, back, label, movement, gentle pull, and fabric/wear.
-- Multiple local seller drafts and private references, resumable recording progress, review, correction, retake and publication.
-- Bag and candidate-only Buy now, checkout recovery, reservation/order timeline, cancellation, disputes and optional arrival reflection.
-- Browser-local persistence and validated migration from the previous `familiar-v1` state. Saved items, existing bag entries, edited Cloud draft and recorded receipts are retained where valid.
-
-There is no customer-facing 3D viewer. Product photographs replace the earlier garment models. The original V1 documentation is preserved under `reference-pack/legacy-v1-docs` as historical material. Unused 3D source/models are archived under `reference-pack/legacy-v1-implementation`; Three.js is not a runtime dependency. Legacy public poster files remain to preserve old receipt image URLs.
+Browser output defaults to `../familiar-v3-check`; use `FAMILIAR_QA_DIR` to change it. The studio script writes to `../familiar-v3-studio-check`. Current release evidence is in `qa/evidence`. Historical V1/V2 material is labeled under `reference-pack`.
 
 ## Demonstration boundaries
 
-All names, seller identities, prices, measurements, feel profiles, conversations and commerce states are prepared examples. Record controls show camera-style prompts and timed demonstration takes. They do not access a device camera, upload files or create real footage. Photographs illustrate prepared garments and are not evidence of actual secondhand condition. Label and reverse views are not invented when the selected set lacks them.
+There is one authored base garment, rendered in ivory and blue. Its fixed-step XPBD simulation has gravity, inertia, damping, structural/shear/bending constraints, support pins, seam coupling, limited thickness collision and localized grip forces. The parameters are tuned for this illustration. They are **not calibrated measurements of the photographed textiles**, and do not establish softness, elasticity, recovery or body fit. Changing a description changes the comparison, not the model's physical parameters. See `docs/CLOTH_PHYSICS.md` and `docs/RENDERING.md`.
 
-Feel suggestions use authored qualitative profiles and intentions, with availability, category, size and ordinary search constraints applied first. They do not use garment inference, laboratory measurements, identity verification or an overall match percentage. Exact skin feel, fit, odor, cleanliness, authenticity and hidden damage remain unknown.
+The recording interface is a guided demonstration. It does not access a camera, scan a garment, create a real video or upload media. Next saves walkthrough progress; it never upgrades the authority of a source photograph or creates measured evidence. Names, measurements, prices, seller accounts, profiles and transactions are prepared examples. Photographs are not specimen-specific proof of secondhand condition.
 
-State belongs to this browser profile. Nothing is shared across users or devices. Real payments, shipping, authentication, messages and a backend are outside this deliverable.
+No backend, cross-device sync, real authentication, messages, payments or shipping exists. Records live in this browser profile and can be lost when storage is cleared. Frame behavior was checked in headless Chromium with software WebGL and simulated phone sizes. Physical-device performance, Safari/Firefox acceptance and real tactile prediction remain unverified.
 
-Read `docs/DESIGN_AND_STATE_SPEC.md`, `docs/INPUTS_AND_LIMITS.md` and `docs/ASSET_PROVENANCE.md` for the design contract, boundaries and source records.
+See `docs/DESIGN_AND_STATE_SPEC.md`, `docs/INPUTS_AND_LIMITS.md` and `docs/ASSET_PROVENANCE.md` for the current contract and provenance.

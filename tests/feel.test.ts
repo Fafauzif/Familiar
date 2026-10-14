@@ -43,16 +43,16 @@ describe("feel-led discovery", () => {
     expect(result.every(r => r.listing.price < 40 && r.listing.size === "M")).toBe(true);
   });
   it("does not invent a stretch comparison for an unknown garment profile", () => {
-    const unknown = { ...REFERENCE, id: "unknown-reference", templateId: "unknown-reference" };
+    const unknown = { ...REFERENCE, id: "unknown-reference", templateId: "unknown-reference", feelDescription: undefined, feelDescriptionSource: undefined };
     expect(findFeelMatches(initialState(), unknown, { ...FEEL_DEFAULTS, priority: "Stretch" }, { category: "All", size: "All" })).toEqual([]);
   });
   it("abstains when a new reference has no authored fabric profile", () => {
-    const unknown = { ...REFERENCE, id: "unknown-reference", templateId: "unknown-reference" };
+    const unknown = { ...REFERENCE, id: "unknown-reference", templateId: "unknown-reference", feelDescription: undefined, feelDescriptionSource: undefined };
     expect(findFeelMatches(initialState(), unknown, FEEL_DEFAULTS, { category: "All", size: "All" })).toEqual([]);
   });
   it("can compare prepared give declarations without turning them into percentages", () => {
     const result = findFeelMatches(initialState(), REFERENCE, { ...FEEL_DEFAULTS, priority: "Stretch", likes: ["Some give"] }, { category: "All", size: "All" });
-    expect(result[0].listing.category).toBe("Knitwear");
+    expect(result[0].listing.feelDescription?.give).toBe("some");
     const littleGive = findFeelMatches(initialState(), REFERENCE, { ...FEEL_DEFAULTS, priority: "Stretch", likes: [], dislikes: ["Some give"] }, { category: "All", size: "All" });
     expect(result[0].listing.id).not.toBe(littleGive[0].listing.id);
     expect(result[0].profile.observations.Stretch).toContain("prepared seller description");
@@ -61,16 +61,16 @@ describe("feel-led discovery", () => {
   it("does not compare an upper garment with trousers", () => {
     expect(compatibleGarments(REFERENCE, CATALOG.find(l => l.id === "ink-trousers")!)).toBe(false);
   });
-  it("does not use a new reference's pull declaration before its take is saved", () => {
+  it("uses attributed give independently of demo progress and does not infer an unknown give", () => {
     let state = transition(initialState(), { type: "REFERENCE_CREATE" });
-    const pending = getReference(state)!;
-    expect(findFeelMatches(state, pending, { ...FEEL_DEFAULTS, priority: "Stretch" }, { category: "All", size: "All" })).toEqual([]);
+    const described = getReference(state)!;
+    expect(findFeelMatches(state, described, { ...FEEL_DEFAULTS, priority: "Stretch" }, { category: "All", size: "All" }).length).toBeGreaterThan(0);
+    state = transition(state, { type: "DESCRIBE_FEEL", qualities: { ...described.feelDescription!, give: "unknown" } });
     for (let step = 0; step <= 4; step++) {
       state = transition(state, { type: "REFERENCE_RECORDING_COMPLETE", step });
       state = transition(state, { type: "REFERENCE_RECORDING_NEXT" });
     }
-    const captured = getReference(state)!;
-    expect(findFeelMatches(state, captured, { ...FEEL_DEFAULTS, priority: "Stretch" }, { category: "All", size: "All" }).length).toBeGreaterThan(0);
+    expect(findFeelMatches(state, getReference(state)!, { ...FEEL_DEFAULTS, priority: "Stretch" }, { category: "All", size: "All" })).toEqual([]);
   });
 });
 

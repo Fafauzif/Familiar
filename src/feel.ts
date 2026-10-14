@@ -1,4 +1,4 @@
-import { allListings, type AppState, type Listing, type Property } from "./domain";
+import { allListings, type AppState, type Listing, type Property, type FeelDescription } from "./domain";
 
 /** Qualitative prepared profiles, not measured textile mechanics. */
 export interface FabricProfile {
@@ -18,11 +18,12 @@ export interface FeelPreferences {
   likes: string[];
   dislikes: string[];
   priority: Property;
+  goal?: string;
 }
 export const FEEL_CHOICES = [
-  "Smooth surface", "Crisp structure", "Relaxed drape", "Textured finish", "Some give",
+  "Smooth texture", "Crisp shape", "Relaxed shape", "Visible texture", "Some give", "Soft touch",
 ] as const;
-export const FEEL_DEFAULTS: FeelPreferences = { query: "", likes: ["Smooth surface"], dislikes: [], priority: "Drape" };
+export const FEEL_DEFAULTS: FeelPreferences = { query: "", likes: ["Smooth texture"], dislikes: [], priority: "Drape" };
 
 const profiles: Record<string, FabricProfile> = {
   "my-blue-blouse": profile("Cotton blouse", "A familiar, lightly structured woven blouse.", .40, .40, .24, .56),
@@ -67,79 +68,146 @@ export function fabricProfile(listing: Listing): FabricProfile {
 }
 export function hasFabricProfile(listing: Listing): boolean { return !!profiles[(listing as Listing & { templateId?: string }).templateId || listing.id]; }
 
+export type FeelDimension = keyof FeelDescription;
+export const HUMAN_FEEL_DIMENSIONS: FeelDimension[] = ["shape", "give", "texture", "softness"];
+export const FEEL_LABELS: Record<FeelDimension, string> = { shape: "Shape", give: "Give", texture: "Texture", softness: "Softness" };
+export const FEEL_OPTIONS = {
+  shape: [{ value: "unknown", label: "Not described" }, { value: "relaxed", label: "Relaxed / falls loosely" }, { value: "balanced", label: "Some shape, some flow" }, { value: "crisp", label: "Crisp / holds its shape" }],
+  give: [{ value: "unknown", label: "Not described" }, { value: "little", label: "Little give" }, { value: "some", label: "Some give" }, { value: "plenty", label: "Plenty of give" }],
+  texture: [{ value: "unknown", label: "Not described" }, { value: "smooth", label: "Smooth-looking" }, { value: "some-texture", label: "Some visible texture" }, { value: "textured", label: "Clearly textured" }],
+  softness: [{ value: "unknown", label: "Not described" }, { value: "not-soft", label: "Not especially soft" }, { value: "somewhat-soft", label: "Somewhat soft to touch" }, { value: "very-soft", label: "Very soft to touch" }],
+} as const;
+export const UNKNOWN_FEEL: FeelDescription = { shape: "unknown", give: "unknown", texture: "unknown", softness: "unknown" };
+const qualityValues: Record<FeelDimension, readonly string[]> = {
+  shape: ["relaxed", "balanced", "crisp"], give: ["little", "some", "plenty"], texture: ["smooth", "some-texture", "textured"], softness: ["not-soft", "somewhat-soft", "very-soft"],
+};
+const qualityText: Record<FeelDimension, readonly string[]> = {
+  shape: ["Relaxed / falls loosely", "Some shape, some flow", "Crisp / holds its shape"], give: ["Little give", "Some give", "Plenty of give"], texture: ["Smooth-looking", "Some visible texture", "Clearly textured"], softness: ["Not especially soft", "Somewhat soft to touch", "Very soft to touch"],
+};
+export interface DescribedQuality { known: boolean; value?: number; text: string; source: string; }
+/** These are attributed descriptions. A model motion or saved demo step cannot establish a quality. */
+export function describeQuality(listing: Listing, key: FeelDimension): DescribedQuality {
+  const source = listing.feelDescriptionSource;
+  const value = source && ["owner", "seller", "prepared"].includes(source) ? qualityValues[key].indexOf(listing.feelDescription?.[key] || "unknown") : -1;
+  if (value < 0) return { known: false, text: "Not described", source: "Description missing" };
+  return { known: true, value, text: qualityText[key][value], source: source === "owner" ? "Your description" : source === "seller" ? "Seller description" : "Prepared description" };
+}
+export interface RelativeFeelRow {
+  key: FeelDimension; label: string; reference: DescribedQuality; candidate: DescribedQuality; relation: "more" | "similar" | "less" | "unknown"; summary: string;
+}
+export function relativeFeelRows(reference: Listing, listing: Listing): RelativeFeelRow[] {
+  return HUMAN_FEEL_DIMENSIONS.map(key => {
+    const a = describeQuality(reference, key), b = describeQuality(listing, key);
+    if (!a.known || !b.known) return { key, label: FEEL_LABELS[key], reference: a, candidate: b, relation: "unknown", summary: `${FEEL_LABELS[key]} hasn’t been described for both pieces` };
+    const delta = b.value! - a.value!;
+    const relation = delta === 0 ? "similar" : delta > 0 ? "more" : "less";
+    const qualifier = Math.abs(delta) === 1 ? "A little " : "";
+    let summary: string;
+    if (key === "shape") summary = delta === 0 ? "Similar shape" : `${qualifier}${delta > 0 ? "more structured" : "more relaxed"}`;
+    else if (key === "give") summary = delta === 0 ? "Similar give" : `${qualifier}${delta > 0 ? "more give" : "less give"}`;
+    else if (key === "texture") summary = delta === 0 ? "Similar-looking texture" : `${qualifier}${delta > 0 ? "more visible texture" : "less visible texture"}`;
+    else summary = delta === 0 ? "Similar described softness" : `Described as ${Math.abs(delta) === 1 ? "a little " : ""}${delta > 0 ? "softer" : "less soft"}`;
+    summary = summary.charAt(0).toUpperCase() + summary.slice(1);
+    return { key, label: FEEL_LABELS[key], reference: a, candidate: b, relation, summary };
+  });
+}
+function familiarName(listing: Listing): string {
+  const name = listing.name.replace(/^(?:my|your)\s+/i, "");
+  return `your ${name.charAt(0).toLowerCase()}${name.slice(1)}`;
+}
+export function relativeFeelSummary(reference: Listing, listing: Listing): string {
+  const rows = relativeFeelRows(reference, listing);
+  const shape = rows.find(row => row.key === "shape")!;
+  if (shape.relation === "more") return `Like ${familiarName(reference)}, with a ${shape.candidate.value! - shape.reference.value! === 1 ? "crisper" : "more structured"} shape.`;
+  if (shape.relation === "less") return `Like ${familiarName(reference)}, with a more relaxed shape.`;
+  const other = rows.find(row => row.relation !== "unknown" && row.relation !== "similar");
+  if (other) return `${other.summary}, compared with ${familiarName(reference)}.`;
+  const known = rows.filter(row => row.relation !== "unknown");
+  if (known.length === 4) return `A similar described feel to ${familiarName(reference)}.`;
+  if (known.length) return `${known[0].summary}, compared with ${familiarName(reference)}.`;
+  return "A few familiar details still need describing.";
+}
 function garmentFamily(category: Listing["category"]) {
   return ["Tops", "Shirts", "Knitwear"].includes(category) ? "upper" : category;
 }
 export function compatibleGarments(reference: Listing, listing: Listing): boolean {
   return garmentFamily(reference.category) === garmentFamily(listing.category);
 }
-export function hasStretchDeclaration(listing: Listing): boolean {
-  if (fabricProfile(listing).stretch === undefined) return false;
-  // A newly recorded personal garment needs its own pull take before its template declaration is usable.
-  return !listing.id.startsWith("private-") || listing.evidence.some(e => e.property === "Stretch" && e.support !== "unavailable");
+export function hasStretchDeclaration(listing: Listing): boolean { return describeQuality(listing, "give").known; }
+export interface FeelMatch { listing: Listing; reason: string; differences: string[]; profile: FabricProfile; }
+const propertyDimension: Record<Property, FeelDimension> = { Drape: "shape", Movement: "shape", Stretch: "give", Surface: "texture" };
+export function feelFocus(intent: FeelPreferences): FeelDimension {
+  return HUMAN_FEEL_DIMENSIONS.includes(intent.goal as FeelDimension) ? intent.goal as FeelDimension : propertyDimension[intent.priority];
 }
-export interface FeelMatch {
-  listing: Listing;
-  reason: string;
-  differences: string[];
-  profile: FabricProfile;
-}
-const propertyKey = { Drape: "drape", Movement: "movement", Stretch: "stretch", Surface: "surface" } as const;
-function supported(reference: Listing, listing: Listing, property: Property) {
-  if (property === "Stretch") return [reference, listing].every(hasStretchDeclaration);
-  return [reference, listing].every(item => item.evidence.some(e => e.property === property && e.support !== "unavailable"));
-}
-function requestTargets(intent: FeelPreferences, reference: FabricProfile) {
-  const targets = { drape: reference.drape, surface: reference.surface, structure: reference.structure, stretch: reference.stretch };
+function requestedTargets(intent: FeelPreferences): Partial<Record<FeelDimension, number>> {
+  const targets: Partial<Record<FeelDimension, number>> = {};
   const text = [intent.query, ...intent.likes].join(" ").toLowerCase();
   const avoid = intent.dislikes.join(" ").toLowerCase();
-  if (/smooth|fine|silky/.test(text) || /textured|rough/.test(avoid)) targets.surface = .1;
-  if (/textured|texture|ribbed|knit/.test(text) || /smooth/.test(avoid)) targets.surface = .86;
-  if (/relaxed|flowy|flowing|fluid|soft|supple|loose|drapey/.test(text) || /crisp|stiff|structured/.test(avoid)) { targets.drape = .8; targets.structure = .2; }
-  if (/crisp|structured|firm/.test(text) || /relaxed|floppy/.test(avoid)) { targets.structure = .9; targets.drape = .2; }
-  if (/less (?:crisp|stiff|structured)|not (?:crisp|stiff|structured)/.test(text)) { targets.drape = .8; targets.structure = .2; }
-  if (/give|stretch|elastic/.test(text)) targets.stretch = .7;
-  if (/give|stretch|elastic/.test(avoid)) targets.stretch = .05;
+  if (/smooth|fine|silky/.test(text) || /textured|texture|rough/.test(avoid)) targets.texture = 0;
+  if (/textured|texture|ribbed|knit/.test(text) || /smooth/.test(avoid)) targets.texture = 2;
+  if (/relaxed|flowy|flowing|fluid|loose|drapey/.test(text) || /crisp|stiff|structured/.test(avoid)) targets.shape = 0;
+  if (/crisp|structured|firm/.test(text) || /relaxed|floppy/.test(avoid)) targets.shape = 2;
+  if (/less (?:crisp|stiff|structured)|not (?:crisp|stiff|structured)/.test(text)) targets.shape = 0;
+  if (/give|stretch|elastic/.test(text)) targets.give = /some give/.test(text) ? 1 : 2;
+  if (/give|stretch|elastic/.test(avoid)) targets.give = 0;
+  if (/soft(?:er|ness)?|supple/.test(text)) targets.softness = 2;
+  if (/soft(?:ness)?/.test(avoid)) targets.softness = 0;
+  if (/less soft|not soft/.test(text)) targets.softness = 0;
   return targets;
 }
-
+function comparativeDirections(query: string): Partial<Record<FeelDimension, number>> {
+  const text = query.toLowerCase();
+  const directions: Partial<Record<FeelDimension, number>> = {};
+  if (/softer|more soft/.test(text)) directions.softness = 1;
+  if (/less soft|firmer to touch/.test(text)) directions.softness = -1;
+  if (/crisper|more structured|stiffer/.test(text)) directions.shape = 1;
+  if (/less crisp|less structured|more relaxed/.test(text)) directions.shape = -1;
+  if (/more give|stretchier/.test(text)) directions.give = 1;
+  if (/less give|less stretch/.test(text)) directions.give = -1;
+  if (/more (?:visible )?texture|more textured/.test(text)) directions.texture = 1;
+  if (/smoother|less (?:visible )?texture|less textured/.test(text)) directions.texture = -1;
+  return directions;
+}
 export function passesFeelSearchFilters(listing: Listing, queryText: string, filters: { category: string; size: string }): boolean {
   const query = queryText.toLowerCase();
   const explicitSize = query.match(/\bsize\s+([sml])\b/i)?.[1]?.toUpperCase();
-  const maxPrice = query.match(/\b(?:under|below|less than)\s*\$?\s*(\d+(?:\.\d+)?)/)?.[1];
+  const price = query.match(/\b(under|below|less than|up to|max)\s*\$?\s*(\d+(?:\.\d+)?)/);
   const ordinary = query
     .replace(/\bsize\s+[sml]\b/g, "")
-    .replace(/\b(?:under|below|less than)\s*\$?\s*\d+(?:\.\d+)?/g, "")
-    .replace(/\b(smooth(?:er)?|fine|silky|textured|texture|ribbed|knit|relaxed|flowy|flowing|fluid|soft(?:er|ness)?|supple|loose|drapey|crisp(?:er)?|structured|stiff(?:er)?|firm|give|stretch(?:y)?|elastic|similar|feeling|feel|like|to|my|a|the|and|with|some|fabric|surface|finish|structure|drape|less|more|not|but)\b/g, "")
+    .replace(/\b(?:under|below|less than|up to|max)\s*\$?\s*\d+(?:\.\d+)?/g, "")
+    .replace(/\b(smooth(?:er)?|fine|silky|textured|texture|ribbed|knit|relaxed|flowy|flowing|fluid|soft(?:er|ness)?|supple|loose|drapey|crisp(?:er)?|structured|stiff(?:er)?|firm|give|stretch(?:y)?|elastic|similar|feeling|feel|like|to|my|a|the|and|with|some|fabric|surface|finish|structure|drape|less|more|not|but|touch|shape|visible|than|piece|slightly|little)\b/g, "")
     .replace(/[^\p{L}\p{N}\s-]/gu, " ")
     .split(/\s+/).filter(Boolean);
-    if (filters.category !== "All" && listing.category !== filters.category) return false;
-    if (filters.size !== "All" && listing.size !== filters.size) return false;
-    if (explicitSize && listing.size !== explicitSize) return false;
-    if (maxPrice && listing.price >= Number(maxPrice)) return false;
-    const haystack = [listing.name, listing.category, listing.color, listing.description, listing.material, fabricProfile(listing).material].join(" ").toLowerCase();
-    return ordinary.every(token => ["shirt", "blouse", "top"].includes(token) ? garmentFamily(listing.category) === "upper" : haystack.includes(token));
+  if (filters.category !== "All" && listing.category !== filters.category) return false;
+  if (filters.size !== "All" && listing.size !== filters.size) return false;
+  if (explicitSize && listing.size !== explicitSize) return false;
+  if (price && (/up to|max/.test(price[1]) ? listing.price > Number(price[2]) : listing.price >= Number(price[2]))) return false;
+  const haystack = [listing.name, listing.category, listing.color, listing.description, listing.material, fabricProfile(listing).material].join(" ").toLowerCase();
+  return ordinary.every(token => ["shirt", "blouse", "top"].includes(token) ? garmentFamily(listing.category) === "upper" : haystack.includes(token));
 }
-
-/** Searches ordinary constraints and then ranks only eligible, available compatible garments. */
+/** Match attributed, known qualities. Unknown values never silently become similar or soft. */
 export function findFeelMatches(state: AppState, reference: Listing, intent: FeelPreferences, filters: { category: string; size: string }, limit = 3): FeelMatch[] {
-  const refProfile = fabricProfile(reference);
-  const key = propertyKey[intent.priority];
-  if (!hasFabricProfile(reference) || !supported(reference, reference, intent.priority) || refProfile[key] === undefined) return [];
-  const targets = requestTargets(intent, refProfile);
+  const focus = feelFocus(intent);
+  const requested = requestedTargets(intent);
+  const directions = comparativeDirections(intent.query);
+  const required = new Set<FeelDimension>([focus, ...Object.keys(requested) as FeelDimension[]]);
+  if ([...required].some(key => !describeQuality(reference, key).known)) return [];
   const ranked = allListings(state).filter(listing => {
-    if (!hasFabricProfile(listing) || (state.availability[listing.id] || "active") !== "active" || !compatibleGarments(reference, listing)) return false;
-    if (!passesFeelSearchFilters(listing, intent.query, filters)) return false;
-    return supported(reference, listing, intent.priority) && fabricProfile(listing)[key] !== undefined;
+    if ((state.availability[listing.id] || "active") !== "active" || !compatibleGarments(reference, listing)) return false;
+    return passesFeelSearchFilters(listing, intent.query, filters) && [...required].every(key => describeQuality(listing, key).known) && (Object.keys(directions) as FeelDimension[]).every(key => {
+      const a = describeQuality(reference, key), b = describeQuality(listing, key);
+      return a.known && b.known && (b.value! - a.value!) * directions[key]! > 0;
+    });
   }).map(listing => {
-    const p = fabricProfile(listing);
-    let distance = Math.abs(p.drape - targets.drape) * (intent.priority === "Drape" ? 3 : 1) + Math.abs(p.surface - targets.surface) * (intent.priority === "Surface" ? 3 : 1) + Math.abs(p.structure - targets.structure) * 1.6;
-    if (intent.priority === "Movement" && p.movement !== undefined && refProfile.movement !== undefined) distance += Math.abs(p.movement - refProfile.movement) * 3;
-    if (p.stretch !== undefined && targets.stretch !== undefined) distance += Math.abs(p.stretch - targets.stretch) * (intent.priority === "Stretch" ? 3 : 1);
-    const chosen = [...intent.likes, ...intent.dislikes.map(x => `less ${x.toLowerCase()}`)];
-    const reason = chosen.length ? `Suggested for ${chosen.slice(0, 2).join(" and ").toLowerCase()}.` : `A similar ${intent.priority.toLowerCase()} direction to your familiar garment.`;
-    const differences = [p.summary, listing.condition];
-    return { listing, profile: p, reason, differences, distance };
+    let distance = 0;
+    for (const key of HUMAN_FEEL_DIMENSIONS) {
+      const a = describeQuality(reference, key), b = describeQuality(listing, key);
+      if (!a.known || !b.known) { distance += .35; continue; }
+      const target = requested[key] ?? a.value!;
+      const weight = requested[key] !== undefined ? 5 : key === focus ? 3 : 1;
+      distance += Math.abs(b.value! - target) * weight;
+    }
+    return { listing, profile: fabricProfile(listing), reason: relativeFeelSummary(reference, listing), differences: relativeFeelRows(reference, listing).map(row => row.summary), distance };
   }).sort((a, b) => a.distance - b.distance || a.listing.id.localeCompare(b.listing.id));
   return ranked.slice(0, limit).map(({ distance: _distance, ...result }) => result);
 }

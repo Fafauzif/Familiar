@@ -1,4 +1,4 @@
-/** Prepared local demonstration: listing facts and recordings are authored examples. */
+/** Local prepared demonstration: photos and attributed descriptions are separate from animated walkthrough progress. */
 import { coverFor, mediaFor } from "./media";
 export type Property = "Drape" | "Movement" | "Stretch" | "Surface";
 export type Support = "supported" | "limited" | "unavailable";
@@ -15,6 +15,13 @@ export interface Evidence {
     originalSupport?: Support;
     preparedTake?: boolean;
 }
+export interface FeelDescription {
+    softness: "not-soft" | "somewhat-soft" | "very-soft" | "unknown";
+    give: "little" | "some" | "plenty" | "unknown";
+    shape: "relaxed" | "balanced" | "crisp" | "unknown";
+    texture: "smooth" | "some-texture" | "textured" | "unknown";
+}
+export type FeelDescriptionSource = "seller" | "owner" | "prepared";
 export interface Listing {
     id: string;
     name: string;
@@ -35,6 +42,8 @@ export interface Listing {
     material?: string;
     compositionSource?: string;
     feelNotes?: string[];
+    feelDescription?: FeelDescription;
+    feelDescriptionSource?: FeelDescriptionSource;
     templateId?: string;
     model?: string;
     poster: string;
@@ -116,6 +125,7 @@ export interface FeelIntent {
     goal: string;
 }
 export interface LocalDraft {
+    progressKind: "animated-demo";
     id: string;
     templateId: string;
     listing: Listing;
@@ -126,6 +136,7 @@ export interface LocalDraft {
     published: boolean;
 }
 export interface PrivateReference {
+    progressKind: "animated-demo";
     id: string;
     templateId: string;
     listing: Listing;
@@ -240,6 +251,11 @@ export type Action = {
 } | {
     type: "RECORDING_NEXT";
 } | {
+    type: "RECORDING_PREVIOUS";
+} | {
+    type: "RECORDING_VIEW";
+    step: number;
+} | {
     type: "RECORDING_RETRY";
     step: number;
 } | {
@@ -258,6 +274,11 @@ export type Action = {
 } | {
     type: "REFERENCE_RECORDING_NEXT";
 } | {
+    type: "REFERENCE_RECORDING_PREVIOUS";
+} | {
+    type: "REFERENCE_RECORDING_VIEW";
+    step: number;
+} | {
     type: "REFERENCE_RECORDING_RETAKE";
     step: number;
 } | {
@@ -268,6 +289,10 @@ export type Action = {
 } | {
     type: "REFERENCE_CAPTURE_SAVE";
     name?: string;
+} | {
+    type: "DESCRIBE_FEEL";
+    id?: string;
+    qualities: FeelDescription;
 } | {
     type: "FEEL_INTENT";
     intent: Partial<FeelIntent>;
@@ -329,8 +354,8 @@ function fixture(input: FixtureInput): Listing {
     };
     const evidence: Evidence[] = [
         { property: "Drape", support: "supported", observation: knit ? "The garment photograph shows a relaxed knit outline. Hanging shape can be inspected; body fit and fabric weight are not established." : "Inspect the photographed outline, seams and visible folds. Hanging shape is visible, but exact fit and fabric weight are not established.", source: source("front"), frame: "Full garment photograph · front view", sellerStatus: "unreviewed" },
-        { property: "Movement", support: movement ? "limited" : "unavailable", observation: movement ? "A prepared guided take represents the seller lifting and moving the garment. It is an authored demonstration, not a recording of measured fabric behaviour." : "No guided movement take is recorded. Movement during wear remains unknown.", source: source("front"), frame: "Prepared movement gesture · source photograph", sellerStatus: "unreviewed" },
-        { property: "Stretch", support: stretch ? "limited" : "unavailable", observation: stretch ? "A prepared gentle-pull gesture and seller description are available. They do not measure elasticity, force or recovery." : "No gentle-pull take is recorded. Stretch and return remain unknown.", source: source("detail"), frame: "Prepared pull gesture · no measured elasticity", sellerStatus: "unreviewed" },
+        { property: "Movement", support: movement ? "limited" : "unavailable", observation: movement ? "A prepared movement example illustrates the action. This is authored demonstration context; movement during wear and fabric weight are not measured." : "There is no garment-specific movement recording. An animated example cannot establish movement during wear.", source: source("front"), frame: "Prepared movement gesture · source photograph", sellerStatus: "unreviewed" },
+        { property: "Stretch", support: stretch ? "limited" : "unavailable", observation: stretch ? "A prepared pull example and attributed description provide context. Elasticity, force and recovery have not been measured." : "There is no garment-specific pull-and-release recording. Give may be described separately, while elasticity and recovery remain unmeasured.", source: source("detail"), frame: "Prepared pull gesture · no measured elasticity", sellerStatus: "unreviewed" },
         { property: "Surface", support: "limited", observation: input.id === "cloud-poplin" ? "Seller describes a crisp cotton surface and light wear at the right cuff. The supplied photo does not verify that mark or exact skin softness; ask for a close-up." : "Inspect the photographed fabric and seller notes. No hidden damage, exact skin softness, cleanliness or authenticity is established by these photographs.", source: source("detail"), frame: "Garment photograph · fabric detail where supplied", sellerStatus: "unreviewed" },
     ];
     const material = input.id.includes("linen") ? "Seller-described linen" : knit ? "Seller-described knit blend" : input.id.includes("denim") ? "Seller-described cotton denim" : input.id === "petal-tee" ? "Seller-described cotton jersey" : input.id === "cloud-poplin" ? "Seller-described cotton" : "Seller-described woven blend";
@@ -340,7 +365,22 @@ function fixture(input: FixtureInput): Listing {
         "rose-jacket": "Twill appearance", "apricot-slip": "Satin-like sheen"
     };
     const feelNotes = [appearance[input.id] ?? "Woven appearance", "Hanging shape shown", "Exact skin softness unknown"];
-    return { ...listing, condition: input.condition.startsWith("Very good") ? "Very good · seller-described" : "Good · seller-described", description: descriptions[input.id] ?? `${input.description.split(". ")[0]}. Seller describes light wear; check the photographs and ask about condition.`, hero: !!input.hero, model: undefined, poster: coverFor(input.id), templateId: input.id, material, compositionSource: "Seller description; label composition is not verified", feelNotes, evidence };
+    const descriptionsByGarment: Record<string, FeelDescription> = {
+        "cloud-poplin": { softness: "somewhat-soft", give: "little", shape: "crisp", texture: "smooth" },
+        "my-blue-blouse": { softness: "somewhat-soft", give: "little", shape: "balanced", texture: "smooth" },
+        "moss-knit": { softness: "unknown", give: "some", shape: "relaxed", texture: "textured" },
+        "airloom-linen": { softness: "unknown", give: "little", shape: "relaxed", texture: "some-texture" },
+        "petal-tee": { softness: "unknown", give: "some", shape: "relaxed", texture: "smooth" },
+        "sunday-denim": { softness: "unknown", give: "unknown", shape: "crisp", texture: "textured" },
+        "ink-trousers": { softness: "unknown", give: "unknown", shape: "balanced", texture: "smooth" },
+        "apricot-slip": { softness: "unknown", give: "unknown", shape: "relaxed", texture: "smooth" },
+        "tide-shirt": { softness: "unknown", give: "little", shape: "balanced", texture: "smooth" },
+        "oat-vest": { softness: "unknown", give: "some", shape: "balanced", texture: "textured" },
+        "lilac-wrap": { softness: "unknown", give: "little", shape: "relaxed", texture: "smooth" },
+        "rose-jacket": { softness: "unknown", give: "unknown", shape: "crisp", texture: "some-texture" },
+        "sage-skirt": { softness: "unknown", give: "unknown", shape: "relaxed", texture: "smooth" },
+    };
+    return { ...listing, condition: input.condition.startsWith("Very good") ? "Very good · seller-described" : "Good · seller-described", description: descriptions[input.id] ?? `${input.description.split(". ")[0]}. Seller describes light wear; check the photographs and ask about condition.`, hero: !!input.hero, model: undefined, poster: coverFor(input.id), templateId: input.id, material, compositionSource: "Seller description; label composition is not verified", feelNotes, feelDescription: { ...descriptionsByGarment[input.id] }, feelDescriptionSource: "prepared", evidence };
 }
 export const CATALOG: Listing[] = [
     fixture({
@@ -668,8 +708,8 @@ export function initialState(): AppState {
         guided: false,
         paymentError: false,
         localListings: [], localDrafts: [], activeDraftId: "cloud-poplin", capturedSteps: [],
-        privateReferences: [{ id: REFERENCE.id, templateId: REFERENCE.id, listing: REFERENCE, captureStage: 6, capturedSteps: [0, 1, 2, 3, 4, 5], ready: true }],
-        feelIntent: { query: "", likes: [], dislikes: [], priority: "Surface", qualities: [], goal: "similar" },
+        privateReferences: [{ progressKind: "animated-demo", id: REFERENCE.id, templateId: REFERENCE.id, listing: REFERENCE, captureStage: 6, capturedSteps: [0, 1, 2, 3, 4, 5], ready: true }],
+        feelIntent: { query: "", likes: [], dislikes: [], priority: "Drape", qualities: [], goal: "shape" },
     };
 }
 export function getListing(state: AppState, id: string): Listing | undefined {
@@ -709,7 +749,7 @@ export function allListings(state: AppState): Listing[] {
     return [...CATALOG, ...state.localListings].map((x) => getListing(state, x.id)).filter((listing): listing is Listing => listing !== undefined);
 }
 export const canPublish = (state: AppState) => state.captureComplete &&
-    state.captureStage === 6 &&
+    state.capturedSteps.length === 6 &&
     PROPERTIES.every((p) => {
         const d = state.decisions[p];
         return (d &&
@@ -777,7 +817,7 @@ function updateOrder(state: AppState, order: Order, updated: Order, availability
 }
 const stepValid = (value: number) => Number.isInteger(value) && value >= 0 && value < 6;
 const recordingProperties: Record<number, Property[]> = { 0: ["Drape"], 1: ["Drape"], 2: ["Surface"], 3: ["Movement"], 4: ["Stretch"], 5: ["Surface"] };
-const cloneListing = (listing: Listing): Listing => ({ ...listing, measurements: { ...listing.measurements }, feelNotes: listing.feelNotes ? [...listing.feelNotes] : undefined, evidence: listing.evidence.map(e => ({ ...e })) });
+const cloneListing = (listing: Listing): Listing => ({ ...listing, feelDescription: listing.feelDescription ? { ...listing.feelDescription } : undefined, measurements: { ...listing.measurements }, feelNotes: listing.feelNotes ? [...listing.feelNotes] : undefined, evidence: listing.evidence.map(e => ({ ...e })) });
 const isPublicId = (state: AppState, id: string) => ids.has(id) || state.localListings.some(x => x.id === id);
 const nextId = (prefix: string, values: {
     id: string;
@@ -791,23 +831,12 @@ function templateFor(state: AppState, id?: string): Listing | undefined {
     return CATALOG.find(x => x.id === id) ?? state.localListings.find(x => x.id === id);
 }
 function decisionsCopy(value: AppState["decisions"]) { return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, { ...v }])); }
-function preparedEvidence(listing: Listing, steps: number[]): Listing {
-    return { ...listing, evidence: listing.evidence.map(e => {
-            if (e.property === "Movement" && steps.includes(3))
-                return { ...e, preparedTake: true, support: "limited", observation: "A prepared guided movement gesture is saved for this garment. It illustrates the requested action, not measured movement during wear or fabric weight." };
-            if (e.property === "Stretch" && steps.includes(4))
-                return { ...e, preparedTake: true, support: "limited", observation: "A prepared gentle-pull demonstration is saved. Elasticity, force and recovery are not measured; actual stretch remains unknown." };
-            return e;
-        }) };
-}
 function referenceListing(reference: PrivateReference, state: AppState): Listing {
-    const listing = reference.id === REFERENCE.id ? cloneListing(reference.listing) : preparedEvidence(cloneListing(reference.listing), reference.capturedSteps);
+    // Photo sources and descriptions exist independently of watching the animated instructions.
+    const listing = cloneListing(reference.listing);
     if (reference.id === REFERENCE.id)
         listing.name = state.privateReferenceName;
-    return { ...listing, evidence: listing.evidence.map(e => {
-            const required = e.property === "Drape" ? [0, 1] : e.property === "Surface" ? [2, 5] : e.property === "Movement" ? [3] : [4];
-            return required.some(step => reference.capturedSteps.includes(step)) ? e : { ...e, support: "unavailable", observation: `No ${e.property.toLowerCase()} take has been saved for this private reference.` };
-        }) };
+    return listing;
 }
 export function allReferences(state: AppState): PrivateReference[] { return state.privateReferences; }
 export const getPrivateReferences = allReferences;
@@ -815,12 +844,12 @@ export function getReference(state: AppState, id = state.selectedReference): Lis
 export const getSelectedReference = getReference;
 export function getActiveReferenceCapture(state: AppState) {
     const reference = state.privateReferences.find(x => x.id === state.selectedReference);
-    return reference ? { stage: reference.captureStage, capturedSteps: reference.capturedSteps, templateId: reference.templateId, ready: reference.ready } : undefined;
+    return reference ? { progressKind: "animated-demo" as const, stage: reference.captureStage, capturedSteps: reference.capturedSteps, templateId: reference.templateId, ready: reference.ready } : undefined;
 }
 export function getActiveDraft(state: AppState): LocalDraft {
     const active = state.localDrafts.find(x => x.id === state.activeDraftId);
     const listing = cloneListing(active?.listing ?? state.cloudDraftListing ?? CATALOG[0]);
-    return { id: state.activeDraftId, templateId: active?.templateId ?? "cloud-poplin", listing: { ...listing, ...state.draft }, captureStage: state.captureStage, captureComplete: state.captureComplete, capturedSteps: [...state.capturedSteps], decisions: decisionsCopy(state.decisions), published: state.published };
+    return { progressKind: "animated-demo", id: state.activeDraftId, templateId: active?.templateId ?? "cloud-poplin", listing: { ...listing, ...state.draft }, captureStage: state.captureStage, captureComplete: state.captureComplete, capturedSteps: [...state.capturedSteps], decisions: decisionsCopy(state.decisions), published: state.published };
 }
 function syncDraft(state: AppState): AppState {
     const active = getActiveDraft(state);
@@ -838,13 +867,43 @@ function cleanFeel(value: unknown, fallback: FeelIntent): FeelIntent {
     const raw = record(value);
     if (!raw)
         return fallback;
-    return { query: typeof raw.query === "string" && raw.query.length <= 300 ? raw.query : fallback.query, likes: textList(raw.likes, fallback.likes), dislikes: textList(raw.dislikes, fallback.dislikes), priority: PROPERTIES.includes(raw.priority as Property) ? raw.priority as Property : fallback.priority, qualities: textList(raw.qualities, fallback.qualities), goal: cleanText(raw.goal, 100) ?? fallback.goal };
+    const aliases: Record<string, string> = { "Smooth surface": "Smooth texture", "Crisp structure": "Crisp shape", "Relaxed drape": "Relaxed shape", "Textured finish": "Visible texture" };
+    const choices = (value: unknown, previous: string[]) => textList(value, previous).map(x => aliases[x] ?? x);
+    const priority = PROPERTIES.includes(raw.priority as Property) ? raw.priority as Property : fallback.priority;
+    const goal = cleanText(raw.goal, 100) ?? fallback.goal;
+    return { query: typeof raw.query === "string" && raw.query.length <= 300 ? raw.query : fallback.query, likes: choices(raw.likes, fallback.likes), dislikes: choices(raw.dislikes, fallback.dislikes), priority, qualities: choices(raw.qualities, fallback.qualities), goal: goal === "similar" ? priority === "Stretch" ? "give" : priority === "Surface" ? "texture" : "shape" : goal };
+}
+export const UNKNOWN_FEEL_DESCRIPTION: FeelDescription = { softness: "unknown", give: "unknown", shape: "unknown", texture: "unknown" };
+export const FEEL_DESCRIPTION_VALUES: { [K in keyof FeelDescription]: readonly FeelDescription[K][] } = {
+    softness: ["not-soft", "somewhat-soft", "very-soft", "unknown"],
+    give: ["little", "some", "plenty", "unknown"],
+    shape: ["relaxed", "balanced", "crisp", "unknown"],
+    texture: ["smooth", "some-texture", "textured", "unknown"],
+};
+function validFeelDescription(value: unknown, strict = false): FeelDescription | undefined {
+    const raw = record(value);
+    if (!raw) return undefined;
+    const result = { ...UNKNOWN_FEEL_DESCRIPTION };
+    for (const key of Object.keys(result) as (keyof FeelDescription)[]) {
+        const candidate = raw[key];
+        if ((FEEL_DESCRIPTION_VALUES[key] as readonly unknown[]).includes(candidate))
+            (result[key] as string) = candidate as string;
+        else if (strict) return undefined;
+    }
+    return result;
+}
+function qualitySource(value: unknown): FeelDescriptionSource | undefined {
+    return value === "seller" || value === "owner" || value === "prepared" ? value : undefined;
 }
 function editedListing(listing: Listing, value: unknown): Listing {
     const raw = record(value);
     if (!raw)
         return listing;
     const next = cloneListing(listing);
+    if (Object.prototype.hasOwnProperty.call(raw, "feelDescription")) {
+        next.feelDescription = validFeelDescription(raw.feelDescription) ?? { ...UNKNOWN_FEEL_DESCRIPTION };
+        next.feelDescriptionSource = qualitySource(raw.feelDescriptionSource) ?? "prepared";
+    }
     for (const key of ["name", "condition", "description", "material"] as const) {
         const max = key === "description" ? 2000 : key === "name" ? 100 : 300;
         const text = cleanText(raw[key], max);
@@ -870,6 +929,25 @@ function editedListing(listing: Listing, value: unknown): Listing {
 }
 export function transition(state: AppState, action: Action): AppState {
     switch (action.type) {
+        case "DESCRIBE_FEEL": {
+            const qualities = validFeelDescription(action.qualities, true);
+            if (!qualities) return state;
+            const id = action.id ?? state.selectedReference;
+            if (state.privateReferences.some(x => x.id === id)) {
+                return { ...state, privateReferences: state.privateReferences.map(x => x.id === id ? { ...x, listing: { ...cloneListing(x.listing), feelDescription: qualities, feelDescriptionSource: "owner" } } : x) };
+            }
+            if (action.id === undefined || id !== state.activeDraftId) return state;
+            const active = getActiveDraft(state);
+            const listing: Listing = { ...active.listing, feelDescription: qualities, feelDescriptionSource: "seller" };
+            const decisions = decisionsCopy(state.decisions);
+            const reviewForQuality: Record<keyof FeelDescription, Property> = { softness: "Surface", give: "Stretch", shape: "Drape", texture: "Surface" };
+            for (const key of Object.keys(qualities) as (keyof FeelDescription)[])
+                if (active.listing.feelDescription?.[key] !== qualities[key]) delete decisions[reviewForQuality[key]];
+            const next = { ...state, decisions, published: false };
+            if (id === "cloud-poplin") next.cloudDraftListing = listing;
+            else next.localDrafts = state.localDrafts.map(x => x.id === id ? { ...x, listing } : x);
+            return syncDraft(next);
+        }
         case "LOCAL_DRAFT_CREATE": {
             if (state.localDrafts.length >= 30)
                 return state;
@@ -877,7 +955,7 @@ export function transition(state: AppState, action: Action): AppState {
             if (!template)
                 return state;
             const prior = syncDraft(state), id = nextId("local", [...state.localDrafts, ...state.localListings]);
-            const draft: LocalDraft = { id, templateId: template.templateId ?? template.id, listing: { ...cloneListing(template), id, templateId: template.templateId ?? template.id, seller: "You" }, captureStage: 0, captureComplete: false, capturedSteps: [], decisions: {}, published: false };
+            const draft: LocalDraft = { progressKind: "animated-demo", id, templateId: template.templateId ?? template.id, listing: { ...cloneListing(template), id, templateId: template.templateId ?? template.id, seller: "You" }, captureStage: 0, captureComplete: false, capturedSteps: [], decisions: {}, published: false };
             return selectDraft({ ...prior, localDrafts: [...prior.localDrafts, draft] }, draft);
         }
         case "LOCAL_DRAFT_SELECT": {
@@ -899,19 +977,21 @@ export function transition(state: AppState, action: Action): AppState {
         case "RECORDING_COMPLETE": {
             if (!stepValid(action.step) || state.captureStage !== action.step || state.capturedSteps.includes(action.step))
                 return state;
-            const active = getActiveDraft(state), listing = preparedEvidence(active.listing, [action.step]);
-            const next = { ...state, capturedSteps: [...state.capturedSteps, action.step] };
-            if (state.activeDraftId === "cloud-poplin")
-                next.cloudDraftListing = listing;
-            else
-                next.localDrafts = state.localDrafts.map(x => x.id === state.activeDraftId ? { ...x, listing } : x);
-            return syncDraft(next);
+            // This stores completed walkthrough steps, never garment recordings or new material evidence.
+            return syncDraft({ ...state, capturedSteps: [...state.capturedSteps, action.step] });
         }
         case "RECORDING_NEXT": {
             if (state.captureStage >= 6 || !state.capturedSteps.includes(state.captureStage))
                 return state;
             const stage = state.captureStage + 1;
-            return syncDraft({ ...state, captureStage: stage, captureComplete: stage === 6 && state.capturedSteps.length === 6 });
+            return syncDraft({ ...state, captureStage: stage, captureComplete: state.capturedSteps.length === 6 });
+        }
+        case "RECORDING_PREVIOUS": {
+            return state.captureStage > 0 ? syncDraft({ ...state, captureStage: state.captureStage - 1 }) : state;
+        }
+        case "RECORDING_VIEW": {
+            return stepValid(action.step) && (action.step === state.captureStage || state.capturedSteps.includes(action.step))
+                ? syncDraft({ ...state, captureStage: action.step }) : state;
         }
         case "RECORDING_RETRY": {
             if (!stepValid(action.step))
@@ -929,7 +1009,7 @@ export function transition(state: AppState, action: Action): AppState {
             if (!template)
                 return state;
             const id = nextId("private", state.privateReferences), templateId = template.templateId ?? template.id;
-            const reference: PrivateReference = { id, templateId, listing: { ...cloneListing(template), id, templateId, name: template.id === REFERENCE.id ? REFERENCE.name : `My ${template.name.toLowerCase()}`, seller: "You · private reference", condition: "Private · your familiar garment" }, captureStage: 0, capturedSteps: [], ready: false };
+            const reference: PrivateReference = { progressKind: "animated-demo", id, templateId, listing: { ...cloneListing(template), id, templateId, name: template.id === REFERENCE.id ? REFERENCE.name : `My ${template.name.toLowerCase()}`, seller: "You · private reference", condition: "Private · your familiar garment" }, captureStage: 0, capturedSteps: [], ready: false };
             return { ...state, privateReferences: [...state.privateReferences, reference], selectedReference: id };
         }
         case "REFERENCE_FROM_ORDER": {
@@ -939,10 +1019,12 @@ export function transition(state: AppState, action: Action): AppState {
             const next = transition(state, { type: "REFERENCE_CREATE", templateId: item.id });
             if (next === state)
                 return state;
-            return { ...next, privateReferences: next.privateReferences.map(x => x.id === next.selectedReference ? { ...x, listing: { ...x.listing, name: item.name, size: item.size, poster: item.poster, description: "Your purchase-time garment saved privately. Complete guided takes to add comparison details." } } : x) };
+            return { ...next, privateReferences: next.privateReferences.map(x => x.id === next.selectedReference ? { ...x, listing: { ...x.listing, name: item.name, size: item.size, poster: item.poster, description: "Your purchase-time garment saved privately. Describe its feel and follow the animated guide to add comparison details." } } : x) };
         }
         case "REFERENCE_RECORDING_COMPLETE":
         case "REFERENCE_RECORDING_NEXT":
+        case "REFERENCE_RECORDING_PREVIOUS":
+        case "REFERENCE_RECORDING_VIEW":
         case "REFERENCE_RECORDING_RETAKE":
         case "REFERENCE_RECORDING_RETRY":
         case "REFERENCE_FINISH":
@@ -954,12 +1036,20 @@ export function transition(state: AppState, action: Action): AppState {
             if (action.type === "REFERENCE_RECORDING_COMPLETE") {
                 if (!stepValid(action.step) || ref.captureStage !== action.step || ref.capturedSteps.includes(action.step))
                     return state;
-                next = { ...ref, capturedSteps: [...ref.capturedSteps, action.step], listing: preparedEvidence(ref.listing, [action.step]), ready: false };
+                next = { ...ref, capturedSteps: [...ref.capturedSteps, action.step], ready: false };
             }
             else if (action.type === "REFERENCE_RECORDING_NEXT") {
                 if (ref.captureStage >= 6 || !ref.capturedSteps.includes(ref.captureStage))
                     return state;
                 next = { ...ref, captureStage: ref.captureStage + 1 };
+            }
+            else if (action.type === "REFERENCE_RECORDING_PREVIOUS") {
+                if (ref.captureStage === 0) return state;
+                next = { ...ref, captureStage: ref.captureStage - 1 };
+            }
+            else if (action.type === "REFERENCE_RECORDING_VIEW") {
+                if (!stepValid(action.step) || (action.step !== ref.captureStage && !ref.capturedSteps.includes(action.step))) return state;
+                next = { ...ref, captureStage: action.step };
             }
             else if (action.type === "REFERENCE_RECORDING_RETAKE" || action.type === "REFERENCE_RECORDING_RETRY") {
                 if (!stepValid(action.step))
@@ -991,7 +1081,7 @@ export function transition(state: AppState, action: Action): AppState {
         case "REFERENCE_RESTORE": {
             if (state.privateReferences.some(x => x.id === REFERENCE.id))
                 return state;
-            return { ...state, referenceAvailable: true, privateReferenceName: REFERENCE.name, selectedReference: REFERENCE.id, privateReferences: [{ id: REFERENCE.id, templateId: REFERENCE.id, listing: cloneListing(REFERENCE), captureStage: 6, capturedSteps: [0, 1, 2, 3, 4, 5], ready: true }, ...state.privateReferences] };
+            return { ...state, referenceAvailable: true, privateReferenceName: REFERENCE.name, selectedReference: REFERENCE.id, privateReferences: [{ progressKind: "animated-demo", id: REFERENCE.id, templateId: REFERENCE.id, listing: cloneListing(REFERENCE), captureStage: 6, capturedSteps: [0, 1, 2, 3, 4, 5], ready: true }, ...state.privateReferences] };
         }
         case "FEEL_INTENT": {
             const feelIntent = cleanFeel(action.intent, state.feelIntent);
@@ -1364,7 +1454,7 @@ function validLocalListing(value: unknown, forcedId?: string): Listing | undefin
         const rawEntry = record(rawEvidence.find(x => record(x)?.property === e.property));
         const status = statuses.includes(rawEntry?.sellerStatus as ReviewStatus) ? rawEntry!.sellerStatus as ReviewStatus : "unreviewed";
         const note = cleanText(rawEntry?.correctionNote, 2000);
-        const recorded = rawEntry?.preparedTake === true && (e.property === "Movement" || e.property === "Stretch") ? preparedEvidence({ ...result, evidence: [e] }, [e.property === "Movement" ? 3 : 4]).evidence[0] : e;
+        const recorded = e;
         return { ...recorded, sellerStatus: status, ...(["supported", "limited", "unavailable"].includes(rawEntry?.originalSupport as string) ? { originalSupport: rawEntry!.originalSupport as Support } : {}), ...(status === "corrected" && note ? { correctionNote: note } : {}), support: status === "unsure" && recorded.support !== "unavailable" ? "limited" : recorded.support };
     });
     return result;
@@ -1385,8 +1475,8 @@ function validLocalDraft(value: unknown): LocalDraft | undefined {
     const raw = record(value), listing = validLocalListing(raw?.listing), id = cleanText(raw?.id, 100);
     if (!raw || !id || !listing || id !== listing.id || raw.templateId !== listing.templateId)
         return undefined;
-    const captureStage = validStage(raw.captureStage), capturedSteps = validSteps(raw.capturedSteps), captureComplete = captureStage === 6 && capturedSteps.length === 6 && raw.captureComplete === true, decisions = validDecisions(raw.decisions);
-    return { id, listing, templateId: listing.templateId!, captureStage, capturedSteps, captureComplete, decisions, published: raw.published === true && captureComplete && PROPERTIES.every(p => decisions[p] && decisions[p].status !== "unreviewed") };
+    const captureStage = validStage(raw.captureStage), capturedSteps = validSteps(raw.capturedSteps), captureComplete = capturedSteps.length === 6 && raw.captureComplete === true, decisions = validDecisions(raw.decisions);
+    return { progressKind: "animated-demo", id, listing, templateId: listing.templateId!, captureStage, capturedSteps, captureComplete, decisions, published: raw.published === true && captureComplete && PROPERTIES.every(p => decisions[p] && decisions[p].status !== "unreviewed") };
 }
 function validPrivateReference(value: unknown): PrivateReference | undefined {
     const raw = record(value), listingRaw = record(raw?.listing), id = cleanText(raw?.id, 100), templateId = cleanText(raw?.templateId, 100), template = templateId === REFERENCE.id ? REFERENCE : CATALOG.find(x => x.id === templateId);
@@ -1394,11 +1484,7 @@ function validPrivateReference(value: unknown): PrivateReference | undefined {
         return undefined;
     const captureStage = validStage(raw.captureStage), capturedSteps = validSteps(raw.capturedSteps);
     let listing: Listing = { ...editedListing(template, listingRaw), id, templateId: template.id, poster: listingRaw.poster, seller: "You · private reference" };
-    const recorded = Array.isArray(listingRaw.evidence) ? listingRaw.evidence : [];
-    for (const step of [3, 4])
-        if (capturedSteps.includes(step) && recorded.some(x => record(x)?.property === (step === 3 ? "Movement" : "Stretch") && record(x)?.preparedTake === true))
-            listing = preparedEvidence(listing, [step]);
-    return { id, templateId: template.id, listing, captureStage, capturedSteps, ready: raw.ready === true && captureStage === 6 && capturedSteps.length === 6 };
+    return { progressKind: "animated-demo", id, templateId: template.id, listing, captureStage, capturedSteps, ready: raw.ready === true && capturedSteps.length === 6 };
 }
 /** Accept only known schema values. Orphan reservations recover to active; sold inventory remains conservative. */
 export function sanitizeStoredState(value: unknown): AppState {
@@ -1493,7 +1579,7 @@ export function sanitizeStoredState(value: unknown): AppState {
         raw.captureStage <= 6
         ? raw.captureStage
         : 0;
-    const captureComplete = captureStage === 6 && raw.captureComplete === true;
+    const captureComplete = (Array.isArray(raw.capturedSteps) ? validSteps(raw.capturedSteps).length === 6 : captureStage === 6) && raw.captureComplete === true;
     const decisions: AppState["decisions"] = {};
     const rawDecisions = record(raw.decisions);
     for (const p of PROPERTIES) {
@@ -1551,7 +1637,7 @@ export function sanitizeStoredState(value: unknown): AppState {
     if (cloudSession) {
         const listing = validLocalListing(cloudSession.listing, "cloud-poplin");
         if (listing)
-            state.cloudDraftSession = { id: "cloud-poplin", templateId: "cloud-poplin", listing, captureStage: validStage(cloudSession.captureStage), capturedSteps: validSteps(cloudSession.capturedSteps), captureComplete: cloudSession.captureComplete === true && validStage(cloudSession.captureStage) === 6 && validSteps(cloudSession.capturedSteps).length === 6, decisions: validDecisions(cloudSession.decisions), published: cloudSession.published === true };
+            state.cloudDraftSession = { progressKind: "animated-demo", id: "cloud-poplin", templateId: "cloud-poplin", listing, captureStage: validStage(cloudSession.captureStage), capturedSteps: validSteps(cloudSession.capturedSteps), captureComplete: cloudSession.captureComplete === true && validSteps(cloudSession.capturedSteps).length === 6, decisions: validDecisions(cloudSession.decisions), published: cloudSession.published === true };
     }
     if (raw.checkoutMode === "buy-now" &&
         typeof raw.buyNowId === "string" &&

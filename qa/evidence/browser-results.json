@@ -2,19 +2,87 @@
   "mode": "production",
   "results": [
     {
-      "name": "Photographic marketplace and inert future cards · 390",
+      "name": "Marketplace and visible seller entry · 320",
       "status": "passed"
     },
     {
-      "name": "Product gallery, measurements and buying controls · 390",
+      "name": "Product motion and original photos · 320",
       "status": "passed"
     },
     {
-      "name": "Fabric comparison with measurements and photos · 390",
+      "name": "Relative feel and synchronized pair · 320",
       "status": "passed"
     },
     {
-      "name": "Evidence property source views · 390",
+      "name": "Marketplace and visible seller entry · 390",
+      "status": "passed"
+    },
+    {
+      "name": "Product motion and original photos · 390",
+      "status": "passed"
+    },
+    {
+      "name": "Relative feel and synchronized pair · 390",
+      "status": "passed"
+    },
+    {
+      "name": "Marketplace and visible seller entry · 768",
+      "status": "passed"
+    },
+    {
+      "name": "Product motion and original photos · 768",
+      "status": "passed"
+    },
+    {
+      "name": "Relative feel and synchronized pair · 768",
+      "status": "passed"
+    },
+    {
+      "name": "Marketplace and visible seller entry · 1440",
+      "status": "passed"
+    },
+    {
+      "name": "Product motion and original photos · 1440",
+      "status": "passed"
+    },
+    {
+      "name": "Relative feel and synchronized pair · 1440",
+      "status": "passed"
+    },
+    {
+      "name": "Actual cloth deformation, manual exploration and frame timing",
+      "status": "passed"
+    },
+    {
+      "name": "Six-second held instruction, immediate Next and short-screen controls",
+      "status": "passed"
+    },
+    {
+      "name": "Reduced-motion poses retain manual controls and Next",
+      "status": "passed"
+    },
+    {
+      "name": "Missing model falls back to original photos",
+      "status": "passed"
+    },
+    {
+      "name": "Missing original photo offers retry and recovers",
+      "status": "passed"
+    },
+    {
+      "name": "Non-modeled garments retain photos and no fake model",
+      "status": "passed"
+    },
+    {
+      "name": "Editing familiar feel affects comparison and persists",
+      "status": "passed"
+    },
+    {
+      "name": "Ordinary search, filters, saves and Search by feel handoff",
+      "status": "passed"
+    },
+    {
+      "name": "Source views return to the comparison without losing readiness",
       "status": "passed"
     },
     {
@@ -22,69 +90,37 @@
       "status": "passed"
     },
     {
-      "name": "Photographic marketplace and inert future cards · 1440",
-      "status": "passed"
-    },
-    {
-      "name": "Product gallery, measurements and buying controls · 1440",
-      "status": "passed"
-    },
-    {
-      "name": "Fabric comparison with measurements and photos · 1440",
-      "status": "passed"
-    },
-    {
-      "name": "Evidence property source views · 1440",
-      "status": "passed"
-    },
-    {
       "name": "Primary route accessibility · 1440",
       "status": "passed"
     },
     {
-      "name": "Ordinary search, filters, save and immediate refresh",
-      "status": "passed"
-    },
-    {
-      "name": "Search by feel icon, query handoff and preference persistence",
-      "status": "passed"
-    },
-    {
-      "name": "Mobile filters drawer with real result changes",
-      "status": "passed"
-    },
-    {
-      "name": "Buyer guided recording completes a private reference and survives refresh",
-      "status": "passed"
-    },
-    {
-      "name": "Seller guided takes, mixed review and public publication",
-      "status": "passed"
-    },
-    {
-      "name": "Bag and Buy now remain separate; checkout validation and decline recover",
-      "status": "passed"
-    },
-    {
-      "name": "Unavailable reference and missing route recover without losing shopping",
-      "status": "passed"
-    },
-    {
-      "name": "Comparison opens each side’s surface source and returns in context",
-      "status": "passed"
-    },
-    {
-      "name": "A new local listing supports publication, questions and purchase",
-      "status": "passed"
-    },
-    {
-      "name": "Missing catalogue media provides retry and recovers",
+      "name": "Bag, candidate-only Buy now, decline recovery and stable receipts",
       "status": "passed"
     }
   ],
   "pageErrors": [],
   "accessibility": [
     {
+      "width": 320,
+      "route": "/listing/cloud-poplin/compare",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/listing/cloud-poplin/compare",
+      "violations": []
+    },
+    {
+      "width": 768,
+      "route": "/listing/cloud-poplin/compare",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/listing/cloud-poplin/compare",
+      "violations": []
+    },
+    {
       "width": 390,
       "route": "/shop",
       "violations": []
@@ -175,9 +211,51 @@
       "violations": []
     }
   ],
+  "motion": [
+    {
+      "environment": "Headless Chromium using software WebGL, not a physical phone",
+      "snapshots": [
+        {
+          "steps": 71,
+          "displacement": 0.046134,
+          "strain": 0.0718,
+          "energy": 0.38179,
+          "yaw": -0.0401
+        },
+        {
+          "steps": 233,
+          "displacement": 0.063225,
+          "strain": 0.1004,
+          "energy": 0.674628,
+          "yaw": -0.04
+        },
+        {
+          "steps": 419,
+          "displacement": 0.103708,
+          "strain": 0.15,
+          "energy": 0.320354,
+          "yaw": -0.04
+        },
+        {
+          "steps": 615,
+          "displacement": 0.114666,
+          "strain": 0.1336,
+          "energy": 0.003352,
+          "yaw": -0.04
+        }
+      ],
+      "manualRotationRadians": 0.32687,
+      "frameMs": {
+        "median": 50.100000000000364,
+        "p95": 116.60000000000218,
+        "max": 166.70000000000073
+      }
+    }
+  ],
   "limits": [
-    "Chromium desktop and simulated mobile viewports",
-    "Prepared recording examples; no physical device camera",
-    "No live deployment or real services"
+    "Headless Chromium with software WebGL and simulated phone viewports",
+    "No physical-device performance or Safari/Firefox acceptance",
+    "Prepared garment mechanics, not calibrated textile properties",
+    "Local-only prototype, no actual camera recording or live commerce"
   ]
 }
