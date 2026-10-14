@@ -108,6 +108,11 @@ export type RetainedAction =
   | { type: "SIGN_OUT" };
 
 const listingIds = new Set(CATALOG.map((item) => item.id));
+const MAX_LOCAL_CONVERSATIONS = 100;
+const isLocalListingId = (id: unknown): id is string =>
+  typeof id === "string" && /^local-\d{3,6}$/.test(id);
+const validConversationId = (id: unknown): id is string =>
+  typeof id === "string" && (listingIds.has(id) || isLocalListingId(id));
 const observationChoices: ObservationChoice[] = [
   "",
   "as-expected",
@@ -180,7 +185,15 @@ export function sanitizeRetainedState(value: unknown): RetainedState {
     base = initialRetainedState();
   if (!raw || raw.version !== 1) return base;
   const conversations = object(raw.conversations);
-  for (const id of listingIds) {
+  // Keep catalogue threads and a bounded history of locally published pieces.
+  // Private wardrobe IDs are intentionally excluded from seller conversations.
+  const conversationIds = [
+    ...listingIds,
+    ...Object.keys(conversations ?? {})
+      .filter(isLocalListingId)
+      .slice(0, MAX_LOCAL_CONVERSATIONS),
+  ];
+  for (const id of conversationIds) {
     const conversation = object(conversations?.[id]);
     if (!conversation) continue;
     const messages: ConversationMessage[] = [];
@@ -348,7 +361,7 @@ export function preparedReply(
       .map(([key, value]) => `${key}: ${value} cm`)
       .join(", ");
     return {
-      reply: `The recorded label is size ${listing.size}${measurements ? `, with ${measurements}` : ". No garment measurements are recorded"}. Use these measurements alongside a piece you know; they do not promise fit.`,
+      reply: `Seller lists size ${listing.size}. ${measurements ? `Recorded flat measurements: ${measurements}.` : "No garment measurements are recorded."} Use these measurements alongside a piece you know; they do not promise fit.`,
       property: null,
     };
   }
@@ -377,9 +390,12 @@ export function transitionRetained(
   switch (action.type) {
     case "QUESTION_DRAFT": {
       if (
-        !listingIds.has(action.listingId) ||
+        !validConversationId(action.listingId) ||
         typeof action.draft !== "string" ||
-        action.draft.length > 500
+        action.draft.length > 500 ||
+        (isLocalListingId(action.listingId) &&
+          !state.conversations[action.listingId] &&
+          Object.keys(state.conversations).filter(isLocalListingId).length >= MAX_LOCAL_CONVERSATIONS)
       )
         return state;
       const conversation = state.conversations[action.listingId] ?? {
@@ -395,7 +411,7 @@ export function transitionRetained(
       };
     }
     case "QUESTION_SEND": {
-      if (!listingIds.has(action.listing.id) || !validTime(action.now))
+      if (!validConversationId(action.listing.id) || !validTime(action.now))
         return state;
       const conversation = state.conversations[action.listing.id];
       const question = conversation?.draft.trim();
@@ -427,6 +443,7 @@ export function transitionRetained(
       const conversation = state.conversations[action.listingId],
         note = action.note.trim();
       if (
+        !validConversationId(action.listingId) ||
         !conversation ||
         !reportReasons.includes(action.reason) ||
         note.length > 1000 ||

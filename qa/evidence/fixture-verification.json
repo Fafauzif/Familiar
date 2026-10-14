@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "catalogue": 12,
+  "photographicSets": 13,
+  "photographs": 36,
+  "runtimeModels": 0,
+  "properties": [
+    "Drape",
+    "Movement",
+    "Stretch",
+    "Surface"
+  ],
+  "candidateCount": 3,
+  "checks": [
+    "source associations",
+    "local photo byte lengths and SHA-256",
+    "no garment-model requirement",
+    "fixed property order",
+    "eligible authored suggestions",
+    "missing versus limited support",
+    "guided completion",
+    "private reference persistence",
+    "immutable local publication"
+  ]
+}

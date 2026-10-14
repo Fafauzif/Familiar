@@ -1,20 +1,14 @@
 {
   "product": "Familiar",
-  "version": "1.0.0",
-  "archive": "Familiar_Final_Vercel_Deployable.zip",
+  "version": "2.0.0",
+  "archive": "Familiar_V2_Vercel_Deployable.zip",
   "applicationRoot": "archive root",
-  "embeddedOriginalArchives": false,
-  "sourceFiles": 417,
+  "runtime": "Photographic local-only prototype",
   "files": [
     {
       "path": "README.md",
-      "bytes": 3444,
-      "sha256": "8d26e2ff81145003224631f52cf234510dbb883f476c0c5226b373f51bdd15d8"
-    },
-    {
-      "path": "asset_briefs/THREE_D_ASSET_GENERATION_BRIEF.md",
-      "bytes": 1558,
-      "sha256": "55d3212a0aa06c03840095a2461b71b2963b635343685b9ae1f5a3baf6507eed"
+      "bytes": 4495,
+      "sha256": "63c0c2f46834a1332e19dfcef7bdbb2665287e842467c997d3aad54c2246df09"
     },
     {
       "path": "context/ORIGINAL_MASTER_AI_CONTEXT.md",
@@ -23,8 +17,8 @@
     },
     {
       "path": "context/UPDATED_MASTER_AI_CONTEXT.md",
-      "bytes": 219550,
-      "sha256": "7b0431ecec5c23acb78d67bbb0194d6c27dc63190d4d5751893149f64a3ce28d"
+      "bytes": 6082,
+      "sha256": "0c8cfbc6578e392a4f8394596a3f928c03808c1c6733632083597d637b8da80f"
     },
     {
       "path": "context/original/Familiar_TGIC_2026_Master_Context_original.md",
@@ -32,49 +26,54 @@
       "sha256": "e257cc6cac836270d4d74dc5b5eb7ba7054e82d662e2b2ec875c0db08868f679"
     },
     {
-      "path": "dist/asset-manifest.json",
-      "bytes": 44425,
-      "sha256": "2c8eecbaec1d6719bc34611656e58f6fbf041639a775c880fe912c307b4a9c98"
+      "path": "dist/assets/CheckCircle.es-CKOWvxFr.js",
+      "bytes": 2077,
+      "sha256": "4fb9ef5c5813eda6950bcce48b5da2f99268ddba6f16382d295b0d73ae3f4fb6"
     },
     {
-      "path": "dist/assets/GLTFLoader-B6tTIk4t.js",
-      "bytes": 45678,
-      "sha256": "7169e0e71c95c4006933717eb0b6273cb7c96714abbbd9d77354424dce64bf1b"
+      "path": "dist/assets/CommercePages-DQY6vuml.css",
+      "bytes": 21643,
+      "sha256": "15410726a857ff600198ae3df402ad3d731ea2f4786d2445b496fa98c9eb4dcb"
     },
     {
-      "path": "dist/assets/GarmentViewer-BBlTwRk3.css",
-      "bytes": 4181,
-      "sha256": "b1935ff893b68c46a1bbdc7664baf7da0c0ffc92485e0e172f700ce15a41b878"
+      "path": "dist/assets/CommercePages-XVFpNM5e.js",
+      "bytes": 55535,
+      "sha256": "788f51eeed374cfb2106075aa51a9ffd1c93c84856d2ec7d61dae9138f4f0e3c"
     },
     {
-      "path": "dist/assets/GarmentViewer-pl4baY0e.js",
-      "bytes": 12504,
-      "sha256": "0a6a1f57c85dd3136c750e1e11e03d637abaeb1bc766d8e7cfe18cf422f052a1"
+      "path": "dist/assets/FeelPages-DJLEHXjc.css",
+      "bytes": 30186,
+      "sha256": "ef8ccaf008c95ea70085c585c003f3ae02e72b9e207ee6497d3452c773f040aa"
     },
     {
-      "path": "dist/assets/OrbitControls-DFCggfwL.js",
-      "bytes": 19176,
-      "sha256": "80a0c626a38fdc40aaef9e562562ea2bb0bdc9f38c50707d2b4ef4b4a9f0c00b"
+      "path": "dist/assets/FeelPages-DiofIxFH.js",
+      "bytes": 37429,
+      "sha256": "bed5d4e157ba83bf64b09e78cbbebe7ef4c7a9c609a56ee6edcf2eb228f3cfec"
     },
     {
-      "path": "dist/assets/SellerCommerce-C1Zqg3VL.js",
-      "bytes": 61825,
-      "sha256": "892a17a17acf062c8fb19c38a63f79761dd94c42eff7d30590fcc914c4328284"
+      "path": "dist/assets/PencilSimple.es-BriiThWe.js",
+      "bytes": 4477,
+      "sha256": "ade025bd645dd57e312f15b06644703131a31565cfef3ef3ca1671fa171e4fc6"
     },
     {
-      "path": "dist/assets/index-Bz0zeWFl.js",
-      "bytes": 337202,
-      "sha256": "3706a28bf7399294e2f2253ae42f5125740086501f7c92b72094525c784f02f5"
+      "path": "dist/assets/StudioPages-B5fI7dCZ.css",
+      "bytes": 31569,
+      "sha256": "ca39a7bb17feddb16c2f6c55b71bcb7d0839a4f33167e053ba87e55f72c93935"
     },
     {
-      "path": "dist/assets/index-DoTTfwjH.css",
-      "bytes": 42790,
-      "sha256": "cf0bded14b44c7d56e3da7e6c3877913189eaab78d885d1702b1b444b07015fa"
+      "path": "dist/assets/StudioPages-BRGsNTzE.js",
+      "bytes": 71533,
+      "sha256": "ca6cccd920b9ead13785d1b899315d860bd9be191918b9262be3f2368af21e48"
     },
     {
-      "path": "dist/assets/three.module-BT1pP-6r.js",
-      "bytes": 704889,
-      "sha256": "2b5ed6a7c5657b657faef993bb417a8a7cbb572167eeddba33bfa78a3f8274f5"
+      "path": "dist/assets/index-B9E1M8iW.css",
+      "bytes": 84541,
+      "sha256": "50262fbe8c7a93634da41e2904e583d1ddb3bc985080e87c4219ff30a399af07"
+    },
+    {
+      "path": "dist/assets/index-C0226CQc.js",
+      "bytes": 377926,
+      "sha256": "e35a13716096dd3704ec550994242874a979dc0e017be64d8ca635ee2ae5add3"
     },
     {
       "path": "dist/brand/brand-manifest.json",
@@ -457,34 +456,219 @@
       "sha256": "e07fd1167c2aaaa6fb965dd66e1e73b13c9c95b76b2d648b6e938780f30b37af"
     },
     {
+      "path": "dist/fonts/newsreader-400.ttf",
+      "bytes": 109472,
+      "sha256": "b8f5e0a8bdd6a12c722ca5635d9da87e77ccbb2d0172112e34e00c4e55f2cd5a"
+    },
+    {
+      "path": "dist/fonts/newsreader-500.ttf",
+      "bytes": 111588,
+      "sha256": "68c4493c7c6c9aaff48defeeb6408e7ce705efc4c33363de4d9d6f5e07775064"
+    },
+    {
+      "path": "dist/fonts/newsreader-600.ttf",
+      "bytes": 111628,
+      "sha256": "04188d5295f4e1100ce91a96b864f15b7af5be976e9fb9cc279af737be804272"
+    },
+    {
+      "path": "dist/fonts/newsreader-OFL.txt",
+      "bytes": 4394,
+      "sha256": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
+    },
+    {
       "path": "dist/fonts/plus-jakarta-sans-latin.woff2",
       "bytes": 27348,
       "sha256": "153fc85b70298beeb1d61a5f723331649e7f23bb77302a66e61cb3e2fbdb5e79"
     },
     {
       "path": "dist/index.html",
-      "bytes": 620,
-      "sha256": "991cb8ef6699852d79ddac0107aff29f9bd958085a0af53d1732b9ecac63eea0"
+      "bytes": 622,
+      "sha256": "a05c6b5dc8ce66dfac25bd0d18a475a46f68336a0b6590bd2ce6280106e0b6a9"
     },
     {
-      "path": "dist/models/airloom-linen.glb",
-      "bytes": 476792,
-      "sha256": "f4a93cb258fef03198b52e411d07aa0a2ce1283fef4778c0f43fcbcd7d9bd29d"
+      "path": "dist/photos/airloom-linen-detail.webp",
+      "bytes": 14784,
+      "sha256": "908d4a2128a19a7d52cfbd28e7fd7f7eccab437931a04bd7b6a7f500f1368da1"
     },
     {
-      "path": "dist/models/cloud-poplin.glb",
-      "bytes": 433556,
-      "sha256": "18326a5428c52fe952b604ab8b399160fb6d4f047161abf6965c3537e17f10dd"
+      "path": "dist/photos/airloom-linen-front.webp",
+      "bytes": 29288,
+      "sha256": "be121b203a33bc06f1cb4102e253d642543c75565a8b1c0e83e438a2faa18cfa"
     },
     {
-      "path": "dist/models/moss-knit.glb",
-      "bytes": 478676,
-      "sha256": "f8ad33da93c0c6a213ff2e1a3330f2d155bfa695a1701e8def4d419be0bde479"
+      "path": "dist/photos/apricot-slip-back.webp",
+      "bytes": 373844,
+      "sha256": "ca9aabf54de6974b9c03cb81347d2e92ff0ee5f18903eac89442e272ca218d9a"
     },
     {
-      "path": "dist/models/my-blue-blouse.glb",
-      "bytes": 291172,
-      "sha256": "dcfe2e5bf3d8170f1362615880d9e67ad98742d56401352c7e66b5e6a68689b5"
+      "path": "dist/photos/apricot-slip-detail.webp",
+      "bytes": 122068,
+      "sha256": "6f9c5a21ae89d15d999f57b54bee47e4f1d5e981c4be6aa946f6f72fb73b4d00"
+    },
+    {
+      "path": "dist/photos/apricot-slip-front.webp",
+      "bytes": 348472,
+      "sha256": "767351b546b4a1cd5911e1fc8d6034909012396eae70b884a5857a850452678e"
+    },
+    {
+      "path": "dist/photos/cloud-poplin-detail-2.webp",
+      "bytes": 34096,
+      "sha256": "e38ceb187d9228ab2f8a223a0d81a8d2d2e4ee834d79fc9928e1fd82ddc202bc"
+    },
+    {
+      "path": "dist/photos/cloud-poplin-detail.webp",
+      "bytes": 31938,
+      "sha256": "9fd46f74019e573faa4faeca0e851cfc6afb93ec9f80137ce09f9acc7c111508"
+    },
+    {
+      "path": "dist/photos/cloud-poplin-front.webp",
+      "bytes": 10666,
+      "sha256": "fbb767eb7ed8a08f5f957eb58a4f1d3230949ab039091aebb3424d6cb8d024f2"
+    },
+    {
+      "path": "dist/photos/cloud-poplin-label.webp",
+      "bytes": 23734,
+      "sha256": "2c31a661d95900c93f680ca06370771f99dea75d6f48f766c4f4759e324317de"
+    },
+    {
+      "path": "dist/photos/ink-trousers-detail.webp",
+      "bytes": 2420,
+      "sha256": "8a90c93c3e4a5a408aff24cb4dd6c2009b50abe25543ec0aa92d717217516d4a"
+    },
+    {
+      "path": "dist/photos/ink-trousers-front.webp",
+      "bytes": 4492,
+      "sha256": "1e43f1547b15daf4f7ddd37a02d7be5aade7fdec0416c0e21d9e08e4f5178468"
+    },
+    {
+      "path": "dist/photos/lilac-wrap-detail.webp",
+      "bytes": 37154,
+      "sha256": "4d759ce620b0c8990da8d295da79e31893540fa6931f856aa5638eaaf1eaa151"
+    },
+    {
+      "path": "dist/photos/lilac-wrap-front.webp",
+      "bytes": 71456,
+      "sha256": "378e7ebc2f545be5553d130db3ad7eedfc59505dd63964fa94931f30babda98c"
+    },
+    {
+      "path": "dist/photos/manifest.json",
+      "bytes": 29226,
+      "sha256": "d516c0d960557d0c983d09e52cb84cb1f78628dde188b99f959f104a0a4dd51a"
+    },
+    {
+      "path": "dist/photos/moss-knit-back.webp",
+      "bytes": 113388,
+      "sha256": "c5673c6f47280573a445f63e5f6b9e002beeaf354cd352fcf6f9662f79ac33dd"
+    },
+    {
+      "path": "dist/photos/moss-knit-detail.webp",
+      "bytes": 48812,
+      "sha256": "8dce77aa226b88228b3050894cf1819b4199888345ba019ab7d70151015b73b0"
+    },
+    {
+      "path": "dist/photos/moss-knit-front.webp",
+      "bytes": 106848,
+      "sha256": "7bcf771c415b5faa06c8fc58efa217cc6fb467317385302c076d82f953b1ab08"
+    },
+    {
+      "path": "dist/photos/my-blue-blouse-detail-2.webp",
+      "bytes": 16144,
+      "sha256": "ba658d2971ab6b7c3ea85d88f3a565e3c843f209716decee2df04f0acab43265"
+    },
+    {
+      "path": "dist/photos/my-blue-blouse-detail.webp",
+      "bytes": 10520,
+      "sha256": "96b9c4f5eae04d74c0d6dc7126e1853e1bc67d893a80ae13154973e891a80de6"
+    },
+    {
+      "path": "dist/photos/my-blue-blouse-front.webp",
+      "bytes": 33790,
+      "sha256": "3cb9cff476c6a92b7d34591605cef9ff0015fcdd0a120de8b56dd30ba7d2aa89"
+    },
+    {
+      "path": "dist/photos/oat-vest-detail.webp",
+      "bytes": 195482,
+      "sha256": "1509735cf45ff90bbaeed4170b7d38575986f8e99dcdde9845d1269c22f17387"
+    },
+    {
+      "path": "dist/photos/oat-vest-front.webp",
+      "bytes": 91964,
+      "sha256": "3506d43234a33682fbfa0cf5f0a5e4e19a6d468f0dd5cf686d8ef6bcc2c4b048"
+    },
+    {
+      "path": "dist/photos/petal-tee-back.webp",
+      "bytes": 77248,
+      "sha256": "ef9a26572ea45ed4d03263722a3305552c6bd1c86bacfb0be3571cd4bba34d3c"
+    },
+    {
+      "path": "dist/photos/petal-tee-detail.webp",
+      "bytes": 698730,
+      "sha256": "34b087fe4114c7f01538c8c59c98ce97b4811543debaaa445a6858e8d5a7c0bb"
+    },
+    {
+      "path": "dist/photos/petal-tee-front.webp",
+      "bytes": 57712,
+      "sha256": "45b155497f93eed570ad9973bd295cf69b3b96ad91336d00119987371852a086"
+    },
+    {
+      "path": "dist/photos/rose-jacket-back.webp",
+      "bytes": 40716,
+      "sha256": "1666a946b6ea59574e71e4383fbdfa29c48a040878dacc3dbcd04a81aa78b13a"
+    },
+    {
+      "path": "dist/photos/rose-jacket-detail.webp",
+      "bytes": 596822,
+      "sha256": "0f6f7a7a51324aec32844cee91411172e69c2a7ddbdb1a3d339cb789853cd095"
+    },
+    {
+      "path": "dist/photos/rose-jacket-front.webp",
+      "bytes": 55590,
+      "sha256": "0847d38b877e137eda3874b848b0116eab7ecb65660f6efbaaa36c14c605417c"
+    },
+    {
+      "path": "dist/photos/sage-skirt-back.webp",
+      "bytes": 25462,
+      "sha256": "c9ac40bdb72097858174a3981e588b7279dd8d90e5aee01bffd48c345b5688da"
+    },
+    {
+      "path": "dist/photos/sage-skirt-detail.webp",
+      "bytes": 69724,
+      "sha256": "7756410b058d8d37df70f337c9cdfd18ac965f0d958dc794a167368eb8886c62"
+    },
+    {
+      "path": "dist/photos/sage-skirt-front.webp",
+      "bytes": 55242,
+      "sha256": "277c4a9cef440ba28ec0f4ef616e730676c5faa92eb5d78c2a3f1fa3e83d344b"
+    },
+    {
+      "path": "dist/photos/sunday-denim-detail-2.webp",
+      "bytes": 529292,
+      "sha256": "b24651147de540b1daefa942c46a7018cbb4de23b9609eaa3fddc99b3627f4f2"
+    },
+    {
+      "path": "dist/photos/sunday-denim-detail.webp",
+      "bytes": 495232,
+      "sha256": "0ec6cd41af1a649e7cfd60c9f55870af46e583fbd54671ed9dcbad153205ae39"
+    },
+    {
+      "path": "dist/photos/sunday-denim-front.webp",
+      "bytes": 138172,
+      "sha256": "13a7bf773e28743950972e940d27afcaeaf1cc47bec51fc8449cc954a5b657ca"
+    },
+    {
+      "path": "dist/photos/tide-shirt-back.webp",
+      "bytes": 76950,
+      "sha256": "7c7b99d184ef20d6196388ec90591f31dcb2bfc3562efd83a7497545b9dc690c"
+    },
+    {
+      "path": "dist/photos/tide-shirt-detail.webp",
+      "bytes": 244648,
+      "sha256": "3fb832cc91bd1aca18573128f0640cc700dabb9cd8f7f4fe8fb20ffbfa4e30ef"
+    },
+    {
+      "path": "dist/photos/tide-shirt-front.webp",
+      "bytes": 59918,
+      "sha256": "62ddd7947e8acf8eaf45a5787e1da2e55ad6b9cef7bcec8901d7c959b056549b"
     },
     {
       "path": "dist/posters/airloom-linen.svg",
@@ -828,83 +1012,48 @@
     },
     {
       "path": "docs/ASSET_PROVENANCE.md",
-      "bytes": 7675,
-      "sha256": "09e462eb9a0bc21991bd74e10aa6a9b17c9c49e2fdd22bd1d24310cb5e3761b2"
+      "bytes": 2452,
+      "sha256": "313e997c7616974ea390bd7dced51148af8f249b29d00f80b4c2cf8e45915a97"
     },
     {
       "path": "docs/DESIGN_AND_STATE_SPEC.md",
-      "bytes": 9166,
-      "sha256": "82a4d6dad57069faf097cba8adc127965ab585b9fb51cc7c7cc18a8b04dd7ab9"
+      "bytes": 8441,
+      "sha256": "f3c4042ed7babc793b60882789f2467830477ec2ea53052388dcda8e62779c1d"
     },
     {
       "path": "docs/INPUTS_AND_LIMITS.md",
-      "bytes": 1800,
-      "sha256": "aa8ba8001aed55e9c067a9866e2c5a2a197bbafb6f79fbc65104ca070d863e92"
+      "bytes": 3096,
+      "sha256": "25840598eb93ded50e937b12eba30219eec7c4587e1477fb558a43b494543898"
+    },
+    {
+      "path": "docs/PHOTO_ASSET_PROVENANCE.md",
+      "bytes": 5498,
+      "sha256": "b73ef3d0970afb85b5f33e71d44fa529fda60b2ca225f1170ea4dfb6c60d7540"
+    },
+    {
+      "path": "docs/REVISION_V2_PLAN.md",
+      "bytes": 5971,
+      "sha256": "911dfb315da54b0411b381ab980ecd659b5b710024a2e94f0ed7725651f4165c"
     },
     {
       "path": "docs/SOURCES_AND_STANDARDS.md",
-      "bytes": 1828,
-      "sha256": "c131480b0dc6fa355244ca4eddd94deaf2b1d5d3e056678684f2c86bd141e20a"
-    },
-    {
-      "path": "handoff/ARTIFACT_WRITING_RULES.md",
-      "bytes": 1742,
-      "sha256": "2ba12d059c55671b7815d78d717d4d5e1fbc0675d12ce27ce42fd913a47ebb53"
-    },
-    {
-      "path": "handoff/DESIGN_SYSTEM_AND_LOGO_SPEC.md",
-      "bytes": 1502,
-      "sha256": "6c6d2aeb39e766c7fb7d88517ab95fb2d1ac740b3d3f729281d6c8b21186d9ab"
-    },
-    {
-      "path": "handoff/GENERATION_MASTER_PROMPT.md",
-      "bytes": 10073,
-      "sha256": "ef9417559f216d9c0a1b83034e561a634c6d2e67e8e32494eed8a9febec99dde"
-    },
-    {
-      "path": "handoff/PRODUCT_AND_STATE_SPEC.md",
-      "bytes": 1417,
-      "sha256": "afed7fc5de26ea92e5ea5a4177ba14146ad6a8c81c4f9f0acb0ffb05510a3e3b"
+      "bytes": 2170,
+      "sha256": "add8ead51edca7d1687cd0393844bc8e80821be7833d2a5e1abfce4ed341bb41"
     },
     {
       "path": "index.html",
-      "bytes": 521,
-      "sha256": "21ac7ae12481b92f03c43879590c20d1850ec3987b3c20e6e8bd6ad0d993305c"
+      "bytes": 523,
+      "sha256": "5be5f8709332c97c8a590d26b1f9138f24b4ff7709a18ebdbd178ebd06347711"
     },
     {
       "path": "package-lock.json",
-      "bytes": 62025,
-      "sha256": "4e40798aceb819029308c04bb9ee7c9e7cfdca1a42ce6ea74471f3e3d3d6cb6a"
+      "bytes": 58900,
+      "sha256": "6d3146416d235e3103456503c6ac85cba1b4ad983df64f05ab57165b0c1502c3"
     },
     {
       "path": "package.json",
-      "bytes": 894,
-      "sha256": "671a7cdaee1f755d2165ed3b4440ca9474e2e25e701f3df027ca09a16e51b886"
-    },
-    {
-      "path": "prompts/00_START_HERE.md",
-      "bytes": 653,
-      "sha256": "a8c8a738821f87de6f1c6fe108037576a3e8bc6aa8000417ed1702eb45ddfb5a"
-    },
-    {
-      "path": "prompts/01_BUILD_SEQUENCE.md",
-      "bytes": 813,
-      "sha256": "12b95630419897cedd87892f066a34b10613f680bb1e06077f2721652bee0f52"
-    },
-    {
-      "path": "prompts/02_ASSET_AND_LOGO_PROMPT.md",
-      "bytes": 475,
-      "sha256": "ed9a3f2efd4f6389a88143e733eaa3f24f9d3def0e5bd65bd2078c25facbdf80"
-    },
-    {
-      "path": "prompts/03_FINAL_REVIEW_PROMPT.md",
-      "bytes": 489,
-      "sha256": "aff03b9661361ce1cfed292d4ac91e854e1c0399711cbda7cdf8186ab8a0735a"
-    },
-    {
-      "path": "public/asset-manifest.json",
-      "bytes": 44425,
-      "sha256": "2c8eecbaec1d6719bc34611656e58f6fbf041639a775c880fe912c307b4a9c98"
+      "bytes": 840,
+      "sha256": "ffab0139e407b8f8eb0b8cb5675b0f5fce7f98526da0bc24cfa545a636ac7248"
     },
     {
       "path": "public/brand/brand-manifest.json",
@@ -1287,29 +1436,214 @@
       "sha256": "e07fd1167c2aaaa6fb965dd66e1e73b13c9c95b76b2d648b6e938780f30b37af"
     },
     {
+      "path": "public/fonts/newsreader-400.ttf",
+      "bytes": 109472,
+      "sha256": "b8f5e0a8bdd6a12c722ca5635d9da87e77ccbb2d0172112e34e00c4e55f2cd5a"
+    },
+    {
+      "path": "public/fonts/newsreader-500.ttf",
+      "bytes": 111588,
+      "sha256": "68c4493c7c6c9aaff48defeeb6408e7ce705efc4c33363de4d9d6f5e07775064"
+    },
+    {
+      "path": "public/fonts/newsreader-600.ttf",
+      "bytes": 111628,
+      "sha256": "04188d5295f4e1100ce91a96b864f15b7af5be976e9fb9cc279af737be804272"
+    },
+    {
+      "path": "public/fonts/newsreader-OFL.txt",
+      "bytes": 4394,
+      "sha256": "fdfad38143ec470553cae82a1e45320bdd1b9ec70415d37bd0171051d8a4ded8"
+    },
+    {
       "path": "public/fonts/plus-jakarta-sans-latin.woff2",
       "bytes": 27348,
       "sha256": "153fc85b70298beeb1d61a5f723331649e7f23bb77302a66e61cb3e2fbdb5e79"
     },
     {
-      "path": "public/models/airloom-linen.glb",
-      "bytes": 476792,
-      "sha256": "f4a93cb258fef03198b52e411d07aa0a2ce1283fef4778c0f43fcbcd7d9bd29d"
+      "path": "public/photos/airloom-linen-detail.webp",
+      "bytes": 14784,
+      "sha256": "908d4a2128a19a7d52cfbd28e7fd7f7eccab437931a04bd7b6a7f500f1368da1"
     },
     {
-      "path": "public/models/cloud-poplin.glb",
-      "bytes": 433556,
-      "sha256": "18326a5428c52fe952b604ab8b399160fb6d4f047161abf6965c3537e17f10dd"
+      "path": "public/photos/airloom-linen-front.webp",
+      "bytes": 29288,
+      "sha256": "be121b203a33bc06f1cb4102e253d642543c75565a8b1c0e83e438a2faa18cfa"
     },
     {
-      "path": "public/models/moss-knit.glb",
-      "bytes": 478676,
-      "sha256": "f8ad33da93c0c6a213ff2e1a3330f2d155bfa695a1701e8def4d419be0bde479"
+      "path": "public/photos/apricot-slip-back.webp",
+      "bytes": 373844,
+      "sha256": "ca9aabf54de6974b9c03cb81347d2e92ff0ee5f18903eac89442e272ca218d9a"
     },
     {
-      "path": "public/models/my-blue-blouse.glb",
-      "bytes": 291172,
-      "sha256": "dcfe2e5bf3d8170f1362615880d9e67ad98742d56401352c7e66b5e6a68689b5"
+      "path": "public/photos/apricot-slip-detail.webp",
+      "bytes": 122068,
+      "sha256": "6f9c5a21ae89d15d999f57b54bee47e4f1d5e981c4be6aa946f6f72fb73b4d00"
+    },
+    {
+      "path": "public/photos/apricot-slip-front.webp",
+      "bytes": 348472,
+      "sha256": "767351b546b4a1cd5911e1fc8d6034909012396eae70b884a5857a850452678e"
+    },
+    {
+      "path": "public/photos/cloud-poplin-detail-2.webp",
+      "bytes": 34096,
+      "sha256": "e38ceb187d9228ab2f8a223a0d81a8d2d2e4ee834d79fc9928e1fd82ddc202bc"
+    },
+    {
+      "path": "public/photos/cloud-poplin-detail.webp",
+      "bytes": 31938,
+      "sha256": "9fd46f74019e573faa4faeca0e851cfc6afb93ec9f80137ce09f9acc7c111508"
+    },
+    {
+      "path": "public/photos/cloud-poplin-front.webp",
+      "bytes": 10666,
+      "sha256": "fbb767eb7ed8a08f5f957eb58a4f1d3230949ab039091aebb3424d6cb8d024f2"
+    },
+    {
+      "path": "public/photos/cloud-poplin-label.webp",
+      "bytes": 23734,
+      "sha256": "2c31a661d95900c93f680ca06370771f99dea75d6f48f766c4f4759e324317de"
+    },
+    {
+      "path": "public/photos/ink-trousers-detail.webp",
+      "bytes": 2420,
+      "sha256": "8a90c93c3e4a5a408aff24cb4dd6c2009b50abe25543ec0aa92d717217516d4a"
+    },
+    {
+      "path": "public/photos/ink-trousers-front.webp",
+      "bytes": 4492,
+      "sha256": "1e43f1547b15daf4f7ddd37a02d7be5aade7fdec0416c0e21d9e08e4f5178468"
+    },
+    {
+      "path": "public/photos/lilac-wrap-detail.webp",
+      "bytes": 37154,
+      "sha256": "4d759ce620b0c8990da8d295da79e31893540fa6931f856aa5638eaaf1eaa151"
+    },
+    {
+      "path": "public/photos/lilac-wrap-front.webp",
+      "bytes": 71456,
+      "sha256": "378e7ebc2f545be5553d130db3ad7eedfc59505dd63964fa94931f30babda98c"
+    },
+    {
+      "path": "public/photos/manifest.json",
+      "bytes": 29226,
+      "sha256": "d516c0d960557d0c983d09e52cb84cb1f78628dde188b99f959f104a0a4dd51a"
+    },
+    {
+      "path": "public/photos/moss-knit-back.webp",
+      "bytes": 113388,
+      "sha256": "c5673c6f47280573a445f63e5f6b9e002beeaf354cd352fcf6f9662f79ac33dd"
+    },
+    {
+      "path": "public/photos/moss-knit-detail.webp",
+      "bytes": 48812,
+      "sha256": "8dce77aa226b88228b3050894cf1819b4199888345ba019ab7d70151015b73b0"
+    },
+    {
+      "path": "public/photos/moss-knit-front.webp",
+      "bytes": 106848,
+      "sha256": "7bcf771c415b5faa06c8fc58efa217cc6fb467317385302c076d82f953b1ab08"
+    },
+    {
+      "path": "public/photos/my-blue-blouse-detail-2.webp",
+      "bytes": 16144,
+      "sha256": "ba658d2971ab6b7c3ea85d88f3a565e3c843f209716decee2df04f0acab43265"
+    },
+    {
+      "path": "public/photos/my-blue-blouse-detail.webp",
+      "bytes": 10520,
+      "sha256": "96b9c4f5eae04d74c0d6dc7126e1853e1bc67d893a80ae13154973e891a80de6"
+    },
+    {
+      "path": "public/photos/my-blue-blouse-front.webp",
+      "bytes": 33790,
+      "sha256": "3cb9cff476c6a92b7d34591605cef9ff0015fcdd0a120de8b56dd30ba7d2aa89"
+    },
+    {
+      "path": "public/photos/oat-vest-detail.webp",
+      "bytes": 195482,
+      "sha256": "1509735cf45ff90bbaeed4170b7d38575986f8e99dcdde9845d1269c22f17387"
+    },
+    {
+      "path": "public/photos/oat-vest-front.webp",
+      "bytes": 91964,
+      "sha256": "3506d43234a33682fbfa0cf5f0a5e4e19a6d468f0dd5cf686d8ef6bcc2c4b048"
+    },
+    {
+      "path": "public/photos/petal-tee-back.webp",
+      "bytes": 77248,
+      "sha256": "ef9a26572ea45ed4d03263722a3305552c6bd1c86bacfb0be3571cd4bba34d3c"
+    },
+    {
+      "path": "public/photos/petal-tee-detail.webp",
+      "bytes": 698730,
+      "sha256": "34b087fe4114c7f01538c8c59c98ce97b4811543debaaa445a6858e8d5a7c0bb"
+    },
+    {
+      "path": "public/photos/petal-tee-front.webp",
+      "bytes": 57712,
+      "sha256": "45b155497f93eed570ad9973bd295cf69b3b96ad91336d00119987371852a086"
+    },
+    {
+      "path": "public/photos/rose-jacket-back.webp",
+      "bytes": 40716,
+      "sha256": "1666a946b6ea59574e71e4383fbdfa29c48a040878dacc3dbcd04a81aa78b13a"
+    },
+    {
+      "path": "public/photos/rose-jacket-detail.webp",
+      "bytes": 596822,
+      "sha256": "0f6f7a7a51324aec32844cee91411172e69c2a7ddbdb1a3d339cb789853cd095"
+    },
+    {
+      "path": "public/photos/rose-jacket-front.webp",
+      "bytes": 55590,
+      "sha256": "0847d38b877e137eda3874b848b0116eab7ecb65660f6efbaaa36c14c605417c"
+    },
+    {
+      "path": "public/photos/sage-skirt-back.webp",
+      "bytes": 25462,
+      "sha256": "c9ac40bdb72097858174a3981e588b7279dd8d90e5aee01bffd48c345b5688da"
+    },
+    {
+      "path": "public/photos/sage-skirt-detail.webp",
+      "bytes": 69724,
+      "sha256": "7756410b058d8d37df70f337c9cdfd18ac965f0d958dc794a167368eb8886c62"
+    },
+    {
+      "path": "public/photos/sage-skirt-front.webp",
+      "bytes": 55242,
+      "sha256": "277c4a9cef440ba28ec0f4ef616e730676c5faa92eb5d78c2a3f1fa3e83d344b"
+    },
+    {
+      "path": "public/photos/sunday-denim-detail-2.webp",
+      "bytes": 529292,
+      "sha256": "b24651147de540b1daefa942c46a7018cbb4de23b9609eaa3fddc99b3627f4f2"
+    },
+    {
+      "path": "public/photos/sunday-denim-detail.webp",
+      "bytes": 495232,
+      "sha256": "0ec6cd41af1a649e7cfd60c9f55870af46e583fbd54671ed9dcbad153205ae39"
+    },
+    {
+      "path": "public/photos/sunday-denim-front.webp",
+      "bytes": 138172,
+      "sha256": "13a7bf773e28743950972e940d27afcaeaf1cc47bec51fc8449cc954a5b657ca"
+    },
+    {
+      "path": "public/photos/tide-shirt-back.webp",
+      "bytes": 76950,
+      "sha256": "7c7b99d184ef20d6196388ec90591f31dcb2bfc3562efd83a7497545b9dc690c"
+    },
+    {
+      "path": "public/photos/tide-shirt-detail.webp",
+      "bytes": 244648,
+      "sha256": "3fb832cc91bd1aca18573128f0640cc700dabb9cd8f7f4fe8fb20ffbfa4e30ef"
+    },
+    {
+      "path": "public/photos/tide-shirt-front.webp",
+      "bytes": 59918,
+      "sha256": "62ddd7947e8acf8eaf45a5787e1da2e55ad6b9cef7bcec8901d7c959b056549b"
     },
     {
       "path": "public/posters/airloom-linen.svg",
@@ -1652,124 +1986,104 @@
       "sha256": "7bf490c4589efa9d7690e6cb58e0d5b3b1b69f40dc4f6017130ae56abc8030dc"
     },
     {
-      "path": "qa/evidence/accessibility.json",
-      "bytes": 542,
-      "sha256": "5f628fc22268c8677f7c32adc5b390893e64009834b18a08ce3832c0fdb55295"
-    },
-    {
-      "path": "qa/evidence/airloom-linen-3d.png",
-      "bytes": 266670,
-      "sha256": "83c1898d054067aff5d220e01e6e977835b711ed3ae85e68f812cc7d230952c8"
-    },
-    {
-      "path": "qa/evidence/asset-verification.txt",
-      "bytes": 973,
-      "sha256": "79ed984c8b31cd001112968378d1fa7424cae0ae73200ce742e6e7dc13cf93dd"
-    },
-    {
       "path": "qa/evidence/browser-results.json",
-      "bytes": 2508,
-      "sha256": "5891e672a0b3950306a8daa95e723eea4c1c3c9876c6999a9eca04c68c77b2f7"
+      "bytes": 3994,
+      "sha256": "99ef22baf6f19c348ebe4c27320545160d703cb362dfa35755de1ac1f2ffb6c2"
     },
     {
-      "path": "qa/evidence/cloud-poplin-3d.png",
-      "bytes": 209689,
-      "sha256": "7e8ed4f112b2995c2a32c559ce4fed6fa7ff08fb3b0326349fe984a059ff7c76"
+      "path": "qa/evidence/comparison-1440.png",
+      "bytes": 519403,
+      "sha256": "83cf870a07d4210a810278e3d86a1140e87fea51f9a0ff7ddc54c93d07577555"
     },
     {
-      "path": "qa/evidence/comparison-desktop.png",
-      "bytes": 585624,
-      "sha256": "721e57f5c003cfb579aaaa3a7ec4414c3ec81d5630e12715514793b782ce5b4f"
+      "path": "qa/evidence/comparison-390.png",
+      "bytes": 419195,
+      "sha256": "8a187300624442aae4462d8ac689dca29fd56beca8ad75f2d3d5f5f5aa6010ec"
     },
     {
-      "path": "qa/evidence/comparison-mobile.png",
-      "bytes": 491678,
-      "sha256": "a4a626806e7b151cabf6efa95c7715db93de599ebb9c3ffd9c45e85237796b23"
+      "path": "qa/evidence/evidence-1440.png",
+      "bytes": 363970,
+      "sha256": "8f8a98ab624698f3cf64c314383462860a4ff091418bc3dac81c6d00f5d9ba9f"
     },
     {
-      "path": "qa/evidence/evidence-desktop.png",
-      "bytes": 317514,
-      "sha256": "cd7d777a1352c9040da1af9f481c4415ed564e0dc9ec001a81b5823d3452ce8c"
+      "path": "qa/evidence/evidence-390.png",
+      "bytes": 178037,
+      "sha256": "b62a5b2d79e14262f99a712283e481b73390bd4bfde8f8a8568e278131b29be7"
     },
     {
-      "path": "qa/evidence/familiar-revised-capture-label-desktop.png",
-      "bytes": 201583,
-      "sha256": "f56e8d8023c59ef3868ac905f1a3db45a8684189947141a2728bbf6d3762c913"
+      "path": "qa/evidence/fixture-verification.json",
+      "bytes": 542,
+      "sha256": "1ec39e388224b607aa43cd06e53802b1193abeb328dd01c4e495664386c91cc1"
     },
     {
-      "path": "qa/evidence/familiar-revised-capture-wear-desktop.png",
-      "bytes": 177824,
-      "sha256": "0fe812681a19b32fda2cca6d53dfab5ccb3dacc8b451244637e999e31111eecd"
+      "path": "qa/evidence/gallery-and-cards.json",
+      "bytes": 7596,
+      "sha256": "d23b2f163e675b304d8ae4eb70c0c23642ef2cc4e06ed4d4dee47c406b396b11"
     },
     {
-      "path": "qa/evidence/familiar-revised-label-viewer-mobile.png",
-      "bytes": 40422,
-      "sha256": "be4a6e8e25659fe353b2bb28c4f43f20ca2ddf113a9eba1610b7316150f4bdc1"
+      "path": "qa/evidence/orders-390.png",
+      "bytes": 125231,
+      "sha256": "bd64dd12c2ce3a8c16d7f309be6c50f2a0947edf5853ed5335d6ae0bba7f6ca2"
     },
     {
-      "path": "qa/evidence/familiar-revised-wear-viewer-mobile.png",
-      "bytes": 43010,
-      "sha256": "90fae554c78c54f09d5e96c84cac712ee6356447e7dcc8b092e288e717c1488a"
+      "path": "qa/evidence/photo-verification.json",
+      "bytes": 300,
+      "sha256": "4a41d2a417fb91abb685ae8af0f9f794e7038d28485c5fc9eeb220e244f375da"
     },
     {
-      "path": "qa/evidence/fixture-verification.txt",
-      "bytes": 253,
-      "sha256": "119e208a3d324a3f0160d89df5770a7c6e42a8d2c577f7673d2471d2b349e8cd"
+      "path": "qa/evidence/product-1440.png",
+      "bytes": 1203962,
+      "sha256": "6451075b46af571f2928a5f6935fa644ce6bc7ae79315e77c68d0d1cded0904b"
     },
     {
-      "path": "qa/evidence/gateway-desktop.png",
-      "bytes": 179487,
-      "sha256": "e47f9f56eb99c07c6a3efde5b931f8c226114880b6ce1c10a6dd2bd6a02a82b2"
+      "path": "qa/evidence/product-390.png",
+      "bytes": 515563,
+      "sha256": "b3cd79ee8d958866e45e6bb385542fe391378e08f57b9c8647f2754c71578c5c"
     },
     {
-      "path": "qa/evidence/gateway-mobile.png",
-      "bytes": 102051,
-      "sha256": "afd6f77ca5d1e6bd3c98689816e86ee76b929c5df02be4c9d06640c4a7930be1"
+      "path": "qa/evidence/recording-progression.json",
+      "bytes": 1136,
+      "sha256": "c4ce06b1b486649e7452b5e8a1386e52b307d932c0ca05a319be7c14458a25ec"
     },
     {
-      "path": "qa/evidence/moss-knit-3d.png",
-      "bytes": 334164,
-      "sha256": "7c9bd297930f04d9e0fccc74b90b551325d8599de3ad6a6f578cff9662a157f1"
+      "path": "qa/evidence/responsive-layout.json",
+      "bytes": 2077,
+      "sha256": "865c656c8f4e052ce3a1cdd5575ef1c70abc0f6cdeeae41b081e8e5dacc5d402"
     },
     {
-      "path": "qa/evidence/orders-desktop.png",
-      "bytes": 20723,
-      "sha256": "34f9e2b21acc5bd5fa70ff736a129e9308fa6c389a64f97e726ee087225163d5"
+      "path": "qa/evidence/shared-accessibility.json",
+      "bytes": 797,
+      "sha256": "9934daf744bc0f3678d09c390c8a5ce82852131c6ca63b073fa72e06a4e21e3f"
     },
     {
-      "path": "qa/evidence/rapid-comparison-reload.json",
-      "bytes": 2278,
-      "sha256": "f97555251749ef315c9b1d5cc9fa398c212e210cc779541a3300b707f118eef8"
+      "path": "qa/evidence/shop-1440.png",
+      "bytes": 448134,
+      "sha256": "bbc9baeee305ac135df7655973787683bf84987f5115f9d6ba52fcda818a69c4"
     },
     {
-      "path": "qa/evidence/seller-capture-wear.png",
-      "bytes": 232682,
-      "sha256": "4ff8c0968c7be8e40bd76433b2dab495dfceb8d1f40ea91dcfdf7ef71cd1fd8c"
+      "path": "qa/evidence/shop-390.png",
+      "bytes": 148177,
+      "sha256": "e071a4bb91dbb83260dbff0ee497eaefefbc89f45250dcb02fe65d8b6672ad58"
     },
     {
-      "path": "qa/evidence/seller-review.png",
-      "bytes": 215237,
-      "sha256": "e371e4c140762e6e664a58d9daf3efa59c6c553d3564fc98e596ecbf0de73e3f"
+      "path": "qa/evidence/studio/capture-mobile.png",
+      "bytes": 108033,
+      "sha256": "b204ed2bd8c3fc311e9931d6c68f1b89b4c40cbb753b163450cd88b26fa7dd0a"
     },
     {
-      "path": "qa/evidence/shop-desktop.png",
-      "bytes": 158103,
-      "sha256": "a94174dd7e8cac5acb409d883dec01bd8bfa3c14e0cd7276190fd2732fedc716"
+      "path": "qa/evidence/studio/recording-flow-results.json",
+      "bytes": 284,
+      "sha256": "77ab8c3cb02111a98515a164957e3fd48cb0eb17ec880fcfca489c6b9c57d8a2"
     },
     {
-      "path": "qa/evidence/shop-mobile.png",
-      "bytes": 65536,
-      "sha256": "9f8bc2a9c2741636b5640c99d0d71740aad89f0ec8c08e4a78814489d342e2ca"
+      "path": "qa/evidence/studio/studio-desktop.png",
+      "bytes": 305396,
+      "sha256": "52382c0ba34dfc55ef08694e53bf9d69d0474c533e58d567d3a863937ac0c0a2"
     },
     {
       "path": "qa/evidence/verification-summary.json",
-      "bytes": 1285,
-      "sha256": "4931f746a2ffb6ab93dd38eda58b7d58a56c9f28f38266152e76926aec9187ab"
-    },
-    {
-      "path": "qa/evidence/webgl-fallback.png",
-      "bytes": 204927,
-      "sha256": "9330e5a3d1a1f37d74bb97cae06d4bd115ad608983d46ad4ce9ba2f3526f44c4"
+      "bytes": 751,
+      "sha256": "8197828304c507dee368f8a31b9dadd4b15f1b57ef857f5b64f5f4a6eba5af4a"
     },
     {
       "path": "reference-pack/OUTPUT_MANIFEST.json",
@@ -1782,9 +2096,244 @@
       "sha256": "23f4cf742186caea8e6d72239c3a2776a8c3eb965da1d965292117e1f2792862"
     },
     {
+      "path": "reference-pack/README.md",
+      "bytes": 720,
+      "sha256": "48249e2ce01e13a76d092518163f89dff7b980a12a929c74f67a838ac6f70750"
+    },
+    {
       "path": "reference-pack/README_START_HERE.md",
       "bytes": 1692,
       "sha256": "36b53c49ad8146ff22c6577ba5b35b8a8bd413f1dc84c3aed40727bfe41d6b4e"
+    },
+    {
+      "path": "reference-pack/current-design/DESIGN_GUIDELINE.md",
+      "bytes": 11771,
+      "sha256": "72981efc95f7a62e90f977a4e4a2a471bc5a470ff0277219829c73bae11c5c74"
+    },
+    {
+      "path": "reference-pack/current-design/README.md",
+      "bytes": 600,
+      "sha256": "f0b0070df0ee348d4b83bbabc96618553e26b7684ff79255e8e9a4ddbc2d81b2"
+    },
+    {
+      "path": "reference-pack/current-design/Stitch_Desktop_Reference.zip",
+      "bytes": 3891650,
+      "sha256": "5360d10143e192867584416aab33f438cdc02152ca27fc29b69ba8aa60d20ba6"
+    },
+    {
+      "path": "reference-pack/current-design/Stitch_Mobile_Reference.zip",
+      "bytes": 7163202,
+      "sha256": "81e6a11b311e576d81ff495d91b9efc973f987a0a6054a12abd67d844fae3879"
+    },
+    {
+      "path": "reference-pack/legacy-qa/browser-tests-v1.mjs",
+      "bytes": 27075,
+      "sha256": "59d8b55e46bb1c60b8c3e0f18c5ef39526ed3d939a677a1aa21b91d17894d938"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/asset_briefs/THREE_D_ASSET_GENERATION_BRIEF.md",
+      "bytes": 1558,
+      "sha256": "55d3212a0aa06c03840095a2461b71b2963b635343685b9ae1f5a3baf6507eed"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/handoff/ARTIFACT_WRITING_RULES.md",
+      "bytes": 1742,
+      "sha256": "2ba12d059c55671b7815d78d717d4d5e1fbc0675d12ce27ce42fd913a47ebb53"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/handoff/DESIGN_SYSTEM_AND_LOGO_SPEC.md",
+      "bytes": 1502,
+      "sha256": "6c6d2aeb39e766c7fb7d88517ab95fb2d1ac740b3d3f729281d6c8b21186d9ab"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/handoff/GENERATION_MASTER_PROMPT.md",
+      "bytes": 10073,
+      "sha256": "ef9417559f216d9c0a1b83034e561a634c6d2e67e8e32494eed8a9febec99dde"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/handoff/PRODUCT_AND_STATE_SPEC.md",
+      "bytes": 1417,
+      "sha256": "afed7fc5de26ea92e5ea5a4177ba14146ad6a8c81c4f9f0acb0ffb05510a3e3b"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/prompts/00_START_HERE.md",
+      "bytes": 653,
+      "sha256": "a8c8a738821f87de6f1c6fe108037576a3e8bc6aa8000417ed1702eb45ddfb5a"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/prompts/01_BUILD_SEQUENCE.md",
+      "bytes": 813,
+      "sha256": "12b95630419897cedd87892f066a34b10613f680bb1e06077f2721652bee0f52"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/prompts/02_ASSET_AND_LOGO_PROMPT.md",
+      "bytes": 475,
+      "sha256": "ed9a3f2efd4f6389a88143e733eaa3f24f9d3def0e5bd65bd2078c25facbdf80"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/prompts/03_FINAL_REVIEW_PROMPT.md",
+      "bytes": 489,
+      "sha256": "aff03b9661361ce1cfed292d4ac91e854e1c0399711cbda7cdf8186ab8a0735a"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/reference-pack/OUTPUT_MANIFEST.json",
+      "bytes": 634,
+      "sha256": "9789c339ca888f227be3f56c2d021aafbd64a4e9ed808b643b0668c34c3f2636"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/reference-pack/PACKAGE_MANIFEST.json",
+      "bytes": 9732,
+      "sha256": "23f4cf742186caea8e6d72239c3a2776a8c3eb965da1d965292117e1f2792862"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/reference-pack/README_START_HERE.md",
+      "bytes": 1692,
+      "sha256": "36b53c49ad8146ff22c6577ba5b35b8a8bd413f1dc84c3aed40727bfe41d6b4e"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/reference-pack/legacy-qa/browser-tests-v1.mjs",
+      "bytes": 27075,
+      "sha256": "59d8b55e46bb1c60b8c3e0f18c5ef39526ed3d939a677a1aa21b91d17894d938"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/reference-pack/qa/COMPLETION_REPORT_TEMPLATE.md",
+      "bytes": 491,
+      "sha256": "121c77097c80225bf2339bae500684f74ba3b83e0521a44321b7a412192115ee"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/reference-pack/qa/SELF_REVIEW_AND_VERIFICATION_PROTOCOL.md",
+      "bytes": 1240,
+      "sha256": "945530a28d9dd150a94eff0f197f707234cb9304e35cb26f4de7a6f53263d0d2"
+    },
+    {
+      "path": "reference-pack/legacy-v1-briefs/reference-pack/qa/VERIFICATION_MATRIX.md",
+      "bytes": 781,
+      "sha256": "a0fa9e134e4db88ad4a5a3768ed1f7bb5f90f03d631d6aedb30026dfb8903f82"
+    },
+    {
+      "path": "reference-pack/legacy-v1-docs/README.md",
+      "bytes": 3444,
+      "sha256": "8d26e2ff81145003224631f52cf234510dbb883f476c0c5226b373f51bdd15d8"
+    },
+    {
+      "path": "reference-pack/legacy-v1-docs/context/UPDATED_MASTER_AI_CONTEXT.md",
+      "bytes": 219550,
+      "sha256": "7b0431ecec5c23acb78d67bbb0194d6c27dc63190d4d5751893149f64a3ce28d"
+    },
+    {
+      "path": "reference-pack/legacy-v1-docs/docs/ASSET_PROVENANCE.md",
+      "bytes": 7675,
+      "sha256": "09e462eb9a0bc21991bd74e10aa6a9b17c9c49e2fdd22bd1d24310cb5e3761b2"
+    },
+    {
+      "path": "reference-pack/legacy-v1-docs/docs/DESIGN_AND_STATE_SPEC.md",
+      "bytes": 9166,
+      "sha256": "82a4d6dad57069faf097cba8adc127965ab585b9fb51cc7c7cc18a8b04dd7ab9"
+    },
+    {
+      "path": "reference-pack/legacy-v1-docs/docs/INPUTS_AND_LIMITS.md",
+      "bytes": 1800,
+      "sha256": "aa8ba8001aed55e9c067a9866e2c5a2a197bbafb6f79fbc65104ca070d863e92"
+    },
+    {
+      "path": "reference-pack/legacy-v1-docs/docs/SOURCES_AND_STANDARDS.md",
+      "bytes": 1828,
+      "sha256": "c131480b0dc6fa355244ca4eddd94deaf2b1d5d3e056678684f2c86bd141e20a"
+    },
+    {
+      "path": "reference-pack/legacy-v1-docs/scripts/verify-fixtures.mjs",
+      "bytes": 1901,
+      "sha256": "09116ad6d91ad5fe98013cc97413fda7ec81398398c17d6bc56c0ec1c2a4d08d"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/README.md",
+      "bytes": 400,
+      "sha256": "1f8680a22188582681ab558fda28c8b6f45890e6fba58bb73d15c83574d823be"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/public/asset-manifest.json",
+      "bytes": 44425,
+      "sha256": "2c8eecbaec1d6719bc34611656e58f6fbf041639a775c880fe912c307b4a9c98"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/public/models/airloom-linen.glb",
+      "bytes": 476792,
+      "sha256": "f4a93cb258fef03198b52e411d07aa0a2ce1283fef4778c0f43fcbcd7d9bd29d"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/public/models/cloud-poplin.glb",
+      "bytes": 433556,
+      "sha256": "18326a5428c52fe952b604ab8b399160fb6d4f047161abf6965c3537e17f10dd"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/public/models/moss-knit.glb",
+      "bytes": 478676,
+      "sha256": "f8ad33da93c0c6a213ff2e1a3330f2d155bfa695a1701e8def4d419be0bde479"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/public/models/my-blue-blouse.glb",
+      "bytes": 291172,
+      "sha256": "dcfe2e5bf3d8170f1362615880d9e67ad98742d56401352c7e66b5e6a68689b5"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/qa/studio-integration-run.mjs",
+      "bytes": 4816,
+      "sha256": "30d722d7712bc4816fc4a761c69f8f921392e87fb655d2ec0fd5d4d361f2d4f5"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/qa/studio-preview-run.mjs",
+      "bytes": 1805,
+      "sha256": "419b1e5c6566aa146cc510b117aca6113f8b74e113f4c8eeba12f87cb00ff655"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/qa/studio-preview.html",
+      "bytes": 886,
+      "sha256": "f1a9ca7fdb25e8d5d4742d04beef707d0069b69ebdbf41ea4c420632f1d6e6bf"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/scripts/author-assets.mjs",
+      "bytes": 56775,
+      "sha256": "dfc0638d9668b22ce2202f133d72774114b62245a4035f9f3f75392745b156ae"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/scripts/author-evidence.py",
+      "bytes": 13467,
+      "sha256": "5492c08dbdbfca3371597b9eb7cae145e0d364a79a9eecc9c0fb21b642a13b48"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/scripts/browser-tests.mjs",
+      "bytes": 27075,
+      "sha256": "59d8b55e46bb1c60b8c3e0f18c5ef39526ed3d939a677a1aa21b91d17894d938"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/scripts/rapid-reload-test.mjs",
+      "bytes": 1270,
+      "sha256": "d3e63497d6ee91307cf23d7e9f25710c01a73abfd3990483ab58c435603c1ad3"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/scripts/verify-assets.mjs",
+      "bytes": 7844,
+      "sha256": "58d521672d8956966b24b7e4e9bb59588862498c19a710c6df2bfbcb7ce110e3"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/src/SellerCommerce.tsx",
+      "bytes": 73168,
+      "sha256": "12d0a53fd01eabe01e529f0e378824fcc872c832fb912e932a9f644f51707061"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/src/components/GarmentViewer.tsx",
+      "bytes": 27244,
+      "sha256": "f2abfad7af8b473c22cc6ea38d69ef1118fac62e7621ef5493b9559cd8d32b08"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/src/components/SourceCapture.tsx",
+      "bytes": 6108,
+      "sha256": "c12b99a112256a57559caf9d3c60eaf18263d57472930a13b63c0d1213c53fbc"
+    },
+    {
+      "path": "reference-pack/legacy-v1-implementation/src/components/viewer.css",
+      "bytes": 5198,
+      "sha256": "15abf4fb84e451073fe43e332de3d2e197927d133f1ce928b8e2670673b0db1d"
     },
     {
       "path": "reference-pack/qa/COMPLETION_REPORT_TEMPLATE.md",
@@ -1812,209 +2361,74 @@
       "sha256": "012dd8ffe04b513914468462aff55bd9a844ab4a18828b65602d6e910f682d83"
     },
     {
-      "path": "references/normalized/CLEAR iOS 47.png",
-      "bytes": 778534,
-      "sha256": "8aa4f843b045f9b82a46be335fbb4f46516c4c5cde697f199f49c673b8ac38cf"
-    },
-    {
-      "path": "references/normalized/CLEAR iOS 48.png",
-      "bytes": 120459,
-      "sha256": "5fde8bc5085b03b99155fbe93bb2f4d58ff63f96b607eee0ffe1dda742b0a032"
-    },
-    {
-      "path": "references/normalized/CLEAR iOS 49.png",
-      "bytes": 395696,
-      "sha256": "8fe0a36fc983edbbe9ec756ac6ba0c8ee7c6f9677753df3362f014133d6ed18a"
-    },
-    {
-      "path": "references/normalized/CLEAR_camera_permission.png",
-      "bytes": 120459,
-      "sha256": "5fde8bc5085b03b99155fbe93bb2f4d58ff63f96b607eee0ffe1dda742b0a032"
-    },
-    {
-      "path": "references/normalized/CLEAR_capture_complete.png",
-      "bytes": 395696,
-      "sha256": "8fe0a36fc983edbbe9ec756ac6ba0c8ee7c6f9677753df3362f014133d6ed18a"
-    },
-    {
-      "path": "references/normalized/CLEAR_capture_instruction.png",
-      "bytes": 778534,
-      "sha256": "8aa4f843b045f9b82a46be335fbb4f46516c4c5cde697f199f49c673b8ac38cf"
-    },
-    {
-      "path": "references/normalized/Starling iOS 351.png",
-      "bytes": 501238,
-      "sha256": "8c30895e45e5454ee6f8becefdc5c12d452993c887fafaa873b1063df6b4f0bd"
-    },
-    {
-      "path": "references/normalized/Starling iOS 352.png",
-      "bytes": 64278,
-      "sha256": "16a8f2404ae3e5fbec1b3623792b7d6b9a3dd85be39904007a2a39407b1af7ae"
-    },
-    {
-      "path": "references/normalized/Starling iOS 353.png",
-      "bytes": 381283,
-      "sha256": "826bd748456f70da57cf33ef4b71489bafa0c9b7337ccd381c31cdb87a93aa99"
-    },
-    {
-      "path": "references/normalized/Starling iOS 354.png",
-      "bytes": 127039,
-      "sha256": "ae86ec60e6f7f92c2ba000724246a5d7b1e001a860522a82699fab811389e3ff"
-    },
-    {
-      "path": "references/normalized/Starling iOS 355.png",
-      "bytes": 473683,
-      "sha256": "e3e6ad3289cd0bd6b4345e20f8e75a862036fc3e9f10387dbbc5f9b7ad21ecf4"
-    },
-    {
-      "path": "references/normalized/Starling iOS 356.png",
-      "bytes": 223027,
-      "sha256": "a7b30da9e8493c5a8af02237c7bd19416f5e3dea94707833743522b7bd659e1b"
-    },
-    {
-      "path": "references/normalized/Starling iOS 357.png",
-      "bytes": 217199,
-      "sha256": "e79f9ff39bd7a9e55ab72d21d8fa6685c37a8c38bd60086dbc544451773f4fbb"
-    },
-    {
-      "path": "references/normalized/Starling iOS 358.png",
-      "bytes": 225306,
-      "sha256": "2409ba83698b7302dd586e5549f906e49790fd3eb042a4f70e5b95f18fe47412"
-    },
-    {
-      "path": "references/normalized/Starling iOS 47.png",
-      "bytes": 522843,
-      "sha256": "366bfd5a0d1e753b8336e121ea7f32ea467beaa9af5ac3120a7228dbcb127578"
-    },
-    {
-      "path": "references/normalized/Starling_capture_camera.png",
-      "bytes": 64278,
-      "sha256": "16a8f2404ae3e5fbec1b3623792b7d6b9a3dd85be39904007a2a39407b1af7ae"
-    },
-    {
-      "path": "references/normalized/Starling_capture_camera_alt.png",
-      "bytes": 223027,
-      "sha256": "a7b30da9e8493c5a8af02237c7bd19416f5e3dea94707833743522b7bd659e1b"
-    },
-    {
-      "path": "references/normalized/Starling_capture_confirmation.png",
-      "bytes": 225306,
-      "sha256": "2409ba83698b7302dd586e5549f906e49790fd3eb042a4f70e5b95f18fe47412"
-    },
-    {
-      "path": "references/normalized/Starling_capture_intro.png",
-      "bytes": 501238,
-      "sha256": "8c30895e45e5454ee6f8becefdc5c12d452993c887fafaa873b1063df6b4f0bd"
-    },
-    {
-      "path": "references/normalized/Starling_capture_intro_alt.png",
-      "bytes": 473683,
-      "sha256": "e3e6ad3289cd0bd6b4345e20f8e75a862036fc3e9f10387dbbc5f9b7ad21ecf4"
-    },
-    {
-      "path": "references/normalized/Starling_capture_review.png",
-      "bytes": 217199,
-      "sha256": "e79f9ff39bd7a9e55ab72d21d8fa6685c37a8c38bd60086dbc544451773f4fbb"
-    },
-    {
-      "path": "references/normalized/Starling_capture_scan.png",
-      "bytes": 381283,
-      "sha256": "826bd748456f70da57cf33ef4b71489bafa0c9b7337ccd381c31cdb87a93aa99"
-    },
-    {
-      "path": "references/normalized/Starling_capture_success.png",
-      "bytes": 127039,
-      "sha256": "ae86ec60e6f7f92c2ba000724246a5d7b1e001a860522a82699fab811389e3ff"
-    },
-    {
-      "path": "references/normalized/Starling_capture_tips.png",
-      "bytes": 522843,
-      "sha256": "366bfd5a0d1e753b8336e121ea7f32ea467beaa9af5ac3120a7228dbcb127578"
-    },
-    {
-      "path": "references/normalized/Tinder iOS 62.png",
-      "bytes": 242789,
-      "sha256": "c8e0289c6e272ee7a106709665389c80a9ccf839a9a7c752489d815ad5adba50"
-    },
-    {
-      "path": "references/normalized/Tinder_capture_loading.png",
-      "bytes": 242789,
-      "sha256": "c8e0289c6e272ee7a106709665389c80a9ccf839a9a7c752489d815ad5adba50"
-    },
-    {
-      "path": "references/normalized/Zopa Bank iOS 54.png",
-      "bytes": 352089,
-      "sha256": "d989bbe2e4bda317fc642b47c3e7a5cd406a801853a5ddeecc334efed4c59d5a"
-    },
-    {
-      "path": "references/normalized/Zopa Bank iOS 55.png",
-      "bytes": 216400,
-      "sha256": "52f9721795214622cf206751788c3ccdd7258fa81e3f1aa6b2794af01069e239"
-    },
-    {
-      "path": "references/normalized/Zopa_liveness_camera.png",
-      "bytes": 216400,
-      "sha256": "52f9721795214622cf206751788c3ccdd7258fa81e3f1aa6b2794af01069e239"
-    },
-    {
-      "path": "references/normalized/Zopa_liveness_intro.png",
-      "bytes": 352089,
-      "sha256": "d989bbe2e4bda317fc642b47c3e7a5cd406a801853a5ddeecc334efed4c59d5a"
-    },
-    {
-      "path": "scripts/author-assets.mjs",
-      "bytes": 56775,
-      "sha256": "dfc0638d9668b22ce2202f133d72774114b62245a4035f9f3f75392745b156ae"
-    },
-    {
-      "path": "scripts/author-evidence.py",
-      "bytes": 13467,
-      "sha256": "5492c08dbdbfca3371597b9eb7cae145e0d364a79a9eecc9c0fb21b642a13b48"
-    },
-    {
-      "path": "scripts/browser-tests.mjs",
-      "bytes": 27075,
-      "sha256": "59d8b55e46bb1c60b8c3e0f18c5ef39526ed3d939a677a1aa21b91d17894d938"
+      "path": "scripts/browser-tests-v2.mjs",
+      "bytes": 16523,
+      "sha256": "61a47cd235289f17895dc03d6d077c6f790ee5a0ca371eb52504f0c0bef9db55"
     },
     {
       "path": "scripts/package-release.py",
-      "bytes": 3552,
-      "sha256": "69994be0943734fffe584a9e3c7e8715e99120cdddf4954342f9f1caf2655268"
+      "bytes": 3553,
+      "sha256": "7a14593e87cdfe8f45800a6f9a45ee7f901b569cfbdd85667c6aee8bf91c746f"
     },
     {
-      "path": "scripts/rapid-reload-test.mjs",
-      "bytes": 1270,
-      "sha256": "d3e63497d6ee91307cf23d7e9f25710c01a73abfd3990483ab58c435603c1ad3"
-    },
-    {
-      "path": "scripts/verify-assets.mjs",
-      "bytes": 7844,
-      "sha256": "58d521672d8956966b24b7e4e9bb59588862498c19a710c6df2bfbcb7ce110e3"
+      "path": "scripts/studio-browser-tests.mjs",
+      "bytes": 6489,
+      "sha256": "81a3885e5748258e60f6f8ea031b6fd4f5dd4f82658f131056df076e5f5654e2"
     },
     {
       "path": "scripts/verify-fixtures.mjs",
-      "bytes": 1901,
-      "sha256": "09116ad6d91ad5fe98013cc97413fda7ec81398398c17d6bc56c0ec1c2a4d08d"
+      "bytes": 7547,
+      "sha256": "05d42747d50f3fe1eec37eacdba71bb3f316e98d47c21f06d53e526d11b0e02b"
+    },
+    {
+      "path": "scripts/verify-photo-assets.mjs",
+      "bytes": 3194,
+      "sha256": "e1e1a003de9c16157b82af67645896252e28811aea7cdae955ac607783e27710"
     },
     {
       "path": "src/App.tsx",
-      "bytes": 52607,
-      "sha256": "b09ece9497a9d7f884d9a817b2af0d88a32eb47713d81a5c09ea9a14d52641a4"
+      "bytes": 11615,
+      "sha256": "2b38d2c0ddf22166558371e5e8f46013e68522e24d988acc1c8e4229ee007594"
     },
     {
-      "path": "src/SellerCommerce.tsx",
-      "bytes": 73168,
-      "sha256": "12d0a53fd01eabe01e529f0e378824fcc872c832fb912e932a9f644f51707061"
+      "path": "src/CommercePages.tsx",
+      "bytes": 35264,
+      "sha256": "9d8c78d0fcd462c496f2c9d5f2d2c050692ef72245144e23e70b437094b0e210"
+    },
+    {
+      "path": "src/FeelPages.tsx",
+      "bytes": 29267,
+      "sha256": "ea6fd399f25d373569bf14d9edb6aada6969bb4349a9b38d4d5a0c2a1b35366f"
+    },
+    {
+      "path": "src/MarketplacePages.tsx",
+      "bytes": 12134,
+      "sha256": "1bb55ec3fb5ad54b879fc0d48c34e3330a92c9274a2ab1523ae98ba1ded0aaaa"
+    },
+    {
+      "path": "src/ProductPages.tsx",
+      "bytes": 13500,
+      "sha256": "bc8f285de9a7100e3b34176889032fdaf7e264a04738e61e9c2af1f5f1c00d08"
+    },
+    {
+      "path": "src/StudioPages.tsx",
+      "bytes": 29145,
+      "sha256": "b0374e39a94b68d30355f4956f9ab08fee0410d6d2fdbeee44e2f2ac5de42e4a"
     },
     {
       "path": "src/buyer.ts",
-      "bytes": 1011,
-      "sha256": "2833d8ea49fc704617133e9e23dfebb41b3e150b354d754da53f5f0b577ebee9"
+      "bytes": 2118,
+      "sha256": "b9712439708bbc9cd7e36e3f37b6d0289562214de91715ef5bcce577ec22552b"
     },
     {
-      "path": "src/components/GarmentViewer.tsx",
-      "bytes": 27244,
-      "sha256": "f2abfad7af8b473c22cc6ea38d69ef1118fac62e7621ef5493b9559cd8d32b08"
+      "path": "src/commerce.css",
+      "bytes": 24541,
+      "sha256": "0d9c2f890151a4c07e353600755541577ba6369724ee7db5a2939de252b77684"
+    },
+    {
+      "path": "src/components/GuidedRecording.tsx",
+      "bytes": 15013,
+      "sha256": "3c010a8ee9f6e7d6f47501bacb9838a9a806a662a9b7da5a7860e2ebacc724ab"
     },
     {
       "path": "src/components/InventoryControls.tsx",
@@ -2022,29 +2436,49 @@
       "sha256": "608b8bfaee49dd82c657b117d046437860c931584ed10481be8566f08bc0d645"
     },
     {
+      "path": "src/components/PhotoGallery.tsx",
+      "bytes": 4784,
+      "sha256": "d50a76852b4fba002c6139049fc021d14efba640a298ea5c11b90f02c3b6155e"
+    },
+    {
       "path": "src/components/RetainedFlows.tsx",
-      "bytes": 56842,
-      "sha256": "509f603efd74fde13c3560a04ec5068a87900459a8ede4e08ac76e031ff0617e"
-    },
-    {
-      "path": "src/components/SourceCapture.tsx",
-      "bytes": 6108,
-      "sha256": "c12b99a112256a57559caf9d3c60eaf18263d57472930a13b63c0d1213c53fbc"
-    },
-    {
-      "path": "src/components/viewer.css",
-      "bytes": 5198,
-      "sha256": "15abf4fb84e451073fe43e332de3d2e197927d133f1ce928b8e2670673b0db1d"
+      "bytes": 57732,
+      "sha256": "ec5fde4ad63b535ef8ec875b241ebe3f348278615a736bc3fac401f5d4380a6f"
     },
     {
       "path": "src/domain.ts",
-      "bytes": 43445,
-      "sha256": "f34593ae174fedb9fb4469ac2f7c83d420b1ab44bb1754baf67680ec3ad35824"
+      "bytes": 79058,
+      "sha256": "99ca3754e3f8262a7a28360432cd76c870e8051f66f4df778d7463b8a3456673"
+    },
+    {
+      "path": "src/feel.css",
+      "bytes": 30733,
+      "sha256": "e60d643774ba3dc8f6cee5046c64d89e956b9fc96d9eb5a616a87ae178baa4af"
+    },
+    {
+      "path": "src/feel.ts",
+      "bytes": 12072,
+      "sha256": "b794e67b17ace9fb767bd6967330cf7dbe19815cf1e9913405715fb2d902d133"
     },
     {
       "path": "src/main.tsx",
-      "bytes": 947,
-      "sha256": "98211cf34818d274a73dbefc4b4e1d590efe67ef31017009a662d0b97eaff5b1"
+      "bytes": 975,
+      "sha256": "9c4bce7550d16a51c080755f62ea550c99160b2de0366b12983543b438950ef3"
+    },
+    {
+      "path": "src/marketplace.css",
+      "bytes": 48654,
+      "sha256": "ffbefb5d04ea4eb07fd424736a91bfef073d99ce084766d9c5228f5e02dbf2e8"
+    },
+    {
+      "path": "src/media.ts",
+      "bytes": 11360,
+      "sha256": "537af7eff9778b6460454006e210a43d34e478e7dbc03d9ef3669b971e8056ab"
+    },
+    {
+      "path": "src/recording.ts",
+      "bytes": 2933,
+      "sha256": "1effa0178b8fb901af9e0520214ac26cf55a6102722385a0140873c3be0d7db3"
     },
     {
       "path": "src/router.tsx",
@@ -2053,8 +2487,13 @@
     },
     {
       "path": "src/store.tsx",
-      "bytes": 3080,
-      "sha256": "fbc27b58a6498402655f051b684af14b30edd054227ec2ef5ef3ac68a718ab24"
+      "bytes": 3193,
+      "sha256": "a8f731e2c2f0971bb4f4110d7ccc158bf2184f0e562f87d187b54e0a3c38cf84"
+    },
+    {
+      "path": "src/studio.css",
+      "bytes": 36102,
+      "sha256": "6b25fa135bc658ab807f8e8af5b11fa2ff00ab614426a8011906da8274e04b0f"
     },
     {
       "path": "src/styles.css",
@@ -2067,14 +2506,39 @@
       "sha256": "81fa5b8725b937197b2ba15d6f6309dd263cab030bd9e99051772152a55ee394"
     },
     {
+      "path": "tests/commerce-v2.test.ts",
+      "bytes": 1935,
+      "sha256": "088a296941bd9263cd1cee3e848c1a09c76ffe90ddec3113284dfb8ea4154797"
+    },
+    {
+      "path": "tests/domain-v2.test.ts",
+      "bytes": 17418,
+      "sha256": "d7ee0b347e04593defcef4bc0157f1c3c9dffb116dc9e991b1bf0406ff25d53b"
+    },
+    {
       "path": "tests/domain.test.ts",
-      "bytes": 40063,
-      "sha256": "c1e4fda8145059cbd056a4a1ba5cca3e03ee59c80e890142dc69fb57b19b456c"
+      "bytes": 43251,
+      "sha256": "5fe0f879a68448763fe1f7d489a77cce71e94f4ff1cf99d6d47ec95211a9e227"
+    },
+    {
+      "path": "tests/feel.test.ts",
+      "bytes": 6358,
+      "sha256": "10808104f1353d014017c644673fc93ebb42ddecbf29bb8717ee287d6dd6bfb1"
+    },
+    {
+      "path": "tests/recording.test.ts",
+      "bytes": 4935,
+      "sha256": "dfd268b7900128071d49055f74caa4c23385e0aa6b323b94ad21b1da2fc1e3a4"
     },
     {
       "path": "tests/retained-flows.test.ts",
-      "bytes": 34206,
-      "sha256": "72c7ed34244f792ea943da078a3bc16b00630b3b6f5bb7945f33131ffee31872"
+      "bytes": 38407,
+      "sha256": "febd54f4baff10a9f9e5044c3affc7ee66cb28e3989ea7453c38b78a2c31d9b2"
+    },
+    {
+      "path": "tests/shopping-v2.test.ts",
+      "bytes": 1600,
+      "sha256": "a46b6e5474aef4acfac6bf68a51297b036e971e4b220f375effe9dee1ef3a202"
     },
     {
       "path": "tests/store.test.ts",

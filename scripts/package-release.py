@@ -1,47 +1,57 @@
-"""Create and inspect the two root-level Familiar release archives."""
+"""Package the root-level V2 Vercel project and verify every archived member."""
 from pathlib import Path
-import hashlib,json,zipfile,os
-ROOT=Path(__file__).resolve().parent.parent
-OUTPUT=ROOT.parent/'deliverables';OUTPUT.mkdir(exist_ok=True)
-EXCLUDE={'node_modules','.git','.vite','__pycache__'}
+import hashlib, json, zipfile, os
+ROOT = Path(__file__).resolve().parent.parent
+OUTPUT = ROOT.parent / 'v2-deliverables'
+OUTPUT.mkdir(exist_ok=True)
+ARCHIVE = 'Familiar_V2_Vercel_Deployable.zip'
+EXCLUDE = {'node_modules', '.git', '.vite', '__pycache__'}
 
-def eligible(path):
- rel=path.relative_to(ROOT)
- return path.name!='RELEASE_MANIFEST.json' and path.is_file() and not any(p in EXCLUDE or p.startswith('.') for p in rel.parts) and not path.name.endswith(('.tmp','.tsbuildinfo')) and not path.name.startswith('failure-')
-files=sorted(p for p in ROOT.rglob('*') if eligible(p))
-required=['package.json','package-lock.json','vercel.json','index.html','tsconfig.json','src/App.tsx','src/domain.ts','src/store.tsx','public/models/cloud-poplin.glb','public/models/moss-knit.glb','public/models/airloom-linen.glb','public/models/my-blue-blouse.glb','dist/index.html','qa/evidence/browser-results.json','README.md']
-reports=[]
-for filename,full in [('Familiar_Final_Vercel_Deployable.zip',False),('Familiar_Final_Source_Assets.zip',True)]:
- target=OUTPUT/filename
- temporary=OUTPUT/(filename+'.partial')
- included=[p for p in files if full or not p.relative_to(ROOT).as_posix().startswith('references/originals/')]
- manifest={'product':'Familiar','version':'1.0.0','archive':filename,'applicationRoot':'archive root','embeddedOriginalArchives':full,'sourceFiles':len(included),'files':[{'path':p.relative_to(ROOT).as_posix(),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in included]}
- manifest_text=json.dumps(manifest,indent=2)+'\n'
- if full:(ROOT/'RELEASE_MANIFEST.json').write_text(manifest_text)
- with zipfile.ZipFile(temporary,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=True) as z:
-  for path in included:
-   rel=path.relative_to(ROOT).as_posix()
-   z.write(path,rel,compress_type=zipfile.ZIP_STORED if path.suffix.lower()=='.zip' else zipfile.ZIP_DEFLATED)
-  z.writestr('RELEASE_MANIFEST.json',manifest_text)
- with temporary.open('rb') as handle:os.fsync(handle.fileno())
- os.replace(temporary,target)
- with zipfile.ZipFile(target) as z:
-  assert z.testzip() is None
-  names=z.namelist()
-  archived_manifest=json.loads(z.read('RELEASE_MANIFEST.json'))
-  assert archived_manifest['archive']==filename
-  assert len(names)==len(set(names))
-  assert set(names)=={entry['path'] for entry in archived_manifest['files']}|{'RELEASE_MANIFEST.json'}
-  for entry in archived_manifest['files']:
-   assert z.getinfo(entry['path']).file_size==entry['bytes'],(filename,entry['path'],'size')
-   with z.open(entry['path']) as handle:digest=hashlib.file_digest(handle,'sha256').hexdigest()
-   assert digest==entry['sha256'],(filename,entry['path'],'sha256')
-  for name in required:assert name in names,(filename,name)
-  assert not any('node_modules' in n or '/.git/' in n or n.startswith('/') or '..' in Path(n).parts for n in names)
-  assert 'context/original/Familiar_TGIC_2026_Master_Context_original.md' in names
-  if full:
-   originals=list((ROOT/'references/originals').glob('*.zip'))
-   for p in originals:assert z.read(p.relative_to(ROOT).as_posix())==p.read_bytes()
-  reports.append({'file':filename,'status':'passed','bytes':target.stat().st_size,'entries':len(names),'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),'rootProject':True,'crcPassed':True,'manifestMembershipAndHashesPassed':True,'embeddedOriginalArchives':full})
-(OUTPUT/'release-integrity.json').write_text(json.dumps({'archives':reports},indent=2)+'\n')
-print(json.dumps(reports,indent=2))
+def eligible(p):
+    rel = p.relative_to(ROOT)
+    return (p.is_file() and p.name != 'RELEASE_MANIFEST.json'
+        and not any(part in EXCLUDE or part.startswith('.') for part in rel.parts)
+        and not p.name.endswith(('.tmp', '.tsbuildinfo', '.partial'))
+        and not p.name.startswith('failure-')
+        and not rel.as_posix().startswith(('references/normalized/','reference-pack/legacy-v1-qa/')))
+
+files = sorted(p for p in ROOT.rglob('*') if eligible(p))
+manifest = {'product': 'Familiar', 'version': '2.0.0', 'archive': ARCHIVE,
+    'applicationRoot': 'archive root', 'runtime': 'Photographic local-only prototype',
+    'files': [{'path': p.relative_to(ROOT).as_posix(), 'bytes': p.stat().st_size,
+               'sha256': hashlib.sha256(p.read_bytes()).hexdigest()} for p in files]}
+manifest_bytes = (json.dumps(manifest, indent=2) + '\n').encode()
+target = OUTPUT / ARCHIVE
+temporary = OUTPUT / (ARCHIVE + '.partial')
+with zipfile.ZipFile(temporary, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6, allowZip64=True) as z:
+    for p in files:
+        z.write(p, p.relative_to(ROOT).as_posix(), compress_type=zipfile.ZIP_STORED if p.suffix == '.zip' else zipfile.ZIP_DEFLATED)
+    z.writestr('RELEASE_MANIFEST.json', manifest_bytes)
+with temporary.open('rb') as handle:
+    os.fsync(handle.fileno())
+os.replace(temporary, target)
+with zipfile.ZipFile(target) as z:
+    assert z.testzip() is None, 'ZIP CRC'
+    names = z.namelist()
+    assert len(names) == len(set(names)), 'Unique archive members'
+    stored = json.loads(z.read('RELEASE_MANIFEST.json'))
+    assert stored['archive'] == ARCHIVE and stored['version'] == '2.0.0'
+    assert set(names) == {e['path'] for e in stored['files']} | {'RELEASE_MANIFEST.json'}, 'Exact manifest membership'
+    for entry in stored['files']:
+        data = z.read(entry['path'])
+        assert len(data) == entry['bytes'], entry['path']
+        assert hashlib.sha256(data).hexdigest() == entry['sha256'], entry['path']
+    for name in ['package.json','package-lock.json','vercel.json','index.html','tsconfig.json',
+                 'src/App.tsx','src/domain.ts','src/MarketplacePages.tsx','src/ProductPages.tsx',
+                 'src/StudioPages.tsx','src/FeelPages.tsx','src/CommercePages.tsx','src/media.ts',
+                 'public/photos/manifest.json','dist/index.html','qa/evidence/browser-results.json',
+                 'README.md','reference-pack/current-design/DESIGN_GUIDELINE.md']:
+        assert name in names, name
+    assert not any('node_modules' in Path(n).parts or n.startswith('/') or '..' in Path(n).parts for n in names)
+    assert not any(n.startswith(('public/models/','dist/models/')) for n in names), 'No deployed 3D models'
+    assert 'three' not in json.loads(z.read('package.json'))['dependencies'], 'No Three.js dependency'
+report = {'archive': ARCHIVE, 'version': '2.0.0', 'bytes': target.stat().st_size,
+    'entries': len(names), 'sha256': hashlib.sha256(target.read_bytes()).hexdigest(),
+    'rootProject': True, 'crcPassed': True, 'manifestMembershipAndHashesPassed': True}
+(OUTPUT / 'release-integrity.json').write_text(json.dumps(report, indent=2) + '\n')
+print(json.dumps(report, indent=2))

@@ -1,8 +1,8 @@
-# Familiar
+# Familiar, photographic marketplace V2
 
-A complete browser-local secondhand clothing vision demonstrator. Buyer discovery, source-linked Familiar Evidence, private garment comparison, seller capture and review, and coherent simulated commerce share persisted state.
+A mobile-first, browser-local secondhand clothing demonstrator inspired closely by the supplied Stitch marketplace layouts. It combines photographic discovery, useful garment comparison, optional Search by feel, guided prepared recordings for buyers and sellers, and coherent simulated commerce.
 
-## Run
+## Run locally
 
 Requires Node.js 22.12 or later and npm.
 
@@ -11,7 +11,25 @@ npm ci
 npm run dev
 ```
 
-Open the local address printed by Vite. The application starts at the buyer/seller gateway.
+Open the local URL printed by Vite. The root route opens the marketplace. Browse `/shop`, use Search by feel, or open `/sell` for the seller studio.
+
+## Build and deploy to Vercel
+
+Unzip the deployable archive and use the directory containing `package.json` as the project root. Import that directory through your repository or Vercel workflow.
+
+- Framework: Vite.
+- Install: `npm ci`.
+- Build: `npm run build`.
+- Output: `dist`.
+- Environment variables: none.
+- Backend, database and external service configuration: none.
+
+`vercel.json` includes the SPA rewrite to `/index.html`. Static photographs, fonts and bundles are local assets. The ZIP is a deployable source project, not a change to your current Vercel account. Source is authoritative; rebuild `dist` after edits.
+
+```sh
+npm run build
+npm run preview
+```
 
 ## Verify
 
@@ -21,34 +39,29 @@ npm run verify:assets
 npm run verify:fixtures
 npm run build
 npx playwright install chromium
-npm run test:browser
+FAMILIAR_TEST_PRODUCTION=1 npm run test:browser
 ```
 
-Browser tests start their own temporary Vite server and test Chromium, desktop and mobile viewports, source media, local persistence, failed payment recovery, six capture stages, one-canvas GLB rendering and WebGL fallback. `qa/evidence` contains inspected screenshots and machine-readable verification results. Structural asset verification checks original model geometry, file sizes, required media and SVG validity.
+The unit suite checks state transitions, authored feel discovery, measurement differences, recording progress, legacy persistence, publication snapshots and immutable order facts. Asset checks verify the local WebP registry, decoded dimensions, checksums and file completeness. Browser checks exercise Chromium desktop and simulated phone viewports. The browser script writes its results to `../familiar-v2-check` by default; set `FAMILIAR_QA_DIR` to choose another directory. Packaged verification evidence records the checks actually run.
 
-## Deploy to Vercel
+## What is included
 
-Import this directory as the project root. Vercel reads `vercel.json`: framework Vite, install with `npm ci`, build `npm run build`, output `dist`. Client-side routes rewrite to `index.html`; existing static media and generated bundles retain their own URLs. The configuration follows [Vercel’s Vite SPA guidance](https://vercel.com/docs/frameworks/frontend/vite). No environment variables or secrets are required. A production build is included, and editable source remains the authority.
+- Twelve prepared listings, one prepared private blue reference, and 36 local photographs across 13 garment sets.
+- Search, filters, sorting, saved pieces, listing galleries, measurements and original-photo inspection.
+- A Search by feel action beside the shopping search bar, private reference selection, preferences, three eligible suggestions when available, paired photographs and four measurement differences.
+- Shared six-task prepared recording: front, back, label, movement, gentle pull, and fabric/wear.
+- Multiple local seller drafts and private references, resumable recording progress, review, correction, retake and publication.
+- Bag and candidate-only Buy now, checkout recovery, reservation/order timeline, cancellation, disputes and optional arrival reflection.
+- Browser-local persistence and validated migration from the previous `familiar-v1` state. Saved items, existing bag entries, edited Cloud draft and recorded receipts are retained where valid.
 
-## Product scope
+There is no customer-facing 3D viewer. Product photographs replace the earlier garment models. The original V1 documentation is preserved under `reference-pack/legacy-v1-docs` as historical material. Unused 3D source/models are archived under `reference-pack/legacy-v1-implementation`; Three.js is not a runtime dependency. Legacy public poster files remain to preserve old receipt image URLs.
 
-The interface is English, priced in USD, with centimetre measurements and S/M/L labels. Twelve prepared listings precede fifty inert Coming soon cards. Three hero garments and one private blue blouse reference have original volumetric GLB models. Desktop comparison uses one WebGL canvas with two views; mobile stacks the same stages.
+## Demonstration boundaries
 
-All inventory, sellers, capture media, prices, measurements, comparisons, conversations, delivery estimates and orders are authored examples. No real payment, shipment, camera capture, message delivery, authentication, cloud storage or inference runs. Interactive 3D is illustration and is separate from prepared source media. Source observations do not establish odor, hygiene, authenticity, exact softness, hidden damage or laboratory mechanics. Match uses an authored property-specific discovery order; it is not a measured model prediction.
+All names, seller identities, prices, measurements, feel profiles, conversations and commerce states are prepared examples. Record controls show camera-style prompts and timed demonstration takes. They do not access a device camera, upload files or create real footage. Photographs illustrate prepared garments and are not evidence of actual secondhand condition. Label and reverse views are not invented when the selected set lacks them.
 
-State saves in this browser profile when storage is available. About & privacy explains the scope and provides reset controls. The app also recovers from malformed saved data and unavailable WebGL/media.
+Feel suggestions use authored qualitative profiles and intentions, with availability, category, size and ordinary search constraints applied first. They do not use garment inference, laboratory measurements, identity verification or an overall match percentage. Exact skin feel, fit, odor, cleanliness, authenticity and hidden damage remain unknown.
 
-## Editable assets
+State belongs to this browser profile. Nothing is shared across users or devices. Real payments, shipping, authentication, messages and a backend are outside this deliverable.
 
-`npm run verify:assets` validates the current authored assets. To regenerate original models, studio posters and SVG brand assets:
-
-```sh
-node scripts/author-assets.mjs
-python3 scripts/author-evidence.py
-```
-
-The authoring script documents its dependencies. Source SVGs and GLBs, manifests, source-media definitions and asset provenance are included. Model dimensions are authored illustration dimensions, separate from the prepared listing measurements.
-
-## Reference material
-
-The complete source-and-assets archive preserves the supplied generation brief, updated and original context, normalized reference images and original embedded archives. Those materials guide the design and preserve research boundaries; third-party screenshots are not product imagery. See `docs/INPUTS_AND_LIMITS.md` and `docs/ASSET_PROVENANCE.md`.
+Read `docs/DESIGN_AND_STATE_SPEC.md`, `docs/INPUTS_AND_LIMITS.md` and `docs/ASSET_PROVENANCE.md` for the design contract, boundaries and source records.

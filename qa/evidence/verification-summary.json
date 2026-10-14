@@ -1,49 +1,34 @@
 {
   "unitTests": {
-    "passed": 97,
-    "files": 4,
-    "command": "npm test"
+    "passed": 155,
+    "failed": 0
   },
-  "cleanInstall": {
-    "status": "passed",
-    "command": "npm ci --no-audit --no-fund"
-  },
-  "typescriptAndProductionBuild": {
-    "status": "passed",
-    "command": "npm run build"
-  },
-  "productionBrowser": {
-    "passed": 23,
+  "browserChecks": {
+    "passed": 20,
     "failed": 0,
     "pageErrors": 0,
-    "command": "FAMILIAR_TEST_PRODUCTION=1 npm run test:browser"
+    "accessibilityScans": 18,
+    "seriousOrCriticalFindings": 0
   },
-  "rapidComparisonReload": {
-    "passed": 20,
-    "trials": 20,
-    "command": "node scripts/rapid-reload-test.mjs"
+  "responsiveViewportWidths": [
+    320,
+    390,
+    768,
+    1440
+  ],
+  "photos": {
+    "sets": 13,
+    "count": 36
   },
-  "assetValidation": {
-    "status": "passed",
-    "requiredAssets": 80,
-    "GLBModels": 4,
-    "command": "npm run verify:assets"
-  },
-  "fixtureValidation": {
-    "status": "passed",
-    "preparedMediaFiles": 65,
-    "catalogue": 12,
-    "command": "npm run verify:fixtures"
-  },
-  "accessibility": {
-    "primaryRouteScans": 9,
-    "seriousOrCriticalViolations": 0,
-    "standard": "automated WCAG A/AA Axe rules"
+  "productionBuild": {
+    "passed": true,
+    "sameBytesAsTestedBuild": true,
+    "staleUnreferencedFilesRemoved": 0
   },
   "limits": [
-    "Familiar companion archive unavailable and not audited",
-    "Browser checks use Chromium; physical devices, Safari and Firefox not tested",
-    "Visual inspection was performed by automated agents; human acceptance not performed",
-    "No live Vercel deployment or real services executed"
+    "Prepared camera-style demonstrations, not device footage",
+    "Browser-local state; no backend or real payment",
+    "Chromium emulated viewport checks, not physical-phone or Safari/Firefox acceptance",
+    "The live Vercel deployment is not updated by this ZIP delivery"
   ]
 }

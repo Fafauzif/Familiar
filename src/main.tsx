@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { StoreProvider } from "./store";
 import App from "./App";
 import "./styles.css";
+import "./marketplace.css";
 class Recovery extends React.Component<
   { children: React.ReactNode },
   { failed: boolean }

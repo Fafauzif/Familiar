@@ -1,0 +1,23 @@
+{
+  "errors": [],
+  "sellerPublished": true,
+  "sellerSteps": [
+    0,
+    1,
+    2,
+    4,
+    5,
+    3
+  ],
+  "buyerReady": true,
+  "buyerName": "My everyday tee",
+  "buyerSteps": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "savedReferenceInspectionPreservesReadiness": true
+}

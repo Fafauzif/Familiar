@@ -1,5 +1,0 @@
-
-> familiar-final@1.0.0 verify:fixtures
-> node --experimental-strip-types scripts/verify-fixtures.mjs
-
-{"status":"passed","catalogue":12,"sourceMedia":65,"models":4,"properties":["Drape","Movement","Stretch","Surface"],"svgXML":"All SVGs parse as XML"}

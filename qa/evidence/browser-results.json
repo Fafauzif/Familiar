@@ -1,100 +1,183 @@
 {
-  "date": "2026-10-13T19:08:07.930Z",
-  "production": true,
-  "browser": "Chromium 141 / Playwright 1.56.1",
-  "reports": [
+  "mode": "production",
+  "results": [
     {
-      "name": "Gateway role choices and editorial desktop",
+      "name": "Photographic marketplace and inert future cards · 390",
       "status": "passed"
     },
     {
-      "name": "Marketplace exact counts and inert Coming soon",
+      "name": "Product gallery, measurements and buying controls · 390",
       "status": "passed"
     },
     {
-      "name": "Search, size filtering and persisted saved listing",
+      "name": "Fabric comparison with measurements and photos · 390",
       "status": "passed"
     },
     {
-      "name": "Every active listing offers comparison and real source files",
+      "name": "Evidence property source views · 390",
       "status": "passed"
     },
     {
-      "name": "Source evidence state, marker and unknowns",
+      "name": "Primary route accessibility · 390",
       "status": "passed"
     },
     {
-      "name": "Three Match results, reference rename/delete/restore",
+      "name": "Photographic marketplace and inert future cards · 1440",
       "status": "passed"
     },
     {
-      "name": "Four real GLBs, one canvas, controls and modes",
+      "name": "Product gallery, measurements and buying controls · 1440",
       "status": "passed"
     },
     {
-      "name": "WebGL and failed asset fallback",
+      "name": "Fabric comparison with measurements and photos · 1440",
       "status": "passed"
     },
     {
-      "name": "Seller six stages, review correction, unsure, publish persistence",
+      "name": "Evidence property source views · 1440",
       "status": "passed"
     },
     {
-      "name": "Seller retake clears stale relevant decisions",
+      "name": "Primary route accessibility · 1440",
       "status": "passed"
     },
     {
-      "name": "Checkout decline, reservation, persistence and order cancellation",
+      "name": "Ordinary search, filters, save and immediate refresh",
       "status": "passed"
     },
     {
-      "name": "Mobile and reduced-motion layouts",
+      "name": "Search by feel icon, query handoff and preference persistence",
       "status": "passed"
     },
     {
-      "name": "Narrow mobile landscape no overflow",
+      "name": "Mobile filters drawer with real result changes",
       "status": "passed"
     },
     {
-      "name": "Corrupted local state and 404 recover",
+      "name": "Buyer guided recording completes a private reference and survives refresh",
       "status": "passed"
     },
     {
-      "name": "Revised discovery, source recovery and private route guards",
+      "name": "Seller guided takes, mixed review and public publication",
       "status": "passed"
     },
     {
-      "name": "Buy now preserves another piece in the bag",
+      "name": "Bag and Buy now remain separate; checkout validation and decline recover",
       "status": "passed"
     },
     {
-      "name": "Persistent source conversation and report",
+      "name": "Unavailable reference and missing route recover without losing shopping",
       "status": "passed"
     },
     {
-      "name": "Private reference processing and incomplete recovery",
+      "name": "Comparison opens each side’s surface source and returns in context",
       "status": "passed"
     },
     {
-      "name": "Distinct durable moderation gate and appeal recovery",
+      "name": "A new local listing supports publication, questions and purchase",
       "status": "passed"
     },
     {
-      "name": "Local privacy export, consent and prepared signout",
-      "status": "passed"
-    },
-    {
-      "name": "Listing pause/remove/resume and immutable receipts",
-      "status": "passed"
-    },
-    {
-      "name": "Four-property arrival feedback and skip recovery",
-      "status": "passed"
-    },
-    {
-      "name": "Accessibility primary views",
+      "name": "Missing catalogue media provides retry and recovers",
       "status": "passed"
     }
   ],
-  "pageErrors": []
+  "pageErrors": [],
+  "accessibility": [
+    {
+      "width": 390,
+      "route": "/shop",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/listing/cloud-poplin",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/match",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/wardrobe",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/sell",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/sell/capture",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/orders",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/account",
+      "violations": []
+    },
+    {
+      "width": 390,
+      "route": "/about",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/shop",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/listing/cloud-poplin",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/match",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/wardrobe",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/sell",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/sell/capture",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/orders",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/account",
+      "violations": []
+    },
+    {
+      "width": 1440,
+      "route": "/about",
+      "violations": []
+    }
+  ],
+  "limits": [
+    "Chromium desktop and simulated mobile viewports",
+    "Prepared recording examples; no physical device camera",
+    "No live deployment or real services"
+  ]
 }

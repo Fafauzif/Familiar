@@ -1,80 +1,66 @@
-# Familiar design and state specification
+# Familiar V2 design and state specification
 
-## Product
+## Product and visual contract
 
-English mobile-first secondhand clothing marketplace. Buyers browse without adding a reference. Source-linked Familiar Evidence and optional private garment comparison inform a purchase; seller capture and review create a clearer published profile. Prices use USD, measurements use centimetres and sizes use S/M/L. All services are deterministic browser-local examples with no backend, camera access, authentication or real transactions.
+English, USD, centimetres and S/M/L. Ordinary shopping works without Match or a private reference. The catalogue starts with twelve prepared listings; fifty inert Coming soon cards remain separate from purchasable inventory. Buyers and sellers can add multiple local records from prepared garment templates.
 
-The initial catalogue contains twelve distinct listings. Fifty inert Coming soon cards follow: twelve original garment render references and thirty-eight inexpensive pastel placeholders. Coming soon items have no route, bag action, comparison action or order state.
+The revision follows the supplied Stitch marketplace, listing-gallery, paired-comparison, recording-studio, review and order layouts. The attached DESIGN GUIDELINE front-matter palette is the selected authority: lavender canvas `#FDF7FF`, ink `#1D1A25`, purple primary `#5E4874`, white surfaces and restrained pastel highlights. Newsreader provides editorial headings; Plus Jakarta Sans provides interface text. Color supports hierarchy, not unsupported authenticity or condition certification.
 
-## Visual system
+Mobile uses photographic cards, accessible search/filter controls, stacked comparison and deliberate bottom navigation. Desktop uses a filter rail, wider galleries, paired photographs and aligned measurement rows. Deeper source explanations remain available without replacing useful shopping facts. Damages, missingness, fees and availability must remain visible where they affect a decision.
 
-Warm off-white, deep ink, lilac, powder blue, mint and soft pink. Self-hosted Plus Jakarta Sans with a Georgia editorial accent. Pill controls; rounded cards and panels; visible focus; large tap targets; readable supporting copy. Editable lowercase wordmark and a folded-loop/evidence-frame compact symbol have light and reverse variants.
-
-## Modules
+## Current modules
 
 | Module | Responsibility |
 |---|---|
-| `src/domain.ts` | Typed fixtures, availability, immutable transitions, source support, authored Match order, publication and order snapshots, recovery validation |
-| `src/store.tsx` | Core React context and versioned local persistence; storage failure preserves current-visit usability |
-| `src/router.tsx` | Native URLs, links, history navigation and current pathname |
-| `src/App.tsx` | Gateway, marketplace, listing, evidence, comparison, privacy, recovery, shell and publication gate |
-| `src/SellerCommerce.tsx` | Draft editor, six capture stages, seller decisions, publication preview, checkout and order timeline |
-| `src/components/GarmentViewer.tsx` | Lazy GLB loading, one-canvas rendering, desktop paired views, mobile stacking, controls, camera states and fallback |
-| `src/components/SourceCapture.tsx` | Actual source-file view, localized marker, crop/zoom, authored movement-frame sequence and unavailable-media recovery |
-| `src/components/RetainedFlows.tsx` | Validated local reference preparation, contextual conversations/reports, distinct moderation history, four-property aftercare and local privacy controls |
-| `scripts/author-assets.mjs` | Reproducible original model, material, poster and SVG-brand authoring |
-| `scripts/author-evidence.py` | Original independent prepared source-frame illustrations |
+| `src/marketplace.css`, `src/styles.css`, route styles | Shared lavender tokens, self-hosted type, responsive composition and interaction states |
+| `src/domain.ts`, `src/store.tsx` | Typed prepared facts, validated immutable transitions, version-1 migration and synchronous local persistence |
+| `src/media.ts` | Garment-associated photograph registry and local cover paths |
+| `src/MarketplacePages.tsx`, `src/buyer.ts` | Discovery, ordinary search, filters, sorting and saved pieces |
+| `src/ProductPages.tsx`, `src/components/PhotoGallery.tsx` | Listing details, galleries, original-photo inspection and photograph-linked evidence |
+| `src/feel.ts`, `src/FeelPages.tsx` | Authored qualitative feel profiles, private references, eligible suggestions and measurement differences |
+| `src/recording.ts`, `src/components/GuidedRecording.tsx`, `src/StudioPages.tsx` | Shared buyer/seller prepared recording, drafts, review, retakes and publication |
+| `src/CommercePages.tsx` | Checkout, receipts, orders and aftercare |
+| `src/components/RetainedFlows.tsx` | Local conversations/reports, moderation, reflection and supplementary privacy/session state |
+| `scripts/verify-photo-assets.mjs`, `scripts/verify-fixtures.mjs` | Photographic registry checks and independent runtime fixture/state checks |
 
-The current TypeScript interfaces and reducers are authoritative. Tests pin all material invariants.
+Dead model modules, GLBs and earlier authoring/verification scripts are archived in `reference-pack/legacy-v1-implementation`. Previous documentation/briefs/QA are retained in their labeled legacy folders. Legacy SVG poster files remain public only so old immutable receipt URLs can resolve. Current customer journeys use photographs and no WebGL canvas or Three.js dependency.
 
-## Core state
+## Persistence and records
 
-Core state schema version 1 persists at `familiar-v1`. It includes saved IDs, bag IDs, active/paused/removed/reserved/sold availability, checkout mode and Buy-now selection, private-reference name/availability, selected comparison listing/property/category/size, capture stage/completion, seller decisions, current draft, last published snapshot, orders, guided exploration and payment recovery.
+`familiar-v1` retains schema version 1 for compatibility, with validated additive fields: `localDrafts`, `localListings`, `activeDraftId`, `capturedSteps`, `privateReferences` and `feelIntent`. Old saved IDs, bag entries, private reference name, Cloud draft, valid publication and purchase receipts are restored. New local IDs require a valid prepared template; arbitrary IDs, external photograph injection and malformed records are discarded. Unknown historical unit prices are not reconstructed from today's listing.
 
-`BAG_ADD` uses ordinary bag checkout. `BUY_NOW` selects one active item independently of the bag. A successful purchase removes purchased IDs only, preserving unrelated bag contents. A decline keeps inventory and checkout context unchanged. Unknown and Coming soon IDs are rejected. The prepared seller can pause, remove and restore Cloud Poplin while it is not reserved or sold; paused pieces remain visible with buying disabled, removed public routes recover, and order-bound stock follows its timeline.
+Seller draft sessions retain their own garment facts, recording stage, six saved task IDs and review decisions. Changing the active draft saves the current session before loading the next. Buyer references retain the same recording progress separately. Deleting a selected private reference selects another valid reference or recovers to an empty state. A missing movement or pull task does not block comparisons of an already recorded different property.
 
-`COMPARISON` validates and persists the chosen listing, property, size and category. `REFERENCE_DELETE` removes the reference from future comparisons; restore and prepared-replacement flows recover it intentionally.
+Core writes happen synchronously when an action is dispatched, protecting immediate-refresh changes. Unavailable browser storage leaves current-visit interaction usable with an honest warning. Supplementary conversation, moderation and reflection state remains at `familiar-retained-v1`.
 
-## Source support and Match
+## Recording, source support and review
 
-Four properties appear in the fixed order Drape, Movement, Stretch and Surface. Each has supported, limited or unavailable source support. Seller status is separately unreviewed, confirmed, corrected or unsure. Corrections retain the original source observation and support metadata. Missing mechanics are never filled in.
+Task order is front, back, label, movement, gentle pull, and fabric/wear. Start/stop, timed prompts, keep take, retry and continue represent a prepared example. A saved take is required before the new recording flow advances. No physical camera, video stream, uploaded blob, sensor or server exists.
 
-Match applies category/size eligibility, then a property-specific authored discovery order grounded in the fixture's visible silhouette, weave or sequence. It returns three distinct active candidates when enough eligible pieces exist; narrower filters can return fewer. Unsupported reference properties are explicitly unavailable and do not receive a match score. No universal percentage is shown. The About page discloses the authored ranking.
+Some media sets do not contain a true reverse view, readable composition label or damaged area. The walkthrough must identify the prepared view's limitation rather than relabel a front photo as new proof.
 
-Prepared source frames are separate from the interactive 3D illustrations. Markers use each image's intrinsic coordinate space. Failed media changes the visible inspector to unavailable-for-this-visit with retry, preserving the original observation for context. Three-frame illustrative movement playback can pause and stops after a short cycle.
+Evidence properties retain the fixed order Drape, Movement, Stretch, Surface. Supported, limited and unavailable describe source context. Confirmed, corrected, unsure and unreviewed describe the seller decision separately. Seller-described condition or give is not photograph verification. A prepared movement/pull take can provide limited demonstration context but never measured elasticity or recovery. Corrections retain original observations and photograph links.
 
-Odor, hygiene, authenticity, exact softness, hidden damage and laboratory mechanics stay unassessed. Evidence coverage is not a condition or quality score.
+Retaking a task invalidates its dependent review decisions while preserving unaffected decisions. Publication requires the completed six-task session and a decision for every property; correction requires text. A separate moderation hold or appeal remains distinct from capture readiness.
 
-## Seller and publication
+## Feel discovery and useful comparison
 
-Six capture stages are introduction, front, label, surface, movement and visible wear. Next advances the state; no camera or upload is required. Each changes the authored garment view. Capture issues block progression until retried. Retake returns to the relevant stage and invalidates the affected current-draft decisions.
+The search bar exposes Search by feel. The query, desired qualities, avoided qualities, selected reference and property preference survive navigation/reload. Ordinary category, size, price and meaningful search constraints determine eligibility first. Only active inventory and compatible garment families can appear.
 
-Review requires a decision on all four findings. Confirm, Correct, Unsure and Retake have distinct consequences; correction text is required. Draft edits autosave valid changes and invalid fields display errors.
+Feel discovery is deterministic and authored, not an AI textile model. Internal profile distances order suggestions but are not displayed as confidence, percentages or laboratory readings. The legacy property-specific discovery order remains for compatibility. Unknown profile values and missing relevant takes require abstention rather than inferred mechanics.
 
-Publication creates a deep immutable snapshot of the current draft and seller decisions. Subsequent edits, corrections or retakes leave the buyer-facing version unchanged until republishing. The original source evidence remains attached.
+Comparison supplies garment identities, photographs, label sizes, four flat measurements, signed candidate-minus-reference centimetre differences, material provenance, shape/fabric observations, condition notes, price/delivery and explicit gaps. Measurements are prepared example facts, not derived from photos or body-fit promises. Original photos are available from context. Smaller eligible pools return fewer candidates.
 
-A separate persisted moderation scenario records hold reason, original finding, appeal and prepared decision history. The publication route is gated while held or awaiting review. Clearing that hold does not bypass capture or seller-review gates. Moderation, visible condition and ordinary review readiness remain separate concepts.
+## Publication and commerce invariants
 
-## Commerce and aftercare
+Last-published garment facts, evidence decisions and photograph identity remain stable while a new seller draft is edited or retaken. Republish atomically replaces the public version. This applies to Cloud and additional local listings.
 
-Checkout validates full name and delivery address, offers fixed $5 standard delivery and Card/Wallet selection without collecting payment credentials, and supports declined-payment recovery. Successful local checkout reserves stock, creates an order and leads to confirmation and timeline.
+Saved identity survives inventory changes. Active owned listings can pause/remove/resume; reserved or sold stock cannot use those controls to bypass orders. Private references and Coming soon records cannot enter checkout.
 
-Order item snapshots retain purchase-time name, size, unit price, condition and poster, together with the recorded total. Later seller changes never rewrite receipt details. Legacy records without item snapshots state that the unit price was not recorded rather than inventing one.
+Buy now includes only its selected candidate and preserves unrelated bag items. Decline retains inputs, checkout context and active stock. Standard delivery is $5. A successful local order reserves stock and snapshots purchase-time name, price, size, condition, poster and total. Optional destination/method are bounded local data. Subsequent edits do not rewrite a receipt. Early cancellation/expiry releases stock where permitted; dispatch/delivery and disputes have intentional transitions.
 
-Reservation, confirmation, packing, dispatch and delivery have explicit transitions. Pre-dispatch cancellation or reservation expiry releases inventory where permitted. Delivered orders support general expectation feedback and an issue/dispute note. A separate optional reflection records expected versus observed Drape, Movement, Stretch and Surface, supports skipping, and offers a return to the private reference.
+Aftercare supports general and optional property reflection, skipping, issue reporting and saving a delivered purchase privately using its receipt identity. The invitation creates an unfinished reference requiring guided takes, rather than restoring an unrelated blue fixture.
 
-## Supplemental local state
+## Verification boundaries
 
-The independent schema version 1 at `familiar-retained-v1` stores bounded conversation drafts/history/reports, four-property aftercare, prepared-reference processing/incomplete/ready state, moderation history and prepared-session panel state. Updates are validated before persistence; malformed values recover without claiming saved work.
-
-Reference replacement pauses comparison while processing or incomplete. A ready prepared reference can be restored without requiring uploads. Conversation replies and reports stay on the device. Local JSON export, consent withdrawal, reset and prepared sign-out have intentional consequences; sign-out does not erase the bag or order history.
-
-## Rendering and recovery
-
-Only one WebGL canvas is active. Desktop uses two scissor views for comparison; mobile stacks reference and candidate. Three.js and model loading are lazy. Drag/pinch/wheel and keyboard/button controls rotate, zoom and reset. Neutral, drape, movement, surface, label and wear views preserve garment identity. Movement stops after four seconds and reduced motion uses a still pose.
-
-WebGL or model failure provides an accessible poster fallback and retry/static-view controls. The marketplace remains usable without 3D. Missing routes, malformed storage, offline visits and failed source media have clear recovery. Route headings receive keyboard focus once loaded. The mobile navigation uses safe-area spacing.
-
-## Verification
-
-Unit tests cover domain and supplemental state invariants, persistence, invalid transitions, immutable published/receipt snapshots and source alignment. Browser checks exercise desktop and phone layouts, journeys, controls, fallback, source recovery, reference management, moderation, privacy and local consequences. Accessibility scans cover visible primary surfaces. Asset verifiers independently inspect GLB geometry and metadata, source-file existence, SVG XML, counts and fixed property order.
+Unit, asset and browser checks test actual state, media and visible UI. Browser tests use Chromium with desktop and simulated mobile viewports, plus bounded Axe checks. These are not physical-device camera testing, full human accessibility certification, inference validation or live Vercel deployment. Current verification results are separate from historical V1 evidence.

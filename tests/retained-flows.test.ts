@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CATALOG, PROPERTIES, type Listing } from "../src/domain";
+import { CATALOG, PROPERTIES, initialState, transition, getListing, type Listing } from "../src/domain";
 import { type BrowserStorage } from "../src/store";
 import {
   RETAINED_STORAGE_KEY,
@@ -73,6 +73,63 @@ function atStepThree(scenario: "complete" | "missing-movement"): RetainedState {
 }
 
 describe("listing conversations", () => {
+  it("sends and reloads a newly published local listing conversation with its current recorded values", () => {
+    let marketplace = transition(initialState(), { type: "LOCAL_DRAFT_CREATE", templateId: "moss-knit" });
+    for (let step = 0; step < 6; step++) {
+      marketplace = transition(marketplace, { type: "RECORDING_COMPLETE", step });
+      marketplace = transition(marketplace, { type: "RECORDING_NEXT" });
+    }
+    for (const property of PROPERTIES)
+      marketplace = transition(marketplace, { type: "DECIDE", property, status: "confirmed" });
+    marketplace = transition(marketplace, { type: "DRAFT", draft: { name: "My newly listed cardigan", price: 48, size: "L" } });
+    marketplace = transition(marketplace, { type: "PUBLISH" });
+    const local = getListing(marketplace, "local-001")!;
+    expect(local).toBeDefined();
+    let state = transitionRetained(initialRetainedState(), { type: "QUESTION_DRAFT", listingId: local.id, draft: "What size is your cardigan?" });
+    state = transitionRetained(state, { type: "QUESTION_SEND", listing: local, now });
+    expect(state.conversations[local.id].messages).toHaveLength(1);
+    expect(state.conversations[local.id].messages[0].reply).toContain("Seller lists size L");
+    const message = state.conversations[local.id].messages[0];
+    state = transitionRetained(state, { type: "QUESTION_REPORT", listingId: local.id, messageId: message.id, reason: "Other concern", note: "Please confirm the measurements.", now: later });
+    state = transitionRetained(state, { type: "QUESTION_DRAFT", listingId: local.id, draft: "An unsent follow-up" });
+    const storage = new MemoryStorage();
+    storage.setItem(RETAINED_STORAGE_KEY, JSON.stringify(state));
+    const reloaded = loadRetainedState(storage).state;
+    expect(reloaded.conversations[local.id]).toEqual(state.conversations[local.id]);
+    expect(reloaded.conversations[local.id].messages[0].report?.note).toBe("Please confirm the measurements.");
+    expect(reloaded.conversations[listing.id]).toBeUndefined();
+  });
+
+  it("separates local listing drafts and rejects private, malformed and oversized IDs", () => {
+    let state = transitionRetained(initialRetainedState(), { type: "QUESTION_DRAFT", listingId: "local-001", draft: "First question" });
+    state = transitionRetained(state, { type: "QUESTION_DRAFT", listingId: "local-002", draft: "Second question" });
+    expect(state.conversations["local-001"].draft).toBe("First question");
+    expect(state.conversations["local-002"].draft).toBe("Second question");
+    for (const id of ["private-001", "local-1", "local-1234567", "local-001/other", "constructor", "__proto__"])
+      expect(transitionRetained(state, { type: "QUESTION_DRAFT", listingId: id, draft: "Rejected" })).toBe(state);
+    expect(sanitizeRetainedState(JSON.parse(JSON.stringify(state))).conversations).toEqual(state.conversations);
+  });
+
+  it("bounds recovered local threads without dropping a catalogue conversation", () => {
+    const conversations: Record<string, unknown> = {};
+    for (let index = 1; index <= 105; index++)
+      conversations[`local-${String(index).padStart(3, "0")}`] = { draft: `Question ${index}`, messages: [] };
+    conversations[listing.id] = { draft: "Catalogue question", messages: [] };
+    conversations["private-001"] = { draft: "Private", messages: [] };
+    const recovered = sanitizeRetainedState({ ...initialRetainedState(), conversations });
+    expect(Object.keys(recovered.conversations)).toHaveLength(101);
+    expect(recovered.conversations[listing.id].draft).toBe("Catalogue question");
+    expect(recovered.conversations["private-001"]).toBeUndefined();
+    expect(transitionRetained(recovered, { type: "QUESTION_DRAFT", listingId: "local-999", draft: "Beyond limit" })).toBe(recovered);
+  });
+
+  it("attributes size to the seller without claiming the garment label was verified", () => {
+    const reply = preparedReply(listing, "What is the label size?").reply;
+    expect(reply).toContain(`Seller lists size ${listing.size}`);
+    expect(reply).not.toMatch(/recorded label|verified label|label is size/i);
+    expect(reply).toContain("do not promise fit");
+  });
+
   it("keeps drafts separate by listing, trims a sent question and records its source-grounded reply", () => {
     let state = transitionRetained(initialRetainedState(), {
       type: "QUESTION_DRAFT",
