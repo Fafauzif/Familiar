@@ -1,14 +1,14 @@
 {
   "product": "Familiar",
-  "version": "3.0.0",
-  "archive": "Familiar_V3_Vercel_Deployable.zip",
+  "version": "3.1.0",
+  "archive": "Familiar_V3.1_Vercel_Deployable.zip",
   "applicationRoot": "archive root",
   "runtime": "Photographic marketplace with one illustrative animated cloth garment; browser-local prototype",
   "files": [
     {
       "path": "README.md",
-      "bytes": 5224,
-      "sha256": "b50779c47c9cb20b9d90ed69ebd25a8cbed7fa25a373fe897c85addd83be1c2a"
+      "bytes": 6046,
+      "sha256": "50f136620b2cd6ef97bba8c7ba06f53902fbb8a96227ae76df1ceb657d6d46fc"
     },
     {
       "path": "context/ORIGINAL_MASTER_AI_CONTEXT.md",
@@ -17,8 +17,8 @@
     },
     {
       "path": "context/UPDATED_MASTER_AI_CONTEXT.md",
-      "bytes": 7110,
-      "sha256": "a80bd46c3ca3acd2dabad38edd603d8f0521b59f2b5ef55ad5e6e056df53483d"
+      "bytes": 7555,
+      "sha256": "c0a42b38c4fa284dad4006dd28d9cd1395cfe5feba237252b87c6127edcffb4e"
     },
     {
       "path": "context/original/Familiar_TGIC_2026_Master_Context_original.md",
@@ -31,19 +31,14 @@
       "sha256": "e47aea695302f0a4d2fcfbfa63b50936d04a8453ddcc72d7abdb9810794cf67d"
     },
     {
-      "path": "dist/assets/AnimatedGarment-Cu_zyc2G.js",
+      "path": "dist/assets/AnimatedGarment-not5di-S.js",
       "bytes": 625365,
-      "sha256": "701ed8af1a4ad264afd65c582412044ab2ae69e7e090693b6a932f103ad4b3d6"
+      "sha256": "6bbb065e46537f76256da290c0b0d3105330bbc93a7ae8b51ff0e40a3ce0f412"
     },
     {
-      "path": "dist/assets/CheckCircle.es-EyR19uM_.js",
+      "path": "dist/assets/CheckCircle.es-C7IpWsC0.js",
       "bytes": 2077,
-      "sha256": "4819afaab758732b6b449300682ea3e60dd1a069e2a49800d046f5fdb9c17042"
-    },
-    {
-      "path": "dist/assets/CommercePages-D1rjlV7b.js",
-      "bytes": 55542,
-      "sha256": "7fb08afd8790e364c42e58f964dcb15f1b62efc2b2c97fe8688ac7e597feb554"
+      "sha256": "0a8ac95c479b1753eb7903cbb358d121f9fc8efacfea22efda69ba92f4861f4b"
     },
     {
       "path": "dist/assets/CommercePages-DQY6vuml.css",
@@ -51,19 +46,29 @@
       "sha256": "15410726a857ff600198ae3df402ad3d731ea2f4786d2445b496fa98c9eb4dcb"
     },
     {
-      "path": "dist/assets/FeelPages-BxMzRiO0.css",
-      "bytes": 43991,
-      "sha256": "21c647b29dfb6e320a2d79d713a21d0d7a8ed722d07153ad77c9b1d0a7422c27"
+      "path": "dist/assets/CommercePages-ZojUFs3g.js",
+      "bytes": 55550,
+      "sha256": "1dd995147d4035927f8555af1442c0aa6be58cf2c968453ebc8549fb919a08a7"
     },
     {
-      "path": "dist/assets/FeelPages-Dn6S6nRb.js",
-      "bytes": 49966,
-      "sha256": "a6fcfbb7ccdae867cc4731c6796312c62037ef4ac39481a005beb4158b3b7887"
+      "path": "dist/assets/FeelPages-ruLrY1pa.js",
+      "bytes": 49984,
+      "sha256": "7be588b821c161cc4e5a28c01f099869cf73f7cd94af54d33ef3c8f662971eff"
     },
     {
-      "path": "dist/assets/PencilSimple.es-ACxQXeyi.js",
+      "path": "dist/assets/FeelPages-zylbkozA.css",
+      "bytes": 50998,
+      "sha256": "5fb2ecf31bdaa6becafdf43c9f3858380c1dacbc33c6a64b667125db651ab509"
+    },
+    {
+      "path": "dist/assets/PencilSimple.es-veqx2L2a.js",
       "bytes": 2446,
-      "sha256": "4b3cb5a02657d2fd62828ee056cbb665c9431858b3e8884c81625775908e0112"
+      "sha256": "69eb0d96053527940133a0eaf879c5f780d26197ee24bc842152490790a31078"
+    },
+    {
+      "path": "dist/assets/SellerPage-w7YwxzRY.js",
+      "bytes": 2097,
+      "sha256": "4debc809b8191d4207dd0c8efc04490ea4a8c0a20ec08fb9555a3526f8ac6ac9"
     },
     {
       "path": "dist/assets/StudioPages-Cx2SmZBw.css",
@@ -71,19 +76,19 @@
       "sha256": "189bf1ed3397561a7ddb5fbf31a75e2afed8aff7287ea23ea58c7dfa0e2d26ff"
     },
     {
-      "path": "dist/assets/StudioPages-_6AHS7Vv.js",
-      "bytes": 68485,
-      "sha256": "169272dfbf9ca13dd53cba25cb6f9cb8d4ab198fd6abc81ddd80b8a7c0f5d0ec"
+      "path": "dist/assets/StudioPages-mHY5bgi4.js",
+      "bytes": 68441,
+      "sha256": "f94098d0448d5c79c11519eb59db25f155bfa88e2aecc418573c75a854bf111a"
     },
     {
-      "path": "dist/assets/index-B1JZ_hz1.js",
-      "bytes": 387958,
-      "sha256": "55d5424cb5eaebb660bdcdc005bc4dc8ad0f47eb67446ffee55d24f55a19eab1"
+      "path": "dist/assets/index-BIzbOEZE.js",
+      "bytes": 390702,
+      "sha256": "7ce8fd349bd19276af3de7719692b1a3f8d82db968338c12325dded6a32c0d1b"
     },
     {
-      "path": "dist/assets/index-uQldHgQc.css",
-      "bytes": 87011,
-      "sha256": "4cf5087d95802c5ad12404191bc8ae4b8b925b8a29d29b3deb80a7e231b118cc"
+      "path": "dist/assets/index-ChV0g6vP.css",
+      "bytes": 88852,
+      "sha256": "4398898db8c0fa077c552cf9e4f8849c69cb8c47f8c2c655392ad6aeac7eda90"
     },
     {
       "path": "dist/brand/brand-manifest.json",
@@ -129,6 +134,76 @@
       "path": "dist/brand/mark.svg",
       "bytes": 1118,
       "sha256": "7f9ad81c2961b8a4309d2cc683b13460398353167508c438c89ec41d6a174503"
+    },
+    {
+      "path": "dist/covers/airloom-linen.webp",
+      "bytes": 131488,
+      "sha256": "457c0f6cd0b29fcad44bc1121976fd538bc6a824e5361d4bcb3475623e341bff"
+    },
+    {
+      "path": "dist/covers/apricot-slip.webp",
+      "bytes": 35896,
+      "sha256": "8e931923bdf4d6f572af801ef2fad15a9bbd82fd6ecc51a005c779e3c0d6f307"
+    },
+    {
+      "path": "dist/covers/cloud-poplin.webp",
+      "bytes": 42188,
+      "sha256": "d4e54449653517f1c91d92095aad771d95b4b2cb797c845c335a47e474d84268"
+    },
+    {
+      "path": "dist/covers/ink-trousers.webp",
+      "bytes": 60476,
+      "sha256": "cbf801648a158ab9042da17f28731809993f5f017f1b83aab337ba3bb0afdfb7"
+    },
+    {
+      "path": "dist/covers/lilac-wrap.webp",
+      "bytes": 120076,
+      "sha256": "662b13adde5e02117961cad4f4b5a9b0e0e662169abf1dcbc6188e22c7f5748d"
+    },
+    {
+      "path": "dist/covers/manifest.json",
+      "bytes": 37082,
+      "sha256": "b5a2fd8018a68df82d6705c3b6408dee0546aa99e15fbcadb0f97c4e7c8c1fc6"
+    },
+    {
+      "path": "dist/covers/moss-knit.webp",
+      "bytes": 150172,
+      "sha256": "1c0389f02c7c53bf6108d01fc190040b6c36be9ed6b3d1f8dbebb716a473121a"
+    },
+    {
+      "path": "dist/covers/my-blue-blouse.webp",
+      "bytes": 59548,
+      "sha256": "680e00a337d51861bd3dd8daeb06328143ef4a8abbff3d53d95b72a7992288b4"
+    },
+    {
+      "path": "dist/covers/oat-vest.webp",
+      "bytes": 128296,
+      "sha256": "3f7e53036482e0c232a89286468fd573b7a56050e1cdf162178001fff6d9ca9d"
+    },
+    {
+      "path": "dist/covers/petal-tee.webp",
+      "bytes": 67482,
+      "sha256": "c15febd793bb76f588c65cf6959e251357e0dd351a206283de31ad915687cadb"
+    },
+    {
+      "path": "dist/covers/rose-jacket.webp",
+      "bytes": 78014,
+      "sha256": "fcc6ef38f37bc82ce5951780b2dafba145d3d557145e5f2ef2b033a824b39203"
+    },
+    {
+      "path": "dist/covers/sage-skirt.webp",
+      "bytes": 67636,
+      "sha256": "855b1a6d9f6c9fd486e121bfb4747ed3bb7e83af045f0d4e39a3d17fe5359762"
+    },
+    {
+      "path": "dist/covers/sunday-denim.webp",
+      "bytes": 122520,
+      "sha256": "71515d7735b1b2876dae1f96449c7e2a4349abef21e3a4b0f9c859f4f3d98096"
+    },
+    {
+      "path": "dist/covers/tide-shirt.webp",
+      "bytes": 92732,
+      "sha256": "156b9e4c87ce5083dc05289888dd4dcf35cba721f73450d973749f6189c9d3da"
     },
     {
       "path": "dist/evidence/airloom-linen-drape.svg",
@@ -493,7 +568,7 @@
     {
       "path": "dist/index.html",
       "bytes": 622,
-      "sha256": "5dc88f050cc145d2b3202cbc3f679c36fad99ddc9d73de7ffdabae5bd346d296"
+      "sha256": "3d7ebbff6cf5ccfa0bd93bc55564b261846ebc2ad1b325485956c9bf35311afe"
     },
     {
       "path": "dist/models/cloud-animated.glb",
@@ -1052,13 +1127,18 @@
     },
     {
       "path": "docs/PHOTO_ASSET_PROVENANCE.md",
-      "bytes": 5498,
-      "sha256": "b73ef3d0970afb85b5f33e71d44fa529fda60b2ca225f1170ea4dfb6c60d7540"
+      "bytes": 8141,
+      "sha256": "cb76b3cc869aa2c69e82db8b2cb96902413d51aff824ce869eb2615f0daf3112"
     },
     {
       "path": "docs/RENDERING.md",
       "bytes": 2188,
       "sha256": "630a8ebd8a28522a1381cf965288ec1bda5fddbb0148fdc8b7618629fefd3c6c"
+    },
+    {
+      "path": "docs/REVISION_V3_1.md",
+      "bytes": 4142,
+      "sha256": "57cf424e9fb8b109aa4ef719765af31adbb814c89f36c42acb9ca25672c090bc"
     },
     {
       "path": "docs/SOURCES_AND_STANDARDS.md",
@@ -1078,12 +1158,12 @@
     {
       "path": "package-lock.json",
       "bytes": 62055,
-      "sha256": "1b3a2c4663a51d911a0d2a41ae4b07d9535235938d7337663e8dae782d44101a"
+      "sha256": "13700ec0d279fb82bced8ab589e737b564e1e81946bafbd1985bbfd66345e25a"
     },
     {
       "path": "package.json",
-      "bytes": 954,
-      "sha256": "ae548449ad3b801812b7288ee1c6bfb3b39af713b17898c2a380965d9c8afd51"
+      "bytes": 1272,
+      "sha256": "3184df5b9ca44659789a393865dc0c9dd03a3dce8539aaf10079e2bed827d7d7"
     },
     {
       "path": "public/brand/brand-manifest.json",
@@ -1129,6 +1209,76 @@
       "path": "public/brand/mark.svg",
       "bytes": 1118,
       "sha256": "7f9ad81c2961b8a4309d2cc683b13460398353167508c438c89ec41d6a174503"
+    },
+    {
+      "path": "public/covers/airloom-linen.webp",
+      "bytes": 131488,
+      "sha256": "457c0f6cd0b29fcad44bc1121976fd538bc6a824e5361d4bcb3475623e341bff"
+    },
+    {
+      "path": "public/covers/apricot-slip.webp",
+      "bytes": 35896,
+      "sha256": "8e931923bdf4d6f572af801ef2fad15a9bbd82fd6ecc51a005c779e3c0d6f307"
+    },
+    {
+      "path": "public/covers/cloud-poplin.webp",
+      "bytes": 42188,
+      "sha256": "d4e54449653517f1c91d92095aad771d95b4b2cb797c845c335a47e474d84268"
+    },
+    {
+      "path": "public/covers/ink-trousers.webp",
+      "bytes": 60476,
+      "sha256": "cbf801648a158ab9042da17f28731809993f5f017f1b83aab337ba3bb0afdfb7"
+    },
+    {
+      "path": "public/covers/lilac-wrap.webp",
+      "bytes": 120076,
+      "sha256": "662b13adde5e02117961cad4f4b5a9b0e0e662169abf1dcbc6188e22c7f5748d"
+    },
+    {
+      "path": "public/covers/manifest.json",
+      "bytes": 37082,
+      "sha256": "b5a2fd8018a68df82d6705c3b6408dee0546aa99e15fbcadb0f97c4e7c8c1fc6"
+    },
+    {
+      "path": "public/covers/moss-knit.webp",
+      "bytes": 150172,
+      "sha256": "1c0389f02c7c53bf6108d01fc190040b6c36be9ed6b3d1f8dbebb716a473121a"
+    },
+    {
+      "path": "public/covers/my-blue-blouse.webp",
+      "bytes": 59548,
+      "sha256": "680e00a337d51861bd3dd8daeb06328143ef4a8abbff3d53d95b72a7992288b4"
+    },
+    {
+      "path": "public/covers/oat-vest.webp",
+      "bytes": 128296,
+      "sha256": "3f7e53036482e0c232a89286468fd573b7a56050e1cdf162178001fff6d9ca9d"
+    },
+    {
+      "path": "public/covers/petal-tee.webp",
+      "bytes": 67482,
+      "sha256": "c15febd793bb76f588c65cf6959e251357e0dd351a206283de31ad915687cadb"
+    },
+    {
+      "path": "public/covers/rose-jacket.webp",
+      "bytes": 78014,
+      "sha256": "fcc6ef38f37bc82ce5951780b2dafba145d3d557145e5f2ef2b033a824b39203"
+    },
+    {
+      "path": "public/covers/sage-skirt.webp",
+      "bytes": 67636,
+      "sha256": "855b1a6d9f6c9fd486e121bfb4747ed3bb7e83af045f0d4e39a3d17fe5359762"
+    },
+    {
+      "path": "public/covers/sunday-denim.webp",
+      "bytes": 122520,
+      "sha256": "71515d7735b1b2876dae1f96449c7e2a4349abef21e3a4b0f9c859f4f3d98096"
+    },
+    {
+      "path": "public/covers/tide-shirt.webp",
+      "bytes": 92732,
+      "sha256": "156b9e4c87ce5083dc05289888dd4dcf35cba721f73450d973749f6189c9d3da"
     },
     {
       "path": "public/evidence/airloom-linen-drape.svg",
@@ -2027,28 +2177,23 @@
     },
     {
       "path": "qa/evidence/browser-results.json",
-      "bytes": 5776,
-      "sha256": "be0bb494a1907d7326778c3a13c59ff1363b6b61e98c437ca26c3567a70ce7ca"
+      "bytes": 5773,
+      "sha256": "a5ef0b1581d7cd54c5b517ca734d59427c8db71a92da8ae4df6fc7b66b1553f8"
     },
     {
-      "path": "qa/evidence/garment-interactions.json",
-      "bytes": 15552,
-      "sha256": "343daa4851855eb33994866519d3bad895a26923b792c44f07345e24e10098bd"
+      "path": "qa/evidence/match-disclosure-results.json",
+      "bytes": 1559,
+      "sha256": "8b49b694a0882e91a6cb3da3fba21847c7c6b435a1d81d71e5348909bb846658"
     },
     {
-      "path": "qa/evidence/render-pixel-fidelity.json",
-      "bytes": 458,
-      "sha256": "301d348eacd1681ddb0dfc55b4a9b6ad10dbe010a2c198f395e2e5fd736374c4"
+      "path": "qa/evidence/navigation-browser-results.json",
+      "bytes": 428,
+      "sha256": "1481d1646ba8f36318181853a7ff4409918f2f836a71f275766baf39613b1bad"
     },
     {
-      "path": "qa/evidence/render-profile-after.json",
-      "bytes": 2602,
-      "sha256": "f9b1367ba6afdbbc47756275e306d404b1839914dd1f2dd22832be944b3bc574"
-    },
-    {
-      "path": "qa/evidence/render-profile-before.json",
-      "bytes": 2121,
-      "sha256": "c6fef3c2a674208ebd0fce333dc4e2540c07bbbf37102a8d4e57901217648ae6"
+      "path": "qa/evidence/shopping-results.json",
+      "bytes": 1111,
+      "sha256": "e978357a054519e25da091e5d507dda971a7ec0481144e39962dfbe843eb012c"
     },
     {
       "path": "qa/evidence/studio-browser-results.json",
@@ -2057,8 +2202,8 @@
     },
     {
       "path": "qa/evidence/unit-results.json",
-      "bytes": 66162,
-      "sha256": "5fbef198134688f6764e7c1ce2319d8273e90d308bc44aee359e6e573f0f06a4"
+      "bytes": 72391,
+      "sha256": "7cffddaf60ece753e83b4a7532f6e486e7cb2ed6cf4a00ce8dd84ee822086c1c"
     },
     {
       "path": "reference-pack/OUTPUT_MANIFEST.json",
@@ -2351,6 +2496,26 @@
       "sha256": "61a47cd235289f17895dc03d6d077c6f790ee5a0ca371eb52504f0c0bef9db55"
     },
     {
+      "path": "reference-pack/legacy-v3-qa/garment-interactions.json",
+      "bytes": 15552,
+      "sha256": "343daa4851855eb33994866519d3bad895a26923b792c44f07345e24e10098bd"
+    },
+    {
+      "path": "reference-pack/legacy-v3-qa/render-pixel-fidelity.json",
+      "bytes": 458,
+      "sha256": "301d348eacd1681ddb0dfc55b4a9b6ad10dbe010a2c198f395e2e5fd736374c4"
+    },
+    {
+      "path": "reference-pack/legacy-v3-qa/render-profile-after.json",
+      "bytes": 2602,
+      "sha256": "f9b1367ba6afdbbc47756275e306d404b1839914dd1f2dd22832be944b3bc574"
+    },
+    {
+      "path": "reference-pack/legacy-v3-qa/render-profile-before.json",
+      "bytes": 2121,
+      "sha256": "c6fef3c2a674208ebd0fce333dc4e2540c07bbbf37102a8d4e57901217648ae6"
+    },
+    {
       "path": "reference-pack/qa/COMPLETION_REPORT_TEMPLATE.md",
       "bytes": 491,
       "sha256": "121c77097c80225bf2339bae500684f74ba3b83e0521a44321b7a412192115ee"
@@ -2382,13 +2547,28 @@
     },
     {
       "path": "scripts/browser-tests-v3.mjs",
-      "bytes": 21520,
-      "sha256": "f7d53080c3893dd5cbfc6f8c86e657810329a6c55aa1522344fa9ee135355624"
+      "bytes": 21541,
+      "sha256": "56aab268a05c625f9dee2d0ac7fc8b162551467c4455fe4865edf8d09e139b71"
+    },
+    {
+      "path": "scripts/match-disclosure-tests.mjs",
+      "bytes": 8383,
+      "sha256": "e190e10bf0355d4646339e93ca9355604abb67e34338bc3f1f8250ae664f70ad"
+    },
+    {
+      "path": "scripts/navigation-browser-tests.mjs",
+      "bytes": 3797,
+      "sha256": "13ae13936f88a87517387e430fdc819945e0d4fa4aa5ada66239980a43425321"
     },
     {
       "path": "scripts/package-release.py",
-      "bytes": 5012,
-      "sha256": "5c77b186cf3ed25fb18389baaa9021a4566d1ddabbc3434f5ded147544e0959d"
+      "bytes": 5967,
+      "sha256": "22959caeee68ac4af36f0556a605e8e02009488a843d46d23c776dadfdf841cc"
+    },
+    {
+      "path": "scripts/shopping-browser-tests-v3.mjs",
+      "bytes": 9907,
+      "sha256": "f14d18d1d456c151c5925bfc4506c918535d567bc97a038d905c2fc2451cc2ac"
     },
     {
       "path": "scripts/studio-browser-tests.mjs",
@@ -2399,6 +2579,11 @@
       "path": "scripts/verify-animated-model.mjs",
       "bytes": 2720,
       "sha256": "a05337ecc95e150406935b1f7ea5c355b417acaa36f0404cfbc87b37af1ad5df"
+    },
+    {
+      "path": "scripts/verify-cover-assets.mjs",
+      "bytes": 4188,
+      "sha256": "0f030e67762b4537825c6a9d13c02e44b95f2f5b650887c2cd4c2c22b1be7327"
     },
     {
       "path": "scripts/verify-fixtures.mjs",
@@ -2412,8 +2597,8 @@
     },
     {
       "path": "src/App.tsx",
-      "bytes": 11804,
-      "sha256": "be1f2eefff42764745a34735370f58fd3274630c631bbe93eb791ee75ff5cb76"
+      "bytes": 12396,
+      "sha256": "1dba21a2686b18c5d05509ceb5ee0a1de9134dd50296ff200796a0ac573eddf4"
     },
     {
       "path": "src/CommercePages.tsx",
@@ -2422,18 +2607,23 @@
     },
     {
       "path": "src/FeelPages.tsx",
-      "bytes": 40595,
-      "sha256": "f1b2be8b2682c2fe86cc6fc61c1561aa5b509f1af8df46891bf05744eff6b634"
+      "bytes": 41067,
+      "sha256": "89420ddce791e37e966ca72cc647b1d837f05ab7a19d7727f03d6851e82b978f"
     },
     {
       "path": "src/MarketplacePages.tsx",
-      "bytes": 12430,
-      "sha256": "673508f5e684db1f125e5d5bcec4cddbcb4f7645116c26572d6c393c20f24492"
+      "bytes": 13881,
+      "sha256": "c03942257df60729aebd62ee8091c55f42c38e02d9eed91514048ceea767f622"
     },
     {
       "path": "src/ProductPages.tsx",
-      "bytes": 13542,
-      "sha256": "f155e2b65f2f2ae6fffaa7af0f9ecb3811fa72e46a1b8cba3e8a827bfcc7a2bc"
+      "bytes": 14651,
+      "sha256": "3ea408d339ea1294b4d97d63e6cf7e093064ef764d6964ab0b26fe96b05eab22"
+    },
+    {
+      "path": "src/SellerPage.tsx",
+      "bytes": 2136,
+      "sha256": "88fc6c121136749ea75640e59a57763b9e36b8c159cdf479597d7bb6b824be06"
     },
     {
       "path": "src/StudioPages.tsx",
@@ -2477,8 +2667,8 @@
     },
     {
       "path": "src/components/GuidedRecording.tsx",
-      "bytes": 13865,
-      "sha256": "510556f59377bf2502995f545de0719049c444c2188a137e470f021e4e27bc3d"
+      "bytes": 13811,
+      "sha256": "a7aa25bf3bc7e6bafc7a9b06f1cdff3115c17f1960b11f5fe7c66b31b728396c"
     },
     {
       "path": "src/components/InventoryControls.tsx",
@@ -2507,8 +2697,8 @@
     },
     {
       "path": "src/feel.css",
-      "bytes": 44891,
-      "sha256": "95a646c0091e115b2635d8ea7051da7c401964d249f7cb38f72943f8f06e07d9"
+      "bytes": 52101,
+      "sha256": "fdebb7d1aad6d900c221e19fb5600fae09f02784751ea5b3561acb0487bc2231"
     },
     {
       "path": "src/feel.ts",
@@ -2522,13 +2712,13 @@
     },
     {
       "path": "src/marketplace.css",
-      "bytes": 51243,
-      "sha256": "6e144d883a1be644b18dec88cf341b455c199bc9f615143b0c02c118e6bab560"
+      "bytes": 53342,
+      "sha256": "893ff3b1ef66e1aeaa29aa3f857744e610145955393f2a44a22351aed3dbb41e"
     },
     {
       "path": "src/media.ts",
-      "bytes": 11360,
-      "sha256": "537af7eff9778b6460454006e210a43d34e478e7dbc03d9ef3669b971e8056ab"
+      "bytes": 12071,
+      "sha256": "537d84d55e42a9f30c4e39f73b156d11f34d9c1c04ce895b3665b96f16fb29e9"
     },
     {
       "path": "src/recording.ts",
@@ -2539,6 +2729,11 @@
       "path": "src/router.tsx",
       "bytes": 1066,
       "sha256": "9c4358dc884bbc29a54303966dde397ce9bb0840ea7d4537646d519ab43bc40c"
+    },
+    {
+      "path": "src/sellers.ts",
+      "bytes": 867,
+      "sha256": "17dac67505dc2fc4616259f1e39283e00824ff2fbe52224f3f71152c9ae82c84"
     },
     {
       "path": "src/store.tsx",
@@ -2614,6 +2809,11 @@
       "path": "tests/retained-flows.test.ts",
       "bytes": 38407,
       "sha256": "febd54f4baff10a9f9e5044c3affc7ee66cb28e3989ea7453c38b78a2c31d9b2"
+    },
+    {
+      "path": "tests/seller-shopping-v3.test.ts",
+      "bytes": 6147,
+      "sha256": "07294f4c3643cf7ab034e3b36d7b0fea1427354a5cba8171d066f7d2bbb01d39"
     },
     {
       "path": "tests/shopping-v2.test.ts",

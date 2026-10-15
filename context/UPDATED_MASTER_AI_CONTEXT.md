@@ -1,6 +1,8 @@
-# Familiar current product context, animated V3
+# Familiar current product context, animated V3.1
 
-Updated 14 October 2026. This contract extends the approved photo marketplace with the user-approved V3 cloth animation and relative comparison revision. Previous V2 context is preserved under reference-pack/legacy-v2-docs. The original research context remains unchanged in `context/original/Familiar_TGIC_2026_Master_Context_original.md`; the complete previous updated context is retained in `reference-pack/legacy-v1-docs/context/UPDATED_MASTER_AI_CONTEXT.md`.
+Updated 15 October 2026. The V3.1 usability revision adds catalogue purchasing, actionable bag confirmation, seller wardrobes, compact comparison disclosures, stationary recording-step navigation, and consistent edited garment-only covers. Listings remain unique pieces at quantity one; unchanged source photos remain the inspection material. The source and rebuilt dist are delivered as a Vercel-ready ZIP for the user to deploy.
+
+Previously updated 14 October 2026. This contract extends the approved photo marketplace with the user-approved V3 cloth animation and relative comparison revision. Previous V2 context is preserved under reference-pack/legacy-v2-docs. The original research context remains unchanged in `context/original/Familiar_TGIC_2026_Master_Context_original.md`; the complete previous updated context is retained in `reference-pack/legacy-v1-docs/context/UPDATED_MASTER_AI_CONTEXT.md`.
 
 ## Product definition
 

@@ -1,7 +1,7 @@
 {
   "name": "familiar-animated-marketplace",
   "private": true,
-  "version": "3.0.0",
+  "version": "3.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
@@ -11,7 +11,12 @@
     "verify:assets": "node scripts/verify-photo-assets.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "verify:fixtures": "node scripts/verify-fixtures.mjs",
-    "verify:models": "node scripts/verify-animated-model.mjs"
+    "verify:models": "node scripts/verify-animated-model.mjs",
+    "test:navigation": "node scripts/navigation-browser-tests.mjs",
+    "test:shopping": "node scripts/shopping-browser-tests-v3.mjs",
+    "package:release": "python3 scripts/package-release.py",
+    "test:match": "node scripts/match-disclosure-tests.mjs",
+    "verify:covers": "node scripts/verify-cover-assets.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "2.1.10",

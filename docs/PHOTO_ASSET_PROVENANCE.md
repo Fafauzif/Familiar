@@ -2,6 +2,18 @@
 
 The Familiar catalogue is a prepared, browser-local demonstrator. Product names, prices, measurements and seller identities are authored examples. The photographs below are stock/product examples used to illustrate those examples; they are not newly captured secondhand inventory, proof of original ownership, or laboratory tests.
 
+## Garment-only catalogue covers
+
+The user approved a consistent garment-only catalogue treatment, including AI reconstruction of fabric obscured by a person. The 12 catalogue items and private blue-blouse reference have separate AI-prepared covers in `public/covers/`. Each cover was made with an individual built-in `imagegen` edit of that item's existing front photograph, then visually inspected. The covers remove people, accessories, backgrounds and cast backdrop shadows. They retain visible garment color, construction and silhouette as closely as possible.
+
+The source photo registry, source files, gallery entries and photographic evidence links remain unchanged. `coverFor()` serves the standardized catalogue cover; `photoCover()` identifies its `ai-reconstructed-demo` provenance and `conditionProof: false`. Generated covers are not inserted into `mediaFor().photos`. Listing galleries and detail/evidence views retain the original prepared photographs.
+
+Covers are 800×1000 transparent WebP files, centered without stretching inside a maximum 680×820 content region. The shared interface provides the background. Sharp was used only for alpha-preserving trim, proportional containment, transparent padding and WebP optimization after generation. There is no runtime image service or third-party hotlink. Total cover payload is approximately 1.16 MB across 13 files.
+
+These are catalogue representations, not condition evidence. AI reconstruction can change tiny fibres, folds, label lettering, exact proportions and hidden construction. Moss, Apricot, Lilac and Sage required fabric reconstruction around a removed model; Apricot also required an inferred lower skirt/hem because its original front photograph is cropped. Airloom required perspective normalization from a tabletop image; Airloom and Ink have low-resolution source details. The original photographs remain the reference for assessing visible details. A targeted second edit corrected Moss to the source's five front buttons.
+
+`public/covers/manifest.json` records each source-photo ID and checksum, generated-file reference, full prompt, any corrective prompt, reconstructed regions, final dimensions, byte length, SHA-256, transparency and framing metadata. These records explicitly distinguish generated covers from original prepared photographs. Run `npm run verify:covers` to verify the complete cover set, alpha-capable WebP headers, dimensions, integrity, source associations and gallery separation.
+
 All selected images were decoded and visually inspected before use. Recursive interface screenshots, unrelated color variants, unrelated suggested products, fabric-choice charts, and disconnected damage close-ups were excluded. Each selected front/back/detail group represents one source garment. Detail crops keep the source garment unchanged and are explicitly labeled as crops. A back view or wear photo is not invented where unavailable.
 
 ## Selected garment sets
@@ -24,7 +36,7 @@ All selected images were decoded and visually inspected before use. Recursive in
 
 ## Source records and processing
 
-The machine-readable `public/photos/manifest.json` contains every original URL, original dimensions, crop coordinates, final dimensions, byte length, and SHA-256 checksum. Images are optimized as WebP and served locally from `/photos/`; no runtime hotlink or third-party image network is required. Crop coordinates are fractions of the original image extent. Crops change framing only. No damage, cloth mechanics, labels, or garment elements were added.
+The machine-readable `public/photos/manifest.json` contains every original URL, original dimensions, crop coordinates, final dimensions, byte length, and SHA-256 checksum. Original prepared photographs are optimized as WebP and served locally from `/photos/`; no runtime hotlink or third-party image network is required. Crop coordinates are fractions of the original image extent. Those source-photo crops change framing only. No damage, cloth mechanics, labels, or garment elements were added to the source photographs. The separately identified AI catalogue covers follow the reconstruction scope above.
 
 The Airloom and Ink photographs came from the user-supplied Stitch Discover export. They are prepared imagery; their photographic appearance is not proof that they document real stock. Retail-source examples came from the relevant public product pages or public image CDN for that product. Brand information in the source is not a verification badge for Familiar.
 

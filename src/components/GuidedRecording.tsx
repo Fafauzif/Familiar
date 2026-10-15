@@ -64,7 +64,6 @@ export default function GuidedRecording(props: GuidedRecordingProps) {
     submitted.current = false;
     act({ type: "REPLAY" });
     setImageFailed(false);
-    window.scrollTo({ top: 0, behavior: "instant" });
     nextRef.current?.focus({ preventScroll: true });
   }, [stage, garment.id]);
   useEffect(() => {

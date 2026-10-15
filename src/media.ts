@@ -1,4 +1,4 @@
-/** Prepared photographic media. Original URLs and crops: docs/PHOTO_ASSET_PROVENANCE.md and public/photos/manifest.json. */
+/** Original listing photographs remain separate from AI-prepared catalogue covers. See docs/PHOTO_ASSET_PROVENANCE.md. */
 export type PhotoKind = 'front' | 'back' | 'detail' | 'label' | 'wear';
 export interface GarmentPhoto { id: string; kind: PhotoKind; label: string; src: string; width: number; height: number }
 export interface GarmentMedia { photos: GarmentPhoto[]; credit: string; sourceUrl: string }
@@ -372,4 +372,28 @@ const registry: Record<string, GarmentMedia> = {
 };
 export const PHOTO_IDS = Object.keys(registry);
 export function mediaFor(id: string): GarmentMedia { return registry[id] ?? registry['cloud-poplin']; }
-export function coverFor(id: string): string { return mediaFor(id).photos.find(photo => photo.kind === 'front')?.src ?? mediaFor(id).photos[0].src; }
+
+/** Catalogue-only representation; never use as an original photograph or condition proof. */
+export interface CoverMedia {
+  src: string;
+  width: number;
+  height: number;
+  label: string;
+  sourcePhotoId: string;
+  kind: 'ai-reconstructed-demo';
+  conditionProof: false;
+}
+
+const covers: Record<string, CoverMedia> = Object.fromEntries(PHOTO_IDS.map(id => [id, {
+  src: `/covers/${id}.webp`,
+  width: 800,
+  height: 1000,
+  label: 'Garment-only catalogue cover · AI-prepared demo',
+  sourcePhotoId: `${id}-front`,
+  kind: 'ai-reconstructed-demo' as const,
+  conditionProof: false as const,
+}]));
+
+/** Metadata stays explicit so catalogue imagery cannot silently become evidence. */
+export function photoCover(id: string): CoverMedia { return covers[id] ?? covers['cloud-poplin']; }
+export function coverFor(id: string): string { return photoCover(id).src; }

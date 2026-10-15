@@ -1,6 +1,16 @@
-# Familiar, animated marketplace V3
+# Familiar, animated marketplace V3.1
 
 A mobile-first, browser-local secondhand clothing prototype. It preserves the photographic Stitch-inspired marketplace and lavender design system, adds one interactive shirt with simulated cloth motion, and compares finds with a garment the buyer already knows.
+
+## What changed in V3.1
+
+- Add available pieces directly from catalogue cards, then use View bag to continue. Each listing is one unique piece with quantity one.
+- Open each seller’s wardrobe and browse their available listings.
+- Compare paired garments and four short differences; expand condition, measurements, materials, explanations, and original supporting views when needed. Price and buying actions stay visible.
+- Press Next in either recording walkthrough without being scrolled back to the top.
+- Browse consistent garment-only demo covers while retaining the unchanged source photographs inside listings.
+
+See `docs/REVISION_V3_1.md` for the implementation and verification record.
 
 ## Run locally
 
@@ -42,10 +52,13 @@ npm test
 npm run verify:assets
 npm run verify:fixtures
 npm run verify:models
+npm run verify:covers
 npm run build
 npx playwright install chromium
 FAMILIAR_TEST_PRODUCTION=1 npm run test:browser
 FAMILIAR_TEST_PRODUCTION=1 node scripts/studio-browser-tests.mjs
+FAMILIAR_TEST_PRODUCTION=1 npm run test:navigation
+FAMILIAR_TEST_PRODUCTION=1 npm run test:shopping
 ```
 
 The numerical cloth suite checks supports, localized deformation, recovery, transient strain, long-run stability and display-rate agreement. State tests cover descriptions, walkthrough progress, review invalidation, migration, shopping and receipts. Asset checks verify local geometry, photographs, dimensions and hashes. Chromium checks exercise real rendered WebGL, interaction, short-phone controls, fallback, source context and bounded automated accessibility checks.

@@ -216,39 +216,39 @@
       "environment": "Headless Chromium using software WebGL, not a physical phone",
       "snapshots": [
         {
-          "steps": 71,
-          "displacement": 0.046134,
-          "strain": 0.0718,
-          "energy": 0.38179,
-          "yaw": -0.0401
-        },
-        {
-          "steps": 233,
-          "displacement": 0.063225,
-          "strain": 0.1004,
-          "energy": 0.674628,
-          "yaw": -0.04
-        },
-        {
-          "steps": 419,
-          "displacement": 0.103708,
+          "steps": 16,
+          "displacement": 0.038226,
           "strain": 0.15,
-          "energy": 0.320354,
+          "energy": 16.089638,
+          "yaw": -0.0475
+        },
+        {
+          "steps": 177,
+          "displacement": 0.068789,
+          "strain": 0.0935,
+          "energy": 1.231893,
           "yaw": -0.04
         },
         {
-          "steps": 615,
-          "displacement": 0.114666,
-          "strain": 0.1336,
-          "energy": 0.003352,
+          "steps": 309,
+          "displacement": 0.076707,
+          "strain": 0.15,
+          "energy": 1.555561,
+          "yaw": -0.04
+        },
+        {
+          "steps": 469,
+          "displacement": 0.10803,
+          "strain": 0.15,
+          "energy": 0.055041,
           "yaw": -0.04
         }
       ],
-      "manualRotationRadians": 0.32687,
+      "manualRotationRadians": 0.34485,
       "frameMs": {
-        "median": 50.100000000000364,
-        "p95": 116.60000000000218,
-        "max": 166.70000000000073
+        "median": 16.700000000000728,
+        "p95": 49.899999999999636,
+        "max": 50.100000000000364
       }
     }
   ],

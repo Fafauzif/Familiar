@@ -178,9 +178,9 @@ await check('Editing familiar feel affects comparison and persists', async p => 
   await goto(p, '/listing/cloud-poplin/compare'); await p.locator('.feel-comparison-setup > summary').click(); await p.locator('.feel-description-editor summary').click();
   await p.getByRole('combobox', { name: 'Softness', exact: true }).selectOption('unknown');
   await p.getByRole('button', { name: 'Save feel description', exact: true }).click();
-  const softness = p.locator('.feel-relative-card').filter({ has: p.getByRole('heading', { name: 'Softness', exact: true }) });
-  assert.match(await softness.innerText(), /hasn’t been described/);
-  await p.reload({ waitUntil: 'networkidle' }); assert.match(await softness.innerText(), /hasn’t been described/);
+  const softness = p.locator('.feel-relative-summary .feel-relative-card').filter({ has: p.getByRole('heading', { name: 'Softness', exact: true }) });
+  assert.match(await softness.innerText(), /Not described for both/);
+  await p.reload({ waitUntil: 'networkidle' }); assert.match(await softness.innerText(), /Not described for both/);
   await p.locator('.feel-comparison-setup > summary').click(); await p.locator('.feel-description-editor summary').click(); await p.getByRole('combobox', { name: 'Softness', exact: true }).selectOption('very-soft');
   await p.getByRole('button', { name: 'Save feel description', exact: true }).click(); assert.match(await softness.innerText(), /less soft/i); await healthy(p);
 });

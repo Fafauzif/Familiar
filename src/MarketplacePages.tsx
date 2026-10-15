@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { ArrowRight, Check, Heart, MagnifyingGlass, SlidersHorizontal, Sparkle, X, ArrowUpRight } from '@phosphor-icons/react';
 import { allListings, money, type Listing } from './domain';
 import { useStore } from './store';
@@ -6,22 +6,30 @@ import { Link } from './router';
 import { shoppingQuery, visibleListings } from './buyer';
 import { coverFor, mediaFor } from './media';
 import { GarmentImage } from './components/PhotoGallery';
+import { sellerHref } from './sellers';
 
 export const CATEGORIES=['All','Tops','Knitwear','Shirts','Bottoms','Dresses','Outerwear'];
 export function ProductCard({listing}:{listing:Listing}) {
   const {state,dispatch}=useStore();
   const saved=state.saved.includes(listing.id);
   const status=state.availability[listing.id]||'active';
+  const available=status==='active';
+  const inBag=state.bag.includes(listing.id);
+  const [added,setAdded]=useState(false);
+  const purchaseActions=useRef<HTMLDivElement>(null);
+  const focusAfterAdd=useRef(false);
+  useEffect(()=>{if(available&&inBag&&focusAfterAdd.current){purchaseActions.current?.querySelector<HTMLAnchorElement>('.card-view-bag')?.focus();focusAfterAdd.current=false;}},[available,inBag]);
+  const add=(event:MouseEvent<HTMLButtonElement>)=>{if(available){focusAfterAdd.current=document.activeElement===event.currentTarget;dispatch({type:'BAG_ADD',id:listing.id});setAdded(true);}};
   const notes=listing.feelNotes?.slice(0,2)||[];
-  const cover=listing.poster||coverFor(listing.templateId||listing.id);
+  const cover=coverFor(listing.templateId||listing.id);
   const coverPhoto=mediaFor(listing.templateId||listing.id).photos.find(photo=>photo.src===cover);
-  return <article className="product-card" data-testid="active-card" data-id={listing.id}>
+  return <article className="product-card" data-testid="active-card" data-id={listing.id} data-quantity="1">
     <div className="product-photo" data-landscape={coverPhoto&&coverPhoto.width>coverPhoto.height||undefined}>
       <Link href={`/listing/${listing.id}`} aria-label={`View ${listing.name}`}><GarmentImage src={cover} alt={listing.name} width={coverPhoto?.width} height={coverPhoto?.height}/></Link>
       <button className={`save-button ${saved?'saved':''}`} aria-label={`${saved?'Unsave':'Save'} ${listing.name}`} aria-pressed={saved} onClick={()=>dispatch({type:'SAVE',id:listing.id})}><Heart size={19} weight={saved?'fill':'regular'}/></button>
       {(listing.templateId||listing.id)==='cloud-poplin'&&status==='active'&&<Link className="card-motion-entry" href={`/listing/${listing.id}`} aria-label={`Explore ${listing.name} in motion`}><Sparkle size={14}/>See it move</Link>}{status!=='active'?<span className="product-status">{status==='sold'?'Sold':status==='reserved'?'Reserved':status==='paused'?'Paused':'Unavailable'}</span>:listing.hero&&<span className="photo-note"><Check size={12}/> Photos & details</span>}
     </div>
-    <div className="product-card-body"><div className="product-meta"><span>{listing.category}</span><span>Size {listing.size}</span></div><Link className="product-name" href={`/listing/${listing.id}`}>{listing.name}</Link><div className="product-price"><strong>{money(listing.price)}</strong><span>{listing.seller}’s wardrobe</span></div><p className="product-condition">{listing.condition.split(' · ')[0]}{listing.condition.includes(' · ')?<span> · {listing.condition.split(' · ').slice(1).join(' · ')}</span>:null}</p>{notes.length>0&&<div className="product-traits">{notes.map(note=><span key={note}>{note}</span>)}</div>}</div>
+    <div className="product-card-body"><div className="product-meta"><span>{listing.category}</span><span>Size {listing.size}</span></div><Link className="product-name" href={`/listing/${listing.id}`}>{listing.name}</Link><div className="product-price"><strong>{money(listing.price)}</strong><Link className="card-seller-link" href={sellerHref(listing.seller)}>{listing.seller}’s wardrobe</Link></div><p className="product-condition">{listing.condition.split(' · ')[0]}{listing.condition.includes(' · ')?<span> · {listing.condition.split(' · ').slice(1).join(' · ')}</span>:null}</p>{notes.length>0&&<div className="product-traits">{notes.map(note=><span key={note}>{note}</span>)}</div>}<div className="card-purchase-actions" ref={purchaseActions}><p>{available?'One piece only · Quantity 1':'This piece is '+status}</p>{available&&inBag?<Link className="button secondary card-view-bag" href="/checkout" onClick={()=>dispatch({type:'BAG_VIEW'})}>View bag <ArrowRight size={16}/></Link>:<button className="button secondary" disabled={!available} aria-label={available?`Add ${listing.name} to bag`:`${listing.name} is ${status}`} onClick={add}>{available?'Add to bag':status==='sold'?'Sold':status==='reserved'?'Reserved':'Unavailable'}</button>}<span className="sr-only" role="status" aria-atomic="true">{added&&inBag&&available?`${listing.name} added to your bag. Quantity 1.`:''}</span></div></div>
   </article>;
 }
 
@@ -39,7 +47,7 @@ export function MarketplacePage({saved=false}:{saved?:boolean}) {
   const [filterOpen,setFilterOpen]=useState(false);
   const dialog=useRef<HTMLDialogElement>(null);
   const parsed=shoppingQuery(query);
-  useEffect(()=>{const p=new URLSearchParams();if(query)p.set('q',query);if(category!=='All')p.set('category',category);if(size!=='All')p.set('size',size);if(maxPrice)p.set('maxPrice',maxPrice);if(color!=='All')p.set('color',color);if(condition!=='All')p.set('condition',condition);if(evidence)p.set('details','yes');if(sort!=='Recommended')p.set('sort',sort);history.replaceState({},'',location.pathname+(p.size?'?'+p.toString():''));},[query,category,size,maxPrice,color,condition,evidence,sort]);
+  useEffect(()=>{const p=new URLSearchParams();if(query)p.set('q',query);if(category!=='All')p.set('category',category);if(size!=='All')p.set('size',size);if(maxPrice)p.set('maxPrice',maxPrice);if(color!=='All')p.set('color',color);if(condition!=='All')p.set('condition',condition);if(evidence)p.set('details','yes');if(sort!=='Recommended')p.set('sort',sort);history.replaceState({...history.state},'',location.pathname+(p.size?'?'+p.toString():''));},[query,category,size,maxPrice,color,condition,evidence,sort]);
   const items=visibleListings(state,{query,category,size,saved,maxPrice:maxPrice?Number(maxPrice):undefined,color,condition,evidenceOnly:evidence});
   if(sort==='Price: low to high')items.sort((a,b)=>a.price-b.price);
   if(sort==='Price: high to low')items.sort((a,b)=>b.price-a.price);
